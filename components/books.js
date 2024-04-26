@@ -1,4 +1,4 @@
-const books = {
+export const books = {
     genesis:"ge",
     exodus:"ex",
     leviticus:"lv",
@@ -66,3 +66,10 @@ const books = {
     jude:"jd",
     revelation:"re"
   }
+  let i = 1;
+  let booksIndex = {}
+  for (let key in books){
+      booksIndex[key] = i;
+      i++
+  }
+export let newBooksIndex = booksIndex;
