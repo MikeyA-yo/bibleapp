@@ -1,3 +1,4 @@
+import  {BookIndex} from "@/app/fetch";
 export const books = {
     genesis:"ge",
     exodus:"ex",
@@ -67,9 +68,12 @@ export const books = {
     revelation:"re"
   }
   let i = 1;
+  
+export function getBookIndex(){
   let booksIndex = {}
   for (let key in books){
-      booksIndex[key] = i;
-      i++
+    booksIndex[key] = i;
+    i++
   }
-export let newBooksIndex = booksIndex;
+return booksIndex;
+}
