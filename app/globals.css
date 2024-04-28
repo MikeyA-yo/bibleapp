@@ -16,7 +16,9 @@
   }
 }
 
-
+body{
+  background-color: black;
+}
 
 @layer utilities {
  
