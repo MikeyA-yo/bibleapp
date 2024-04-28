@@ -1,13 +1,13 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title:"Contact"
+    title:"Signup"
 }
-export default function Contact(){
+export default function Signup(){
   return (
     <>
     <div className="bg-white">
-        welcome Contact
+        welcome Signup
     </div>
     </>
   )
