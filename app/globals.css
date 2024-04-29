@@ -21,5 +21,7 @@ body{
 }
 
 @layer utilities {
- 
+  .active{
+    @apply transition transform duration-300 ease-in-out border-blue-600 border-b-4 rounded-md 
+  }
 }
