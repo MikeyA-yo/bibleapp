@@ -20,8 +20,13 @@ export default function Nav(){
                     {pages.map((page, i) => <Link key={i} href={`/${page.toLowerCase()}`}><p className={`text-gray-100 hover:active ${pathname == '/'+page.toLowerCase() ? 'active' : ''}`}>{page}</p></Link>)}
                 </div>
             </div>
-            <div>
-
+            <div className="flex md:hidden lg:hidden p-4">
+                <div>
+                  <p className="h-6 font-bold text-white">Spiritual Awakening</p>
+                </div>
+                <div>
+                    
+                </div>
             </div>
         </div>
         </>
