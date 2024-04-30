@@ -72,10 +72,92 @@ export interface BookIndex {
    jude:number,
    revelation:number
 }
+export interface Books {
+   [key:string]:string,
+   genesis:string,
+   exodus:string,
+   leviticus:string,
+   strings:string,
+   deuteronomy:string,
+   joshua:string,
+   judges:string,
+   ruth:string,
+   firstSamuel:string,
+   secondSamuel:string,
+   firstKings:string,
+   secondKings:string,
+   firstChronicles:string,
+   secondChronicles:string,
+   ezra:string,
+   nehemiah:string,
+   esther:string,
+   job:string,
+   psalms:string,
+   proverbs:string,
+   ecclesiastes:string,
+   songOfSongs:string,  //or songs of solomon ig
+   isaiah:string,
+   jeremiah:string,
+   lamentations:string,
+   ezekiel:string,
+   daniel:string,
+   hosea:string,
+   joel:string,
+   amos:string,
+   obadiah:string,
+   jonah:string,
+   micah:string,
+   nahum:string,
+   habakkuk:string,
+   zephaniah:string,
+   haggai:string,
+   zechariah:string,
+   malachi:string,
+   matthew:string,
+   mark:string,
+   luke:string,
+   john:string,
+   acts:string,
+   romans:string,
+   firstCorinthians:string,
+   secondCorinthians:string,
+   galatians:string,
+   ephesians:string,
+   philippians:string,
+   colossians:string,
+   firstThessalonians:string,
+   secondThessalonians:string,
+   firstTimothy:string,
+   secondTimothy:string,
+   titus:string,
+   philemon:string,
+   hebrews:string,
+   james:string,
+   firstPeter:string,
+   secondPeter:string,
+   firsJohn:string,
+   secondJohn:string,
+   thirdJohn:string,
+   jude:string,
+   revelation:string
+}
 export interface NKJV{
    pk:any,
    verse: number,
    text:string
+}
+interface Verses{
+   number:number,
+   text:string
+}
+interface Chapters{
+   number:number,
+   verses:number
+}
+interface DataBook{
+  book:object,
+  chapter: Chapters,
+  verses: Verses[]
 }
 import { books, getBookIndex} from "@/components/books";
 let tempBook:any = getBookIndex()
@@ -96,7 +178,17 @@ export async function getNKJV(chap:string, ver:string){
    console.log(obj.verse, obj.text)
  });
 }
-
-async function getBibles(version:string, chap:string, ver:string){
-
+export async function getBibles(version:string, chap:string, ver:string){
+   for (const key in books){
+       if(chap.toLowerCase() == key){
+         chap = books[key];
+       }
+   }
+    const res= await fetch(`https://www.abibliadigital.com.br/api/verses/${version}/${chap}/${ver}`,{
+          headers:{
+            "Authorization": authString
+        }
+    })
+    const data:DataBook = await res.json();
+    //verse sample : data.verses[0].text
 }
