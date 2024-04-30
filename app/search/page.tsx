@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 export default function Search(){
   return (
     <>
-    <div className="bg-white">
+    <div className="bg-white mt-20">
         welcome Search
     </div>
     </>
