@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Lander(){
+export default function LanderReproduce(){
     return (
         <>
           <div className=" bg-red-500 bg-opacity-50 w-full relative">
