@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Bar from "./bar";
+import { MotionDiv } from "./motions";
 import { useState } from "react";
 import { Roboto } from "next/font/google";
 import { pages } from './pages'
@@ -8,7 +9,8 @@ import { usePathname } from "next/navigation";
 const roboto = Roboto({weight:['700'], subsets:['latin']})
 // <Bar className="h-6 w-6" />
 export default function Nav(){
-    const pathname = usePathname()
+    const pathname = usePathname();
+    const [open, setOpen] = useState(false)
     return (
         <>
         <div>
@@ -26,7 +28,11 @@ export default function Nav(){
                   <p className="h-6 font-bold text-white">Spiritual Awakening</p>
                 </div>
                 <div>
-                  <Bar className="h-6 w-6 text-white" />
+                  <Bar className="h-6 w-6 text-white"
+                  onClick = {()=>{
+                    setOpen(!open)
+                  }}
+                  />
                 </div>
             </div>
         </div>
