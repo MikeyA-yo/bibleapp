@@ -9,12 +9,12 @@ import { usePathname } from "next/navigation";
  const roboto = Roboto({weight:['700'], subsets:['latin']})
  export const rob = roboto.className 
 // <Bar className="h-6 w-6" />
-function MenuList({state}:{state:boolean}){
+function MenuList({state, pathname}:{state:boolean, pathname:string}){
  return ( 
    <AnimateP>
       {state && (
        <MotionDiv>
-         hey
+       {pages.map((page, i) => <Link key={i} href={`/${page.toLowerCase()}`}><p className={`text-gray-100 hover:active ${pathname == '/'+page.toLowerCase() ? 'active' : ''}`}>{page}</p></Link>)}
        </MotionDiv>
   )}
 </AnimateP>)
@@ -39,12 +39,12 @@ export default function Nav(){
                   <p className={`${roboto.className} h-6 font-bold text-white`}>Spiritual Awakening</p>
                 </div>
                 <div>
-                  <Bar className="h-6 w-6 text-white"
-                  onClick = {()=>{
+                  <div  onClick = {()=>{
                     setOpen(!open)
-                  }}
-                  />
-                  <MenuList state= {open} />
+                  }}>
+                  <Bar className={`h-6 w-6 text-white`} state={open} />
+                  </div>
+                  <MenuList state= {open} pathname={pathname} />
                 </div>
             </div>
         </div>
