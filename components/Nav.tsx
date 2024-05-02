@@ -1,13 +1,24 @@
 "use client";
 import Link from "next/link";
 import Bar from "./bar";
-import { MotionDiv } from "./motions";
+import { AnimateP, MotionDiv } from "./motions";
 import { useState } from "react";
 import { Roboto } from "next/font/google";
 import { pages } from './pages'
 import { usePathname } from "next/navigation";
-const roboto = Roboto({weight:['700'], subsets:['latin']})
+ const roboto = Roboto({weight:['700'], subsets:['latin']})
+ export const rob = roboto.className 
 // <Bar className="h-6 w-6" />
+function MenuList({state}:{state:boolean}){
+ return ( 
+   <AnimateP>
+      {state && (
+       <MotionDiv>
+         hey
+       </MotionDiv>
+  )}
+</AnimateP>)
+}
 export default function Nav(){
     const pathname = usePathname();
     const [open, setOpen] = useState(false)
@@ -25,7 +36,7 @@ export default function Nav(){
             </div>
             <div className="flex md:hidden z-20 w-full   justify-between fixed top-0 lg:hidden p-4">
                 <div>
-                  <p className="h-6 font-bold text-white">Spiritual Awakening</p>
+                  <p className={`${roboto.className} h-6 font-bold text-white`}>Spiritual Awakening</p>
                 </div>
                 <div>
                   <Bar className="h-6 w-6 text-white"
@@ -33,6 +44,7 @@ export default function Nav(){
                     setOpen(!open)
                   }}
                   />
+                  <MenuList state= {open} />
                 </div>
             </div>
         </div>
