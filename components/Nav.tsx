@@ -13,15 +13,24 @@ function MenuList({state, pathname}:{state:boolean, pathname:string}){
   const variants = {
     initial:{
       y:"-100%",
-      blur:"5px"
+      blur:"5px",
+      transition:{
+        duration:1,
+      }
     },
     animate:{
       y:0,
-      blur:'0px'
+      blur:'0px',
+      transition:{
+        duration:1,
+      }
     },
     end:{
       scale:[0.5, 0.1, 0],
-      blur:"7px"
+      blur:"7px",
+      transition:{
+        duration:1,
+      }
     }
   }
  return ( 
