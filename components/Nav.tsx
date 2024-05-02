@@ -10,10 +10,30 @@ import { usePathname } from "next/navigation";
  export const rob = roboto.className 
 // <Bar className="h-6 w-6" />
 function MenuList({state, pathname}:{state:boolean, pathname:string}){
+  const variants = {
+    initial:{
+      y:"-100%",
+      blur:"5px"
+    },
+    animate:{
+      y:0,
+      blur:'0px'
+    },
+    end:{
+      scale:[0.5, 0.1, 0],
+      blur:"7px"
+    }
+  }
  return ( 
    <AnimateP>
       {state && (
-       <MotionDiv>
+       <MotionDiv
+       variants={variants}
+       initial= "initial"
+       animate="animate"
+       exit="end"
+       >
+        <Link href={'/'} ><p className="text-gray-100 hover:active">HOME</p></Link>
        {pages.map((page, i) => <Link key={i} href={`/${page.toLowerCase()}`}><p className={`text-gray-100 hover:active ${pathname == '/'+page.toLowerCase() ? 'active' : ''}`}>{page}</p></Link>)}
        </MotionDiv>
   )}
@@ -34,19 +54,22 @@ export default function Nav(){
                     {pages.map((page, i) => <Link key={i} href={`/${page.toLowerCase()}`}><p className={`text-gray-100 hover:active ${pathname == '/'+page.toLowerCase() ? 'active' : ''}`}>{page}</p></Link>)}
                 </div>
             </div>
-            <div className="flex md:hidden z-20 w-full   justify-between fixed top-0 lg:hidden p-4">
+            <div className="flex flex-col gap-2 md:hidden z-20 w-full    fixed top-0 lg:hidden p-4">
+             <div className="flex justify-between w-full ">
                 <div>
                   <p className={`${roboto.className} h-6 font-bold text-white`}>Spiritual Awakening</p>
                 </div>
-                <div>
+                 <div>
                   <div  onClick = {()=>{
                     setOpen(!open)
                   }}>
-                  <Bar className={`h-6 w-6 text-white`} state={open} />
-                  </div>
-                  <MenuList state= {open} pathname={pathname} />
+                     <Bar className={`h-6 w-6 text-white`} state={open} />
+                   </div>
+                   </div>
                 </div>
+               <MenuList state= {open} pathname={pathname} />
             </div>
+            
         </div>
         </>
     )
