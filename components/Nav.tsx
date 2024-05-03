@@ -28,6 +28,7 @@ function MenuList({state, pathname}:{state:boolean, pathname:string}){
     end:{
       scale:[0.5, 0.1, 0],
       blur:"7px",
+      rotate:[250, 180, 0],
       transition:{
         duration:1,
       }
