@@ -7,6 +7,8 @@ export default function Home() {
       <>
         <Lander />
         <Section />
+        <Lander />
+        <Section />
       </>
   );
 }

@@ -7,9 +7,9 @@ import cross from '@/public/bible.jpg'
 export default function Section(){
 return (
     <>
-      <div className="  section bg-cover bg-center bg-opacity-50 min-h-screen flex items-center w-full">
+      <div className="  section bg-cover bg-center bg-opacity-50 min-h-96 flex items-center w-full">
         {/* <Image src={cross} className="w-full  h-screen opacity-50 sticky" width={344} height={344} alt="this image shows on my machine"/> */}
-        <div className="">
+        <div className="h-96 bg-slate-500 bg-opacity-50 w-full">
           <div className="flex flex-col ">
             <MotionP
             className={`${rob} text-white`}
