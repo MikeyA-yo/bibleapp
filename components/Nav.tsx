@@ -55,7 +55,7 @@ export default function Nav(){
     return (
         <>
         <div>
-            <div className="lg:flex md:flex justify-between fixed top-0 w-full z-20  h-20 hidden p-8 ">
+            <div className="lg:flex md:flex justify-between fixed top-0 w-full z-50  h-20 hidden p-8 ">
                 <div>
                   <p className="h-6 font-bold text-white">Spiritual Awakening</p>
                 </div>
@@ -64,7 +64,7 @@ export default function Nav(){
                     {pages.map((page, i) => <Link key={i} href={`/${page.toLowerCase()}`}><p className={`text-gray-100 hover:active ${pathname == '/'+page.toLowerCase() ? 'active' : ''}`}>{page}</p></Link>)}
                 </div>
             </div>
-            <div className="flex flex-col gap-2 md:hidden z-20 w-full    fixed top-0 lg:hidden p-4">
+            <div className="flex flex-col gap-2 md:hidden z-50 w-full    fixed top-0 lg:hidden p-4">
              <div className="flex justify-between w-full ">
                 <div>
                   <p className={`${roboto.className} h-6 font-bold text-white`}>Spiritual Awakening</p>
