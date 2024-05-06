@@ -2,3 +2,7 @@
     background-image: url('../public/bible.jpg');
     background-attachment: fixed;
   }
+  .lander{
+    background-image: url('../public/cross.jpg');
+    background-attachment: fixed;
+  }
