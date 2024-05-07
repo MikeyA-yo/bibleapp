@@ -43,8 +43,8 @@ function MenuList({state, pathname}:{state:boolean, pathname:string}){
        animate="animate"
        exit="end"
        >
-        <Link href={'/'} ><p className="text-gray-100 hover:active">HOME</p></Link>
-       {pages.map((page, i) => <Link key={i} href={`/${page.toLowerCase()}`}><p className={`text-gray-100 hover:active ${pathname == '/'+page.toLowerCase() ? 'active' : ''}`}>{page}</p></Link>)}
+        <Link href={'/'} ><p className={`text-gray-100 hover:active-mobile ${pathname == '/' ? 'active-mobile' : ''}`}><span className="pl-2">HOME</span></p></Link>
+       {pages.map((page, i) => <Link key={i} href={`/${page.toLowerCase()}`}><p className={`text-gray-100 hover:active-mobile ${pathname == '/'+page.toLowerCase() ? 'active-mobile' : ''}`}><span className="pl-2">{page}</span></p></Link>)}
        </MotionDiv>
   )}
 </AnimateP>)
