@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { MotionP } from "./motions";
 import { rob } from "./Nav";
-//top-1/2 left-1/2 absolute 
 import './Sections.css'
 import cross from '@/public/bible.jpg'
 export default function Section(){
@@ -10,7 +9,7 @@ return (
       <div className="  section bg-cover bg-center bg-opacity-50 min-h-96 flex items-center w-full">
         {/* <Image src={cross} className="w-full  h-screen opacity-50 sticky" width={344} height={344} alt="this image shows on my machine"/> */}
         <div className="h-96 bg-slate-600 flex justify-center items-start bg-opacity-50 w-full ">
-          <div className=" gap-8 flex-col hidden lg:flex md:flex p-14">
+          <div className=" gap-10 flex-col hidden lg:flex md:flex p-14">
           <h1 className={`${rob} text-3xl text-white `}>Navigate the Bible with simplicity and joy, aided by our intuitive search feature for significant events </h1>
             <MotionP
             className={`${rob} pt-4 text-2xl leading-8 text-white ` }
