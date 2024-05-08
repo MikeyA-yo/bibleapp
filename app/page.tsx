@@ -1,4 +1,5 @@
 import Lander from "@/components/Lander";
+import Features from "@/components/features";
 import Section from "@/components/section";
 import Image from "next/image";
 
@@ -7,6 +8,7 @@ export default function Home() {
       <>
         <Lander />
         <Section />
+        <Features />
         <Lander />
         <Section />
       </>

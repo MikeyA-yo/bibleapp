@@ -1,8 +1,12 @@
-.section{
-    background-image: url('../public/word-high.jpg');
-    background-attachment: fixed;
-  }
-  .lander{
-    background-image: url('../public/crosses-high.jpg');
-    background-attachment: fixed;
-  }
+.section {
+  background-image: url("../public/word-high.jpg");
+  background-attachment: fixed;
+}
+.lander {
+  background-image: url("../public/crosses-high.jpg");
+  background-attachment: fixed;
+}
+.feature{
+  background-image: url("../public/highlight-high.jpg");
+  background-attachment: fixed;
+}
