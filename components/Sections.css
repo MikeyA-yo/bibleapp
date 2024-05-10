@@ -10,3 +10,7 @@
   background-image: url("../public/highlight-high.jpg");
   background-attachment: fixed;
 }
+.footer{
+  background-image: url('../public/wooden-high.jpg');
+  background-attachment: fixed;
+}

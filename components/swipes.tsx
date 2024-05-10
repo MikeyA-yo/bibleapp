@@ -4,7 +4,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
-import Button from "./button";
+import Button, { ButtonSignUp } from "./button";
 export default function SwiperComponent() {
   let strings: string[] = [
     "Discover the joy of effortless Bible reading",
@@ -20,7 +20,7 @@ export default function SwiperComponent() {
         spaceBetween={0}
         slidesPerView={1}
         autoplay={{
-          delay: 2900,
+          delay: 3500,
         }}
       >
         {strings.map((str, i) => {
@@ -29,6 +29,7 @@ export default function SwiperComponent() {
               <div className="flex flex-col gap-5 items-center py-24 justify-center">
                 <p className="text-2xl text-white">{str}</p>
                 <Button />
+                <ButtonSignUp />
               </div>
             </SwiperSlide>
           );
