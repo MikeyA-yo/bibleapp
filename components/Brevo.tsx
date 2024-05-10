@@ -13,9 +13,7 @@ export default function Cry() {
           href="https://sibforms.com/forms/end-form/build/sib-styles.css"
           rel="stylesheet"
         />
-        <div
-          className="sib-form !max-h-auto text-center lg:bg-[#EFF2F7]"
-        >
+        <div className="sib-form !max-h-auto text-center lg:bg-[#EFF2F7]">
           <div className="sib-form-container !max-h-56" id="sib-form-container">
             <div
               className="sib-form-message-panel bg-[#ffeded] border-[#ff4949] max-w-lg text-base text-left rounded text-[#661d1d]"
@@ -67,9 +65,7 @@ export default function Cry() {
                 id="sib-form"
                 method="POST"
               >
-                <div
-                className="py-2 px-0"
-                >
+                <div className="py-2 px-0">
                   <div
                     className="sib-form-block bg-transparent text-[#3C4858] text-left text-base"
                     style={{
@@ -81,9 +77,7 @@ export default function Cry() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="py-2 px-0"
-                >
+                <div className="py-2 px-0">
                   <div className="sib-input sib-form-block">
                     <div className="form__entry entry_block">
                       <div className="form__label-row ">
@@ -128,12 +122,8 @@ export default function Cry() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="py-2 px-0"
-                >
-                  <div
-                    className="sib-form-block text-left"
-                  >
+                <div className="py-2 px-0">
+                  <div className="sib-form-block text-left">
                     <button
                       className="sib-form-block__button sib-form-block__button-with-loader text-base font-bold text-left text-white rounded border-0 bg-[#3E4857]"
                       form="sib-form"
