@@ -56,7 +56,7 @@ export default function Cry() {
             </div>
             <div />
             <div
-              className="sib-container--large sib-container--vertical !max-h-40 max-w-lg text-center border-2 rounded border-solid bg-[rgba(255,255,255,0.49)]  border-[#C0CCD9]"
+              className="sib-container--large sib-container--vertical !max-h-40 max-w-lg text-center border-2 rounded border-solid !bg-[rgba(255,255,255,0.49)]  border-[#C0CCD9]"
               id="sib-container"
             >
               <form
