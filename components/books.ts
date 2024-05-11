@@ -61,7 +61,7 @@ export const booksA:Books = {
   james: "jm",
   firstPeter: "1pe",
   secondPeter: "2pe",
-  firsJohn: "1jo",
+  firstJohn: "1jo",
   secondJohn: "2jo",
   thirdJohn: "3jo",
   jude: "jd",

@@ -135,7 +135,7 @@ export interface Books {
   james: string;
   firstPeter: string;
   secondPeter: string;
-  firsJohn: string;
+  firstJohn: string;
   secondJohn: string;
   thirdJohn: string;
   jude: string;
@@ -153,6 +153,12 @@ interface Verses {
 interface Chapters {
   number: number;
   verses: number;
+}
+interface VersesOtherVersions{
+  book: {abbrev:{pt:string, en: string}, name:string, author:string, group:string, version:string},
+  chapter:number,
+  number:number,
+  text:string
 }
 interface DataBook {
   book: object;
@@ -192,8 +198,24 @@ export async function getBibles(version: string, book: string, chap: string,ver:
       },
     }
   );
-  const data: DataBook = await res.json();
-  console.log(data)
+  const data: VersesOtherVersions = await res.json();
+  //console.log(data.text)
   //verse sample : data.verses[0].text
 }
-//getBibles('en-kjv', 'Joshua', '8')
+// getBibles('kjv', 'Joshua','1', '8')
+export async function VerseArray(version: string, book: string, chap: string){
+  for (const key in booksA) {
+    if (book.toLowerCase() == key) {
+      book = booksA[key];
+    }
+  }
+  const res = await fetch(
+    `https://www.abibliadigital.com.br/api/verses/${version}/${book}/${chap}/`,
+    {
+      headers: {
+        Authorization: authString,
+      },
+    }
+  );
+  const data: DataBook = await res.json();
+}
