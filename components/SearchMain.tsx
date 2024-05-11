@@ -1,4 +1,4 @@
-import { BookCards, VersesNumber } from './BibleCards';
+import { BookCards, SearchBox, VersesNumber } from './BibleCards';
 import { booksA } from './books';
 import PagesBook from './BookSwiper';
 import './Sections.css';
@@ -23,8 +23,8 @@ export default function SearchMain(){
            <div className="h-screen bg-cover lg:bg-center md:bg-center bg-bottom search">
            
                 <div className='bg-neutral-700  h-full w-full  bg-opacity-50  '>
-                    <div>
-                        
+                    <div className='flex lg:p-10 md:p-7 md:m-3 p-5 m-2 lg:m-5'>
+                        <SearchBox />
                     </div>
                   <PagesBook />
                 </div>

@@ -211,6 +211,49 @@ transparent;
 .btn-17:hover:after {
   --progress: -102%;
 }
+.wrap-input-6 .input {
+  width: 100%;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+  border: 0;
+  padding: 5px 0 7px;
+  border: 1px solid 
+transparent;
+  border-bottom-color: 
+#ccc;
+  transition: 0.4s;
+  background-color: 
+  transparent;
+  height: 36px;
+}
+
+.wrap-input-6 .input:focus {
+  outline: none;
+  padding: 5px 14px 7px;
+  transition: 0.4s;
+}
+
+.wrap-input-6 {
+  width: 80%;
+  margin: 40px 3%;
+  position: relative;
+}
+
+.wrap-input-6 .input ~ .focus-border {
+  position: absolute;
+  height: 36px;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  transition: 0.4s;
+}
+
+.wrap-input-6 .input:focus ~ .focus-border {
+  width: 100%;
+  transition: 0.4s;
+  border: 2px solid 
+#6c5dd3;
+}
 @layer utilities {
   .active{
     @apply transition transform duration-300 ease-in-out border-blue-600 border-b-4 rounded-md 
