@@ -1,5 +1,5 @@
 import  {BookIndex, Books} from "@/app/fetch";
-export const books:Books = {
+export const booksA:Books = {
   genesis: "ge",
   exodus: "ex",
   leviticus: "lv",
@@ -72,7 +72,7 @@ export const books:Books = {
   
 export function getBookIndex(){
   let booksIndex:any = {}
-  for (let key in books){
+  for (let key in booksA){
     booksIndex[key] = i;
     i++
   }

@@ -159,11 +159,11 @@ interface DataBook {
   chapter: Chapters;
   verses: Verses[];
 }
-import { books, getBookIndex } from "@/components/books";
+import { booksA, getBookIndex } from "@/components/books";
 let tempBook: any = getBookIndex();
 let BooksIndex: BookIndex = tempBook;
 const authString = "Bearer " + process.env.APIBIBLEKEY;
-export async function getNKJV(chap: string, ver: string) {
+export async function getNKJV(Book:string, chap: string, ver: string) {
   let index = (() => {
     for (const key in BooksIndex) {
       if (key.includes(chap.toLowerCase())) {
@@ -178,14 +178,14 @@ export async function getNKJV(chap: string, ver: string) {
     console.log(obj.verse, obj.text);
   });
 }
-export async function getBibles(version: string, chap: string, ver: string) {
-  for (const key in books) {
-    if (chap.toLowerCase() == key) {
-      chap = books[key];
+export async function getBibles(version: string, book: string, chap: string,ver:string) {
+  for (const key in booksA) {
+    if (book.toLowerCase() == key) {
+      book = booksA[key];
     }
   }
   const res = await fetch(
-    `https://www.abibliadigital.com.br/api/verses/${version}/${chap}/${ver}`,
+    `https://www.abibliadigital.com.br/api/verses/${version}/${book}/${chap}/${ver}`,
     {
       headers: {
         Authorization: authString,
@@ -193,5 +193,7 @@ export async function getBibles(version: string, chap: string, ver: string) {
     }
   );
   const data: DataBook = await res.json();
+  console.log(data)
   //verse sample : data.verses[0].text
 }
+//getBibles('en-kjv', 'Joshua', '8')

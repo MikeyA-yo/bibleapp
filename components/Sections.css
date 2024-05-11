@@ -14,3 +14,7 @@
   background-image: url('../public/wooden-high.jpg');
   background-attachment: fixed;
 }
+.search{
+  background-image: url('../public/nobg-high.png');
+  background-attachment: fixed;
+}
