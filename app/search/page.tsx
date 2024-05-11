@@ -7,8 +7,6 @@ export const metadata: Metadata = {
     title:"Search"
 }
 export default function Search(){
-  getBibles('kjv', 'Isaiah','38', '8')
-  VerseArray('kjv',"joshua", '1')
   return (
     <>
       <SearchMain />
