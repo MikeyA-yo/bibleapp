@@ -1,3 +1,4 @@
+import { VersesNumber } from "@/components/BibleCards";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,6 +9,7 @@ export default function Search(){
     <>
     <div className="bg-white mt-20">
         welcome Search
+        <VersesNumber number={23} />
     </div>
     </>
   )
