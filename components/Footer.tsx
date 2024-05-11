@@ -9,6 +9,8 @@ export default function Footer() {
             <h1 className="text-xl text-white">Spiritual Awakening</h1>
             <p>Terms of Service</p>
             <p>Privacy policies</p>
+            <p>Spiritual Awakening</p>
+            <i className="text-xs">&copy; 2024 all rights reserved, Ayomide, CHO inc.</i>
           </div>
           <div className="flex  gap-3 flex-col">
             <h1 className="text-xl text-white">NewsLetter</h1>
