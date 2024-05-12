@@ -20,7 +20,7 @@ export let books4 = booksLoop.slice(54);
 export default function SearchMain(){
     return (
         <>
-           <div className="h-screen bg-cover lg:bg-center md:bg-center bg-bottom search">
+           <div className="md:h-auto h-screen bg-cover lg:bg-center md:bg-center bg-center search">
            
                 <div className='bg-neutral-700  h-full w-full  bg-opacity-50  '>
                     <div className='flex lg:p-10 md:p-7 md:m-3 p-5 m-2 lg:m-5'>
