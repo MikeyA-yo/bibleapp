@@ -219,3 +219,6 @@ export async function VerseArray(version: string, book: string, chap: string){
   );
   const data: DataBook = await res.json();
 }
+export async function versesKeyphrases(){
+  
+}
