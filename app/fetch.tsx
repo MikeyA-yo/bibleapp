@@ -146,6 +146,7 @@ export interface NKJV {
   verse: number;
   text: string;
 }
+type NKJVData = NKJV[];
 interface Verses {
   number: number;
   text: string;
@@ -191,7 +192,8 @@ import { getVerse, getVerseOfTheDay } from "@glowstudent/youversion";
 let tempBook: any = getBookIndex();
 let BooksIndex: BookIndex = tempBook;
 const authString = "Bearer " + process.env.APIBIBLEKEY;
-export async function getNKJV(Book: string, chap: string, ver: string) {
+export async function getNKJV( chap: string, ver: string) {
+  // example call: getNKJV( 'joshua', '1');
   let index = (() => {
     for (const key in BooksIndex) {
       if (key.includes(chap.toLowerCase())) {
@@ -199,12 +201,13 @@ export async function getNKJV(Book: string, chap: string, ver: string) {
       }
     }
   })();
-  console.log(index);
   const res = await fetch(`https://bolls.life/get-text/NKJV/${index}/${ver}/ `);
-  const data = await res.json();
-  data.forEach((obj: NKJV) => {
-    console.log(obj.verse, obj.text);
-  });
+  const data:NKJVData = await res.json();
+  console.log(data)
+  return data;
+  // data.forEach((obj: NKJV) => {
+  //   console.log(obj.verse, obj.text);
+  // });
 }
 export async function getBibles(
   version: string,
