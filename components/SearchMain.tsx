@@ -1,3 +1,4 @@
+import { getNIV } from '@/app/fetch';
 import { BookCards, SearchBox, VersesNumber } from './BibleCards';
 import { booksA } from './books';
 import PagesBook from './BookSwiper';

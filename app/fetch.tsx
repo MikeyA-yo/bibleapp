@@ -154,22 +154,44 @@ interface Chapters {
   number: number;
   verses: number;
 }
-interface VersesOtherVersions{
-  book: {abbrev:{pt:string, en: string}, name:string, author:string, group:string, version:string},
-  chapter:number,
-  number:number,
-  text:string
+interface VersesOtherVersions {
+  book: {
+    abbrev: { pt: string; en: string };
+    name: string;
+    author: string;
+    group: string;
+    version: string;
+  };
+  chapter: number;
+  number: number;
+  text: string;
 }
 interface DataBook {
   book: object;
   chapter: Chapters;
   verses: Verses[];
 }
+interface NivData {
+  book: string;
+  chapter: string;
+  verses: string;
+  text: string;
+  version: string;
+  bid: string;
+  verse: {
+    id: string;
+    book: string;
+    chapter: string;
+    verse: string;
+    text: string;
+  };
+}
 import { booksA, getBookIndex } from "@/components/books";
+import { getVerse, getVerseOfTheDay } from "@glowstudent/youversion";
 let tempBook: any = getBookIndex();
 let BooksIndex: BookIndex = tempBook;
 const authString = "Bearer " + process.env.APIBIBLEKEY;
-export async function getNKJV(Book:string, chap: string, ver: string) {
+export async function getNKJV(Book: string, chap: string, ver: string) {
   let index = (() => {
     for (const key in BooksIndex) {
       if (key.includes(chap.toLowerCase())) {
@@ -184,7 +206,13 @@ export async function getNKJV(Book:string, chap: string, ver: string) {
     console.log(obj.verse, obj.text);
   });
 }
-export async function getBibles(version: string, book: string, chap: string,ver:string) {
+export async function getBibles(
+  version: string,
+  book: string,
+  chap: string,
+  ver: string
+) {
+  // example call : getBibles('kjv', 'Joshua','1', '8')
   for (const key in booksA) {
     if (book.toLowerCase() == key) {
       book = booksA[key];
@@ -199,11 +227,31 @@ export async function getBibles(version: string, book: string, chap: string,ver:
     }
   );
   const data: VersesOtherVersions = await res.json();
+  console.log(data.text, data.number);
+  return {
+    verse: data.text,
+    verseNo: data.number,
+  };
   //console.log(data.text)
   //verse sample : data.verses[0].text
 }
-// getBibles('kjv', 'Joshua','1', '8')
-export async function VerseArray(version: string, book: string, chap: string){
+
+export async function getNIV(book: string, chapter: string, verse: string) {
+  //example call: getNIV('1 samuel', '23', '18');
+  let exampleBook = "3 john";
+  const res = await fetch(
+    `https://jsonbible.com//search/verses.php?json={ "book":"${book}",  "chapter": ${chapter},  "verse": ${verse},  "version": "niv" }`
+  );
+  const data: NivData = await res.json();
+  return {
+    verse: data.text,
+    verseNo: data.verses,
+  };
+  //console.log(data.text, data.verses)
+}
+
+// this function is the verse arrays standard
+export async function VerseArray(version: string, book: string, chap: string) {
   for (const key in booksA) {
     if (book.toLowerCase() == key) {
       book = booksA[key];
@@ -219,6 +267,4 @@ export async function VerseArray(version: string, book: string, chap: string){
   );
   const data: DataBook = await res.json();
 }
-export async function versesKeyphrases(){
-  
-}
+export async function versesKeyphrases() {}
