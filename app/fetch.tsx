@@ -203,7 +203,6 @@ export async function getNKJV( chap: string, ver: string) {
   })();
   const res = await fetch(`https://bolls.life/get-text/NKJV/${index}/${ver}/ `);
   const data:NKJVData = await res.json();
-  console.log(data)
   return data;
   // data.forEach((obj: NKJV) => {
   //   console.log(obj.verse, obj.text);
@@ -269,5 +268,6 @@ export async function VerseArray(version: string, book: string, chap: string) {
     }
   );
   const data: DataBook = await res.json();
+  return data;
 }
 export async function versesKeyphrases() {}
