@@ -232,7 +232,6 @@ export async function getBibles(
     }
   );
   const data: VersesOtherVersions = await res.json();
-  console.log(data.text, data.number);
   return {
     verse: data.text,
     verseNo: data.number,
@@ -252,7 +251,6 @@ export async function getNKJV(book: string, chapter: string, verse: string){
     `https://bolls.life/get-verse/NKJV/${index}/${chapter}/${verse}/ `
   );
   const data: NKJV = await res.json();
-  console.log(data)
   return {
     verse: data.text,
     verseNo: data.verse
@@ -278,13 +276,35 @@ export async function getNLT(book: string, chapter: string, verse: string){
      `https://jsonbible.com//search/verses.php?json={ "book":"${book}",  "chapter": ${chapter},  "verse": ${verse},  "version": "nlt" }`
    );
    const data: NivData = await res.json();
-   console.log(data)
    return {
      verse: data.text,
      verseNo: data.verses,
    };
 }
-
+export async function getAMP(book: string, chapter: string, verse: string){
+  //example call: getAMP('1 samuel', '23', '18');
+  let exampleBook = "3 john";
+  const res = await fetch(
+    `https://jsonbible.com//search/verses.php?json={ "book":"${book}",  "chapter": ${chapter},  "verse": ${verse},  "version": "amp" }`
+  );
+  const data: NivData = await res.json();
+  return {
+    verse: data.text,
+    verseNo: data.verses,
+  };
+}
+export async function getESV(book: string, chapter: string, verse: string){
+   //example call: getESV('1 samuel', '23', '18');
+   let exampleBook = "3 john";
+   const res = await fetch(
+     `https://jsonbible.com//search/verses.php?json={ "book":"${book}",  "chapter": ${chapter},  "verse": ${verse},  "version": "esv" }`
+   );
+   const data: NivData = await res.json();
+   return {
+     verse: data.text,
+     verseNo: data.verses,
+   };
+}
 // this function is the verse arrays standard
 export async function VerseArray(version: string, book: string, chap: string) {
   for (const key in booksA) {
