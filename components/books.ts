@@ -23,7 +23,7 @@ export const booksA:Books = {
   ecclesiastes: "ec",
   songOfSongs: "so", //or songs of solomon ig
   isaiah: "is",
-  jeremiah: "jeremiah",
+  jeremiah: "jr",
   lamentations: "lm",
   ezekiel: "ez",
   daniel: "dn",
