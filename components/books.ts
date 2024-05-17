@@ -1,6 +1,6 @@
 import  {BookIndex, Books} from "@/app/fetch";
 export const booksA:Books = {
-  genesis: "ge",
+  genesis: "gn",
   exodus: "ex",
   leviticus: "lv",
   numbers: "nm",

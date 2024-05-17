@@ -305,22 +305,28 @@ export async function getESV(book: string, chapter: string, verse: string){
      verseNo: data.verses,
    };
 }
-// this function is the verse arrays standard
-export async function VerseArray(version: string, book: string, chap: string) {
+// this function is the chapter arrays standard
+export async function ChapterArray( book: string) {
+  //example call:  ChapterArray('John') /  ChapterArray('firstJohn')
+  let b;
   for (const key in booksA) {
-    if (book.toLowerCase() == key) {
-      book = booksA[key];
+    if (book.toLowerCase() == key || book == key) {
+      b= booksA[key];
     }
   }
   const res = await fetch(
-    `https://www.abibliadigital.com.br/api/verses/${version}/${book}/${chap}/`,
+    `https://www.abibliadigital.com.br/api/books/${b}/`,
     {
       headers: {
         Authorization: authString,
       },
     }
   );
-  const data: DataBook = await res.json();
-  return data;
+  const data = await res.json();
+ let array = [];
+ for(let i = 1; i <= data.chapters; i++){
+  array.push(i)
+ }
+  return array;
 }
 export async function versesKeyphrases(phrase:string) {}

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 export function VersesNumber({ number }: { number: number | string }) {
@@ -14,22 +15,25 @@ export function VersesNumber({ number }: { number: number | string }) {
 export function BookCards({ book }: { book: string }) {
   return (
     <>
-      <div className="flex lg:h-24 md:h-24 h-16 w-auto lg:w-44 md:w-44 lg:m-5 m-2 items-center transition duration-300 ease-in-out rounded-2xl bg-gradient-to-b from-neutral-500 via-slate-100 to-gray-300 hover:scale-110 hover:bg-gradient-to-t hover:from-red-300 hover:via-slate-100 hover:to-indigo-500 justify-center">
-        <p className="text-base lg:text-2xl p-2 md:text-xl  text-gray-700">
-          {book}
-        </p>
-      </div>
+      <Link href={"/search/"+book}>
+        {" "}
+        <div className="flex lg:h-24 md:h-24 h-16 w-auto lg:w-44 md:w-44 lg:m-5 m-2 items-center transition duration-300 ease-in-out rounded-2xl bg-gradient-to-b from-neutral-500 via-slate-100 to-gray-300 hover:scale-110 hover:bg-gradient-to-t hover:from-red-300 hover:via-slate-100 hover:to-indigo-500 justify-center">
+          <p className="text-base lg:text-2xl p-2 md:text-xl  text-gray-700">
+            {book}
+          </p>
+        </div>
+      </Link>
     </>
   );
 }
 let value: string;
-let versionValue:string;
+let versionValue: string;
 export function SearchBox() {
   const [text, setText] = useState("");
   const [version, setVersion] = useState("kjv");
   value = text;
   versionValue = version;
-   // console.log(version, value, versionValue, text);
+  // console.log(version, value, versionValue, text);
   return (
     <>
       <div className="flex flex-col gap-1 w-72">
@@ -40,7 +44,6 @@ export function SearchBox() {
             placeholder="Enter key phrase in bible"
             onChange={(e) => {
               setText(e.target.value);
-              
             }}
           />
           <span className="focus-border" />
@@ -77,12 +80,13 @@ export function SearchBox() {
             <option value={"nvi"}>NVI (portuegues)</option>
             <option value={"niv"}>New International Version</option>
             <option value={"nlt"}>New Living Translation</option>
+            <option value={"esv"}>English Standard Version</option>
           </select>
         </div>
       </div>
     </>
   );
 }
-export function searchValues(){
+export function searchValues() {
   return [value, versionValue];
 }
