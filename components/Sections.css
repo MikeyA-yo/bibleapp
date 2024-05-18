@@ -18,3 +18,25 @@
   background-image: url('../public/nobg-high.png');
   background-attachment: fixed;
 }
+.chapters{
+  background-image: url('../public/light.jpg');
+  background-attachment: fixed;
+}
+/* Sections.css */
+.select-container {
+  position: relative;
+  width: 16rem; /* fixed width */
+}
+
+.select-box {
+  width: 100%;
+}
+
+.chapters-container {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  max-height: calc(100vh - 8rem); /* adjust based on your padding/margins */
+}
