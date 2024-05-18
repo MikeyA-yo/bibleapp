@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import useQueryParams from "./query";
+import { ChaptersNumber } from "./BibleCards";
 
 interface QueryParams {
   v: string;
@@ -9,6 +11,7 @@ export default function Chapters({ chapters }: { chapters: number[] }) {
   const [version, setVersion] = useState("kjv");
   const { queryParams, setQueryParams } = useQueryParams<QueryParams>();
   setQueryParams({ v: version });
+  const pathname = usePathname();
   return (
     <>
       <div className="text-black flex  flex-col gap-3 bg-gray-300 pt-16">
@@ -53,7 +56,7 @@ export default function Chapters({ chapters }: { chapters: number[] }) {
         </div>
         My Chapters:{" "}
         {chapters.map((chapter) => {
-          return <p key={chapter}>{chapter}</p>;
+          return <div><ChaptersNumber path={pathname + '/' + chapter} key={chapter} query={{v:version}} number={chapter} /> </div>;
         })}
       </div>
     </>

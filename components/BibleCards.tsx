@@ -3,19 +3,34 @@
 import Link from "next/link";
 import { useState } from "react";
 
-export function VersesNumber({ number }: { number: number | string }) {
+export function ChaptersNumber({
+  number,
+  path,
+  query,
+}: {
+  number: number | string;
+  path: string;
+  query: { v: string };
+}) {
   return (
     <>
-      <div className="flex h-20 w-20 m-5 items-center transition duration-300 ease-in-out rounded bg-gradient-to-b from-neutral-500 via-slate-100 to-gray-300 hover:scale-110 hover:bg-gradient-to-t hover:from-gray-300 hover:via-slate-100 hover:to-neutral-500 justify-center">
-        <p className="text-2xl text-gray-700">{number}</p>
-      </div>
+      <Link
+        href={{
+          pathname: path,
+          query: query,
+        }}
+      >
+        <div className="flex h-20 w-20 m-5 items-center transition duration-300 ease-in-out rounded bg-gradient-to-b from-neutral-500 via-slate-100 to-gray-300 hover:scale-110 hover:bg-gradient-to-t hover:from-gray-300 hover:via-slate-100 hover:to-neutral-500 justify-center">
+          <p className="text-2xl text-gray-700">{number}</p>
+        </div>
+      </Link>
     </>
   );
 }
 export function BookCards({ book }: { book: string }) {
   return (
     <>
-      <Link href={"/search/"+book}>
+      <Link href={"/search/" + book}>
         {" "}
         <div className="flex lg:h-24 md:h-24 h-16 w-auto lg:w-44 md:w-44 lg:m-5 m-2 items-center transition duration-300 ease-in-out rounded-2xl bg-gradient-to-b from-neutral-500 via-slate-100 to-gray-300 hover:scale-110 hover:bg-gradient-to-t hover:from-red-300 hover:via-slate-100 hover:to-indigo-500 justify-center">
           <p className="text-base lg:text-2xl p-2 md:text-xl  text-gray-700">
