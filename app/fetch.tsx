@@ -330,3 +330,5 @@ export async function ChapterArray( book: string) {
   return array;
 }
 export async function versesKeyphrases(phrase:string) {}
+// filter functions function
+export async function Bible(version: string, book:string, chapter:string ){}
