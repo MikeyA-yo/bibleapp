@@ -56,6 +56,7 @@ export default function Chapters({ chapters }: { chapters: number[] }) {
               <option value={"niv"}>New International Version</option>
               <option value={"nlt"}>New Living Translation</option>
               <option value={"esv"}>English Standard Version</option>
+              <option value={"msg"}>The Message Translation</option>
             </select>
           </div>
         </div>

@@ -188,6 +188,14 @@ interface NivData {
     text: string;
   };
 }
+interface SearchNKJVnKJV{
+  pk: any,
+  translation:string,
+  book:number,
+  chapter:number,
+  verse:number,
+  text:string
+}
 import { booksA, getBookIndex } from "@/components/books";
 import { getVerse, getVerseOfTheDay } from "@glowstudent/youversion";
 let tempBook: any = getBookIndex();
@@ -333,8 +341,22 @@ export async function ChapterArray( book: string) {
 export async function versesKeyphrases(phrase:string, version:string) {
   if (version == 'kjv'){
     const res = await fetch(`https://bolls.life/find/KJV/?search=${phrase}&match_case=false&match_whole=true`)
+    const data: SearchNKJVnKJV[] = await res.json()
   }else if (version == 'nkjv'){
-    const res = await fetch(`https://bolls.life/find/NKJV/?search=${phrase}&match_case=false&match_whole=true`)
+    const res = await fetch(`https://bolls.life/find/NKJV/?search=${phrase}&match_case=false&match_whole=true`);
+    const data:SearchNKJVnKJV[] = await res.json()
+  }else if (version == 'niv'){
+    const res = await fetch(`https://bolls.life/find/NIV/?search=${phrase}&match_case=false&match_whole=true`);
+    const data:SearchNKJVnKJV[] = await res.json()
+  }else if(version == 'nlt'){
+    const res = await fetch(`https://bolls.life/find/NLT/?search=${phrase}&match_case=false&match_whole=true`);
+    const data:SearchNKJVnKJV[] = await res.json()
+  }else if(version == 'esv'){
+    const res = await fetch(`https://bolls.life/find/ESV/?search=${phrase}&match_case=false&match_whole=true`);
+    const data:SearchNKJVnKJV[] = await res.json()
+  }else if(version == 'amp'){
+    const res = await fetch(`https://bolls.life/find/AMP/?search=${phrase}&match_case=false&match_whole=true`);
+    const data:SearchNKJVnKJV[] = await res.json()
   }
 }
 // filter functions function
