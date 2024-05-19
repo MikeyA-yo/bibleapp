@@ -145,7 +145,7 @@ export interface NKJV {
   pk: any;
   verse: number;
   text: string;
-  comment?:string;
+  comment?: string;
 }
 type NKJVData = NKJV[];
 interface Verses {
@@ -188,13 +188,13 @@ interface NivData {
     text: string;
   };
 }
-interface SearchNKJVnKJV{
-  pk: any,
-  translation:string,
-  book:number,
-  chapter:number,
-  verse:number,
-  text:string
+interface SearchNKJVnKJV {
+  pk: any;
+  translation: string;
+  book: number;
+  chapter: number;
+  verse: number;
+  text: string;
 }
 import { booksA, getBookIndex } from "@/components/books";
 import { getVerse, getVerseOfTheDay } from "@glowstudent/youversion";
@@ -247,7 +247,7 @@ export async function getBibles(
   //console.log(data.text)
   //verse sample : data.verses[0].text
 }
-export async function getNKJV(book: string, chapter: string, verse: string){
+export async function getNKJV(book: string, chapter: string, verse: string) {
   let index = (() => {
     for (const key in BooksIndex) {
       if (key.includes(book.toLowerCase())) {
@@ -261,7 +261,7 @@ export async function getNKJV(book: string, chapter: string, verse: string){
   const data: NKJV = await res.json();
   return {
     verse: data.text,
-    verseNo: data.verse
+    verseNo: data.verse,
   };
 }
 export async function getNIV(book: string, chapter: string, verse: string) {
@@ -277,19 +277,19 @@ export async function getNIV(book: string, chapter: string, verse: string) {
   };
   //console.log(data.text, data.verses)
 }
-export async function getNLT(book: string, chapter: string, verse: string){
-   //example call: getNLT('1 samuel', '23', '18');
-   let exampleBook = "3 john";
-   const res = await fetch(
-     `https://jsonbible.com//search/verses.php?json={ "book":"${book}",  "chapter": ${chapter},  "verse": ${verse},  "version": "nlt" }`
-   );
-   const data: NivData = await res.json();
-   return {
-     verse: data.text,
-     verseNo: data.verses,
-   };
+export async function getNLT(book: string, chapter: string, verse: string) {
+  //example call: getNLT('1 samuel', '23', '18');
+  let exampleBook = "3 john";
+  const res = await fetch(
+    `https://jsonbible.com//search/verses.php?json={ "book":"${book}",  "chapter": ${chapter},  "verse": ${verse},  "version": "nlt" }`
+  );
+  const data: NivData = await res.json();
+  return {
+    verse: data.text,
+    verseNo: data.verses,
+  };
 }
-export async function getAMP(book: string, chapter: string, verse: string){
+export async function getAMP(book: string, chapter: string, verse: string) {
   //example call: getAMP('1 samuel', '23', '18');
   let exampleBook = "3 john";
   const res = await fetch(
@@ -301,63 +301,188 @@ export async function getAMP(book: string, chapter: string, verse: string){
     verseNo: data.verses,
   };
 }
-export async function getESV(book: string, chapter: string, verse: string){
-   //example call: getESV('1 samuel', '23', '18');
-   let exampleBook = "3 john";
-   const res = await fetch(
-     `https://jsonbible.com//search/verses.php?json={ "book":"${book}",  "chapter": ${chapter},  "verse": ${verse},  "version": "esv" }`
-   );
-   const data: NivData = await res.json();
-   return {
-     verse: data.text,
-     verseNo: data.verses,
-   };
+export async function getESV(book: string, chapter: string, verse: string) {
+  //example call: getESV('1 samuel', '23', '18');
+  let exampleBook = "3 john";
+  const res = await fetch(
+    `https://jsonbible.com//search/verses.php?json={ "book":"${book}",  "chapter": ${chapter},  "verse": ${verse},  "version": "esv" }`
+  );
+  const data: NivData = await res.json();
+  return {
+    verse: data.text,
+    verseNo: data.verses,
+  };
 }
 // this function is the chapter arrays standard
-export async function ChapterArray( book: string) {
+export async function ChapterArray(book: string) {
   //example call:  ChapterArray('John') /  ChapterArray('firstJohn')
   let b;
   for (const key in booksA) {
     if (book.toLowerCase() == key || book == key) {
-      b= booksA[key];
+      b = booksA[key];
     }
   }
-  const res = await fetch(
-    `https://www.abibliadigital.com.br/api/books/${b}/`,
-    {
-      headers: {
-        Authorization: authString,
-      },
-    }
-  );
+  const res = await fetch(`https://www.abibliadigital.com.br/api/books/${b}/`, {
+    headers: {
+      Authorization: authString,
+    },
+  });
   const data = await res.json();
- let array = [];
- for(let i = 1; i <= data.chapters; i++){
-  array.push(i)
- }
+  let array = [];
+  for (let i = 1; i <= data.chapters; i++) {
+    array.push(i);
+  }
   return array;
 }
 // for keypharses search
-export async function versesKeyphrases(phrase:string, version:string) {
-  if (version == 'kjv'){
-    const res = await fetch(`https://bolls.life/find/KJV/?search=${phrase}&match_case=false&match_whole=true`)
-    const data: SearchNKJVnKJV[] = await res.json()
-  }else if (version == 'nkjv'){
-    const res = await fetch(`https://bolls.life/find/NKJV/?search=${phrase}&match_case=false&match_whole=true`);
-    const data:SearchNKJVnKJV[] = await res.json()
-  }else if (version == 'niv'){
-    const res = await fetch(`https://bolls.life/find/NIV/?search=${phrase}&match_case=false&match_whole=true`);
-    const data:SearchNKJVnKJV[] = await res.json()
-  }else if(version == 'nlt'){
-    const res = await fetch(`https://bolls.life/find/NLT/?search=${phrase}&match_case=false&match_whole=true`);
-    const data:SearchNKJVnKJV[] = await res.json()
-  }else if(version == 'esv'){
-    const res = await fetch(`https://bolls.life/find/ESV/?search=${phrase}&match_case=false&match_whole=true`);
-    const data:SearchNKJVnKJV[] = await res.json()
-  }else if(version == 'amp'){
-    const res = await fetch(`https://bolls.life/find/AMP/?search=${phrase}&match_case=false&match_whole=true`);
-    const data:SearchNKJVnKJV[] = await res.json()
+export async function versesKeyphrases(phrase: string, version: string) {
+  function indexToChapter(i: number | string) {
+    let chapter = (() => {
+      for (const key in BooksIndex) {
+        if (BooksIndex[key] == i) {
+          return key.includes("first")
+            ? key.replace("first", "1st ")
+            : key.includes("second")
+            ? key.replace("second", "2nd ")
+            : key.includes("third")
+            ? key.replace("third", "3rd ")
+            : key;
+        }
+      }
+    })();
+    return chapter ?? "nth found rare error";
+  }
+  try {
+    if (version == "kjv") {
+      const res = await fetch(
+        `https://bolls.life/find/KJV/?search=${phrase}&match_case=false&match_whole=true`
+      );
+      const data: SearchNKJVnKJV[] = await res.json();
+      let citations = {
+        book:"",
+        chapter: 0,
+        verse:0,
+        text:""
+      };
+      data.forEach(result =>{
+        citations.chapter = result.chapter
+        citations.verse = result.verse
+        citations.book = indexToChapter(result.book)
+        citations.text = result.text
+      })
+      return citations;
+    } else if (version == "nkjv") {
+      const res = await fetch(
+        `https://bolls.life/find/NKJV/?search=${phrase}&match_case=false&match_whole=true`
+      );
+      const data: SearchNKJVnKJV[] = await res.json();
+      let citations = {
+        book:"",
+        chapter: 0,
+        verse:0,
+        text:""
+      };
+      data.forEach(result =>{
+        citations.chapter = result.chapter
+        citations.verse = result.verse
+        citations.book = indexToChapter(result.book)
+        citations.text = result.text
+      })
+      return citations;
+    } else if (version == "niv") {
+      const res = await fetch(
+        `https://bolls.life/find/NIV/?search=${phrase}&match_case=false&match_whole=true`
+      );
+      const data: SearchNKJVnKJV[] = await res.json();
+      let citations = {
+        book:"",
+        chapter: 0,
+        verse:0,
+        text:""
+      };
+      data.forEach(result =>{
+        citations.chapter = result.chapter
+        citations.verse = result.verse
+        citations.book = indexToChapter(result.book)
+        citations.text = result.text
+      })
+      return citations;
+    } else if (version == "nlt") {
+      const res = await fetch(
+        `https://bolls.life/find/NLT/?search=${phrase}&match_case=false&match_whole=true`
+      );
+      const data: SearchNKJVnKJV[] = await res.json();
+      let citations = {
+        book:"",
+        chapter: 0,
+        verse:0,
+        text:""
+      };
+      data.forEach(result =>{
+        citations.chapter = result.chapter
+        citations.verse = result.verse
+        citations.book = indexToChapter(result.book)
+        citations.text = result.text
+      })
+      return citations;
+    } else if (version == "esv") {
+      const res = await fetch(
+        `https://bolls.life/find/ESV/?search=${phrase}&match_case=false&match_whole=true`
+      );
+      const data: SearchNKJVnKJV[] = await res.json();
+      let citations = {
+        book:"",
+        chapter: 0,
+        verse:0,
+        text:""
+      };
+      data.forEach(result =>{
+        citations.chapter = result.chapter
+        citations.verse = result.verse
+        citations.book = indexToChapter(result.book)
+        citations.text = result.text
+      })
+      return citations;
+    } else if (version == "amp") {
+      const res = await fetch(
+        `https://bolls.life/find/AMP/?search=${phrase}&match_case=false&match_whole=true`
+      );
+      const data: SearchNKJVnKJV[] = await res.json();
+      let citations = {
+        book:"",
+        chapter: 0,
+        verse:0,
+        text:""
+      };
+      data.forEach(result =>{
+        citations.chapter = result.chapter
+        citations.verse = result.verse
+        citations.book = indexToChapter(result.book)
+        citations.text = result.text
+      })
+      return citations;
+    } else if (version == "nvi") {
+      const res = await fetch(
+        `https://bolls.life/find/NVIPT/?search=${phrase}&match_case=false&match_whole=true`
+      );
+      const data: SearchNKJVnKJV[] = await res.json();
+      let citations = {
+        book:"",
+        chapter: 0,
+        verse:0,
+        text:""
+      };
+      data.forEach(result =>{
+        citations.chapter = result.chapter
+        citations.verse = result.verse
+        citations.book = indexToChapter(result.book)
+        citations.text = result.text
+      })
+      return citations;
+    }
+  } catch (e) {
+    console.log(`text not found`);
   }
 }
 // filter functions function
-export async function Bible(version: string, book:string, chapter:string ){}
+export async function Bible(version: string, book: string, chapter: string) {}
