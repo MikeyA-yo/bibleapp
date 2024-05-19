@@ -250,13 +250,30 @@ export async function getBibles(
 export async function getNKJV(book: string, chapter: string, verse: string) {
   let index = (() => {
     for (const key in BooksIndex) {
-      if (key.includes(book.toLowerCase())) {
+      if (key.toLowerCase().includes(book.toLowerCase())) {
         return BooksIndex[key];
       }
     }
   })();
   const res = await fetch(
     `https://bolls.life/get-verse/NKJV/${index}/${chapter}/${verse}/ `
+  );
+  const data: NKJV = await res.json();
+  return {
+    verse: data.text,
+    verseNo: data.verse,
+  };
+}
+export async function getMSG(book: string, chapter: string, verse: string){
+  let index = (() => {
+    for (const key in BooksIndex) {
+      if (key.toLowerCase().includes(book.toLowerCase())) {
+        return BooksIndex[key];
+      }
+    }
+  })();
+  const res = await fetch(
+    `https://bolls.life/get-verse/MSG/${index}/${chapter}/${verse}/ `
   );
   const data: NKJV = await res.json();
   return {
