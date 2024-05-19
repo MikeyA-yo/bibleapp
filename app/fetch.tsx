@@ -329,6 +329,13 @@ export async function ChapterArray( book: string) {
  }
   return array;
 }
-export async function versesKeyphrases(phrase:string) {}
+// for keypharses search
+export async function versesKeyphrases(phrase:string, version:string) {
+  if (version == 'kjv'){
+    const res = await fetch(`https://bolls.life/find/KJV/?search=${phrase}&match_case=false&match_whole=true`)
+  }else if (version == 'nkjv'){
+    const res = await fetch(`https://bolls.life/find/NKJV/?search=${phrase}&match_case=false&match_whole=true`)
+  }
+}
 // filter functions function
 export async function Bible(version: string, book:string, chapter:string ){}
