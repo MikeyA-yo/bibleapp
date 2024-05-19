@@ -1,4 +1,3 @@
-import { VersesNumber } from "@/components/BibleCards";
 import SearchMain from "@/components/SearchMain";
 import { Metadata } from "next";
 

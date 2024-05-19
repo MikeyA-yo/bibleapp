@@ -283,9 +283,14 @@ export async function getMSG(book: string, chapter: string, verse: string){
 }
 export async function getNIV(book: string, chapter: string, verse: string) {
   //example call: getNIV('1 samuel', '23', '18');
+  let nBook = book;
+  if(book.startsWith('first')) nBook = book.replace('first','1 ');
+  if(book.startsWith('second')) nBook = book.replace('second','2 ');
+  if(book.startsWith('third')) nBook = book.replace('third','3 ');
+  if(book.includes('song')) nBook = 'Song of Solomon';
   let exampleBook = "3 john";
   const res = await fetch(
-    `https://jsonbible.com//search/verses.php?json={ "book":"${book}",  "chapter": ${chapter},  "verse": ${verse},  "version": "niv" }`
+    `https://jsonbible.com//search/verses.php?json={ "book":"${nBook}",  "chapter": ${chapter},  "verse": ${verse},  "version": "niv" }`
   );
   const data: NivData = await res.json();
   return {
@@ -296,9 +301,14 @@ export async function getNIV(book: string, chapter: string, verse: string) {
 }
 export async function getNLT(book: string, chapter: string, verse: string) {
   //example call: getNLT('1 samuel', '23', '18');
+  let nBook = book;
+  if(book.startsWith('first')) nBook = book.replace('first','1 ');
+  if(book.startsWith('second')) nBook = book.replace('second','2 ');
+  if(book.startsWith('third')) nBook = book.replace('third','3 ');
+  if(book.includes('song')) nBook = 'Song of Solomon';
   let exampleBook = "3 john";
   const res = await fetch(
-    `https://jsonbible.com//search/verses.php?json={ "book":"${book}",  "chapter": ${chapter},  "verse": ${verse},  "version": "nlt" }`
+    `https://jsonbible.com//search/verses.php?json={ "book":"${nBook}",  "chapter": ${chapter},  "verse": ${verse},  "version": "nlt" }`
   );
   const data: NivData = await res.json();
   return {
@@ -308,9 +318,14 @@ export async function getNLT(book: string, chapter: string, verse: string) {
 }
 export async function getAMP(book: string, chapter: string, verse: string) {
   //example call: getAMP('1 samuel', '23', '18');
+  let nBook = book;
+  if(book.startsWith('first')) nBook = book.replace('first','1 ');
+  if(book.startsWith('second')) nBook = book.replace('second','2 ');
+  if(book.startsWith('third')) nBook = book.replace('third','3 ');
+  if(book.includes('song')) nBook = 'Song of Solomon';
   let exampleBook = "3 john";
   const res = await fetch(
-    `https://jsonbible.com//search/verses.php?json={ "book":"${book}",  "chapter": ${chapter},  "verse": ${verse},  "version": "amp" }`
+    `https://jsonbible.com//search/verses.php?json={ "book":"${nBook}",  "chapter": ${chapter},  "verse": ${verse},  "version": "amp" }`
   );
   const data: NivData = await res.json();
   return {
@@ -320,9 +335,14 @@ export async function getAMP(book: string, chapter: string, verse: string) {
 }
 export async function getESV(book: string, chapter: string, verse: string) {
   //example call: getESV('1 samuel', '23', '18');
+  let nBook = book;
+  if(book.startsWith('first')) nBook = book.replace('first','1 ');
+  if(book.startsWith('second')) nBook = book.replace('second','2 ');
+  if(book.startsWith('third')) nBook = book.replace('third','3 ');
+  if(book.includes('song')) nBook = 'Song of Solomon';
   let exampleBook = "3 john";
   const res = await fetch(
-    `https://jsonbible.com//search/verses.php?json={ "book":"${book}",  "chapter": ${chapter},  "verse": ${verse},  "version": "esv" }`
+    `https://jsonbible.com//search/verses.php?json={ "book":"${nBook}",  "chapter": ${chapter},  "verse": ${verse},  "version": "esv" }`
   );
   const data: NivData = await res.json();
   return {
@@ -335,7 +355,7 @@ export async function ChapterArray(book: string) {
   //example call:  ChapterArray('John') /  ChapterArray('firstJohn')
   let b;
   for (const key in booksA) {
-    if (book.toLowerCase() == key || book == key) {
+    if (book.toLowerCase() == key.toLowerCase() || book == key) {
       b = booksA[key];
     }
   }
