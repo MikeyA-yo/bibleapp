@@ -196,6 +196,10 @@ interface SearchNKJVnKJV {
   verse: number;
   text: string;
 }
+interface verses{
+  verse:string,
+  verseNo: number | string
+}
 import { booksA, getBookIndex } from "@/components/books";
 import { getVerse, getVerseOfTheDay } from "@glowstudent/youversion";
 let tempBook: any = getBookIndex();
@@ -205,7 +209,7 @@ export async function getNKJVVersesArray(book: string, chap: string) {
   // example call: getNKJV( 'joshua', '1');
   let index = (() => {
     for (const key in BooksIndex) {
-      if (key.includes(book.toLowerCase())) {
+      if (key.toLowerCase().includes(book.toLowerCase())) {
         return BooksIndex[key];
       }
     }
@@ -214,7 +218,7 @@ export async function getNKJVVersesArray(book: string, chap: string) {
     `https://bolls.life/get-text/NKJV/${index}/${chap}/ `
   );
   const data: NKJVData = await res.json();
-  return data;
+  return data.length;
   // data.forEach((obj: NKJV) => {
   //   console.log(obj.verse, obj.text);
   // });
@@ -287,7 +291,7 @@ export async function getNIV(book: string, chapter: string, verse: string) {
   if (book.startsWith("first")) nBook = book.replace("first", "1 ");
   if (book.startsWith("second")) nBook = book.replace("second", "2 ");
   if (book.startsWith("third")) nBook = book.replace("third", "3 ");
-  if (book.includes("song")) nBook = "Song of Solomon";
+  if (book.includes("song") || book.includes('Song')) nBook = "Song of Solomon";
   let exampleBook = "3 john";
   const res = await fetch(
     `https://jsonbible.com//search/verses.php?json={ "book":"${nBook}",  "chapter": ${chapter},  "verse": ${verse},  "version": "niv" }`
@@ -305,7 +309,7 @@ export async function getNLT(book: string, chapter: string, verse: string) {
   if (book.startsWith("first")) nBook = book.replace("first", "1 ");
   if (book.startsWith("second")) nBook = book.replace("second", "2 ");
   if (book.startsWith("third")) nBook = book.replace("third", "3 ");
-  if (book.includes("song")) nBook = "Song of Solomon";
+  if (book.includes("song") || book.includes('Song')) nBook = "Song of Solomon";
   let exampleBook = "3 john";
   const res = await fetch(
     `https://jsonbible.com//search/verses.php?json={ "book":"${nBook}",  "chapter": ${chapter},  "verse": ${verse},  "version": "nlt" }`
@@ -322,12 +326,12 @@ export async function getAMP(book: string, chapter: string, verse: string) {
   if (book.startsWith("first")) nBook = book.replace("first", "1 ");
   if (book.startsWith("second")) nBook = book.replace("second", "2 ");
   if (book.startsWith("third")) nBook = book.replace("third", "3 ");
-  if (book.includes("song")) nBook = "Song of Solomon";
+  if (book.includes("song") || book.includes('Song')) nBook = "Song of Solomon";
   let exampleBook = "3 john";
   const res = await fetch(
     `https://jsonbible.com//search/verses.php?json={ "book":"${nBook}",  "chapter": ${chapter},  "verse": ${verse},  "version": "amp" }`
   );
-  const data: NivData = await res.json();
+  const data: NivData = await res.json(); 
   return {
     verse: data.text,
     verseNo: data.verses,
@@ -339,7 +343,7 @@ export async function getESV(book: string, chapter: string, verse: string) {
   if (book.startsWith("first")) nBook = book.replace("first", "1 ");
   if (book.startsWith("second")) nBook = book.replace("second", "2 ");
   if (book.startsWith("third")) nBook = book.replace("third", "3 ");
-  if (book.includes("song")) nBook = "Song of Solomon";
+  if (book.includes("song") || book.includes('Song')) nBook = "Song of Solomon";
   let exampleBook = "3 john";
   const res = await fetch(
     `https://jsonbible.com//search/verses.php?json={ "book":"${nBook}",  "chapter": ${chapter},  "verse": ${verse},  "version": "esv" }`
@@ -599,4 +603,50 @@ export async function versesKeyphrases(phrase: string, version: string) {
   }
 }
 // filter functions function
-export async function Bible(version: string, book: string, chapter: string) {}
+export async function Bible(version: string, book: string, chapter: string) {
+  let verses:verses[] = []
+  if ( version == 'kjv' || version == 'nvi'){
+    let length = await getNKJVVersesArray(book, chapter);
+      for(let i = 1; i <= length; i++){
+         let verse = await getBibles(version, book, chapter, `${i}`);
+         verses.push(verse)
+      }
+  }else if(version == 'amp'){
+    let length = await getNKJVVersesArray(book, chapter);
+    for(let i = 1; i <= length; i++){
+       let verse = await getAMP( book, chapter, `${i}`);
+       verses.push(verse)
+    }
+  }else if(version == 'nkjv'){
+    let length = await getNKJVVersesArray(book, chapter);
+    for(let i = 1; i <= length; i++){
+       let verse = await getNKJV( book, chapter, `${i}`);
+       verses.push(verse)
+    }
+  }else if (version == 'esv'){
+    let length = await getNKJVVersesArray(book, chapter);
+    for(let i = 1; i <= length; i++){
+       let verse = await getESV( book, chapter, `${i}`);
+       verses.push(verse)
+    }
+  }else if(version == 'nlt'){
+    let length = await getNKJVVersesArray(book, chapter);
+    for(let i = 1; i <= length; i++){
+       let verse = await getNLT( book, chapter, `${i}`);
+       verses.push(verse)
+    }
+  }else if(version == 'niv'){
+    let length = await getNKJVVersesArray(book, chapter);
+    for(let i = 1; i <= length; i++){
+       let verse = await getNIV( book, chapter, `${i}`);
+       verses.push(verse)
+    }
+  }else if(version == 'msg'){
+    let length = await getNKJVVersesArray(book, chapter);
+    for(let i = 1; i <= length; i++){
+       let verse = await getMSG( book, chapter, `${i}`);
+       verses.push(verse)
+    }
+  }
+  return verses
+}

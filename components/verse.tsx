@@ -8,7 +8,7 @@ export default function VerseGroup({ chap }: { chap: string | number  }) {
   return (
     <>
       <div className="bg-white text-center mt-20">
-        {book} : {chap}
+        {book} : {chap} 
       </div>
     </>
   );
