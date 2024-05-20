@@ -3,6 +3,7 @@
 //https://bolls.life/get-text/NKJV/19/119/
 //this returns list of verses with moses
 //https://bolls.life/find/NKJV/?search=moses&match_case=false&match_whole=true
+
 export interface BookIndex {
   [key: string]: number;
   genesis: number;
@@ -196,7 +197,7 @@ interface SearchNKJVnKJV {
   verse: number;
   text: string;
 }
-interface verses{
+export interface verses{
   verse:string,
   verseNo: number | string
 }
@@ -648,5 +649,13 @@ export async function Bible(version: string, book: string, chapter: string) {
        verses.push(verse)
     }
   }
+  console.log(verses)
   return verses
 }
+export const verseOfTheDay = async () =>{
+  let votd = await getVerseOfTheDay();
+  return {
+    verse: votd?.citation,
+    text: votd?.passage
+  }
+};

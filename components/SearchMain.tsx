@@ -1,5 +1,4 @@
-import { ChapterArray, getAMP, getESV, getNKJV, getNLT } from '@/app/fetch';
-import { BookCards, SearchBox, VersesNumber } from './BibleCards';
+import { SearchBox } from './BibleCards';
 import { booksA } from './books';
 import PagesBook from './BookSwiper';
 import './Sections.css';
@@ -19,7 +18,6 @@ export let books2 = booksLoop.slice(18, 36);
 export let books3 = booksLoop.slice(36, 54);
 export let books4 = booksLoop.slice(54);
 export default function SearchMain(){
-    ChapterArray('genesis')
     return (
         <>
            <div className="md:h-auto h-screen bg-cover lg:bg-center md:bg-center bg-center search">
