@@ -10,6 +10,7 @@ export default async function Page({ params }: { params: { book: string } }) {
     ? params.book.replace("%20", " ")
     : params.book;
   let chapters = await ChapterArray(mapUrl(book));
+ // versesKeyphrases('moses', 'nkjv')
   return (
     <Chapters chapters={chapters} />
   );
