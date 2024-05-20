@@ -7,7 +7,7 @@ export default function VerseGroup({ chap }: { chap: string | number  }) {
   let book = pathname.split("/")[2].replace("%20", " ");
   return (
     <>
-      <div className="bg-white mt-20">
+      <div className="bg-white text-center mt-20">
         {book} : {chap}
       </div>
     </>

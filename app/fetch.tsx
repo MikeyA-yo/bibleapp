@@ -227,7 +227,7 @@ export async function getBibles(
 ) {
   // example call : getBibles('kjv', 'Joshua','1', '8') kjv or nvi
   for (const key in booksA) {
-    if (book.toLowerCase() == key) {
+    if (book.toLowerCase() == key.toLowerCase()) {
       book = booksA[key];
     }
   }
