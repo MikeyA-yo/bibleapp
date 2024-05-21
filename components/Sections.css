@@ -22,6 +22,10 @@
   background-image: url('../public/light.jpg');
   background-attachment: fixed;
 }
+.verse{
+  background-image: url('../public/sunset-low.jpg');
+  background-attachment: fixed;
+}
 /* Sections.css */
 .select-container {
   position: relative;

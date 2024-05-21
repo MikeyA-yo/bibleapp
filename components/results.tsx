@@ -8,7 +8,7 @@ import Spinner from "./spinner";
 export function Loading() {
   return (
     <>
-      <div className="flex items-center bg-white justify-center mt-16">
+      <div className="flex items-center  justify-center mt-16">
         <Spinner className="animate-spin h-20 w-20" />
       </div>
     </>
@@ -23,7 +23,7 @@ export default function Result() {
   let verse = sp.get("v") ?? "nkjv";
   let chapter = params.chap + "";
   return (
-      <div>
+      <div className="p-6">
         <Resolved version={verse} book={book} chapter={chapter} />
       </div>
   );
