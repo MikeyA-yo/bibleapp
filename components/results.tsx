@@ -23,6 +23,8 @@ export default function Result() {
   let verse = sp.get("v") ?? "nkjv";
   let chapter = params.chap + "";
   return (
-      <Resolved version={verse} book={book} chapter={chapter} />
+      <div>
+        <Resolved version={verse} book={book} chapter={chapter} />
+      </div>
   );
 }
