@@ -1,4 +1,4 @@
-import  {BookIndex, Books} from "@/app/fetch";
+import { Books } from "@/app/api/fetch";
 export const booksA:Books = {
   genesis: "gn",
   exodus: "ex",

@@ -12,7 +12,7 @@ export default function Result(){
     let verse = sp.get('v') ?? 'nkjv';
     let chapter = params.chap + ''
     return (
-       <Suspense fallback={<p className="text-white">Loading.....</p>}>
+       <Suspense fallback={<p className="bg-white p-20">Loading.....</p>}>
          <Resolved version={verse} book={book} chapter={chapter} />
        </Suspense>
     )

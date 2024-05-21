@@ -1,4 +1,4 @@
-import { ChapterArray } from "@/app/fetch";
+import { ChapterArray } from "@/app/api/fetch";
 import Chapters from "@/components/chapters";
 import mapUrl from "@/components/urlMapper";
 import { Metadata } from "next";
