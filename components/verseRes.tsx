@@ -8,6 +8,7 @@ export async function VersesArray(version:string, book:string, chapter:string){
     <>
       {data.map((verse:verses, i:number)=>{
         let nVerse = verse.verse
+        nVerse = nVerse.replace('<i>', '').replaceAll('<i>', '').replaceAll('</i>', '')
         return <VerseCard key={verse.verseNo} verse={verse.verseNo} text={nVerse} />
       })}
     </>

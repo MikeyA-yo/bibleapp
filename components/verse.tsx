@@ -1,20 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { VersesArray } from "./verseRes"
+import { Loading } from "./results";
 
 export function Resolved({version, book, chapter}:{version:string, book:string, chapter:string}) {
-  const [result, setResult] = useState<any>();
+  // const [result, setResult] = useState<any>();
 
-  useEffect(() => {
+  // useEffect(() => {
   
-    async function fetchData() {
-      const data = await VersesArray(version, book, chapter);
-      setResult(data);
-    }
+  //   async function fetchData() {
+  //     const data = await VersesArray(version, book, chapter);
+  //     setResult(data);
+  //   }
 
-    fetchData();
-  }, [version, book, chapter]);
+  //   fetchData();
+  // }, [version, book, chapter]);
 
-  return result;
+  return (
+    <Suspense fallback={<Loading />}>
+      {/* {result} */}
+      {VersesArray(version,book, chapter)}
+    </Suspense>
+  );
 }
