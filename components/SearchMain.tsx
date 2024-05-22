@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 import { SearchBox } from "./BibleCards";
 import { booksA } from "./books";
@@ -13,7 +13,7 @@ for (const key in booksA) {
   if (key.startsWith("third")) nKey = key.replace("third", "3rd ");
   booksLoop.push(nKey);
   if (nKey == "Strings") {
-    booksLoop.pop(); // remove last string property 
+    booksLoop.pop(); // remove last string property
   }
 }
 export let books1 = booksLoop.slice(0, 18);
@@ -26,20 +26,28 @@ export default function SearchMain() {
   const [isClick, setIsClick] = useState(false);
   return (
     <>
-      <div className="md:h-auto h-screen bg-cover lg:bg-center md:bg-center bg-center search">
-        <div className="bg-neutral-700  h-full w-full  bg-opacity-50  ">
-          <div className="flex lg:p-10 md:p-7 md:m-3 p-5 m-2 lg:m-5">
-            <SearchBox onChange={(e):void=>{
-                 setText(e.target.value)
-            }} 
-            onChangeSelect={(e):void=>{
-              setVersion(e.target.value)
-            }}
-            onClick={()=>{
-              setIsClick(true)
-            }}
+      <div className="md:h-auto min-h-screen bg-cover lg:bg-center md:bg-center bg-center search">
+        <div className="bg-neutral-700  min-h-full w-full  bg-opacity-50  ">
+          <div className="flex gap-5 lg:p-16 md:p-7 md:m-3 p-8 m-2 lg:m-5">
+            <SearchBox
+              onChange={(e): void => {
+                setText(e.target.value);
+              }}
+              onChangeSelect={(e): void => {
+                setVersion(e.target.value);
+              }}
+              onClick={() => {
+                setIsClick(true);
+              }}
             />
+            <div className="wrap-check-57">
+              <input id="s1-57" type="checkbox" className="switch" onChange={()=>{
+                setIsClick(!isClick)
+              }} />
+              <label htmlFor="s1-57">Show books</label>
+            </div>
           </div>
+
           {!isClick && <PagesBook />}
           {isClick && <KeyMain phrase={text} version={version} />}
         </div>

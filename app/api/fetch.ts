@@ -391,7 +391,7 @@ export interface BookIndex {
           }
         }
       })();
-      return chapter ?? "nth found rare error";
+      return chapter ?? "nth found rare error/API internals bug";
     }
     try {
       if (version == "kjv") {
@@ -571,6 +571,35 @@ export interface BookIndex {
       } else if (version == "nvi") {
         const res = await fetch(
           `https://bolls.life/find/NVIPT/?search=${phrase}&match_case=false&match_whole=true`
+        );
+        const data: SearchNKJVnKJV[] = await res.json();
+        class citations {
+          [x: string]: string | number;
+          constructor(
+            book: string,
+            chapter: number,
+            verse: number,
+            text: string
+          ) {
+            this.book = book;
+            this.chapter = chapter;
+            this.verse = verse;
+            this.text = text;
+          }
+        }
+        let resArray: any = [];
+        data.forEach((result) => {
+          let chapter = result.chapter;
+          let verse = result.verse;
+          let book = indexToChapter(result.book);
+          let text = result.text;
+          let scripture = new citations(book, chapter, verse, text);
+          resArray.push(scripture);
+        });
+        return resArray;
+      }else if(version == 'msg'){
+        const res = await fetch(
+          `https://bolls.life/find/MSG/?search=${phrase}&match_case=false&match_whole=true`
         );
         const data: SearchNKJVnKJV[] = await res.json();
         class citations {

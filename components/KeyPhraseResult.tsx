@@ -7,7 +7,6 @@ import { Loading } from "./results";
 export default function KeyMain({phrase, version}:{phrase:string, version:string}){
     const [isLoading, setIsLoadidng] = useState(false);
     const [data, setData] = useState<any>();
-    console.log(isLoading, "i'm here")
 
     useEffect(()=>{
       async function fetchData(){
