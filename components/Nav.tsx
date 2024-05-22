@@ -45,7 +45,7 @@ function MenuList({ state, pathname }: { state: boolean; pathname: string }) {
         >
           <Link href={"/"}>
             <p
-              className={`text-gray-400 hover:active-mobile ${
+              className={`text-gray-700 hover:active-mobile ${
                 pathname == "/" ? "active-mobile" : ""
               }`}
             >
@@ -55,7 +55,7 @@ function MenuList({ state, pathname }: { state: boolean; pathname: string }) {
           {pages.map((page, i) => (
             <Link key={i} href={`/${page.toLowerCase()}`}>
               <p
-                className={`text-gray-400 hover:active-mobile ${
+                className={`text-gray-700 hover:active-mobile ${
                   pathname == "/" + page.toLowerCase() ? "active-mobile" : ""
                 }`}
               >
@@ -81,7 +81,7 @@ export default function Nav() {
           <div className="flex gap-5">
             <Link href={"/"}>
               <p
-                className={`text-gray-400 hover:active ${
+                className={`text-gray-700 hover:active ${
                   pathname == "/" ? "active" : ""
                 }`}
               >
@@ -91,7 +91,7 @@ export default function Nav() {
             {pages.map((page, i) => (
               <Link key={i} href={`/${page.toLowerCase()}`}>
                 <p
-                  className={`text-gray-400 hover:active ${
+                  className={`text-gray-700 hover:active ${
                     pathname == "/" + page.toLowerCase() ? "active" : ""
                   }`}
                 >
