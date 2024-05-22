@@ -4,6 +4,7 @@ import { SearchBox } from "./BibleCards";
 import { booksA } from "./books";
 import PagesBook from "./BookSwiper";
 import "./Sections.css";
+import KeyMain from "./KeyPhraseResult";
 let booksLoop: string[] = [];
 for (const key in booksA) {
   let nKey = key.charAt(0).toUpperCase() + key.slice(1);
@@ -40,6 +41,7 @@ export default function SearchMain() {
             />
           </div>
           {!isClick && <PagesBook />}
+          {isClick && <KeyMain phrase={text} version={version} />}
         </div>
       </div>
     </>

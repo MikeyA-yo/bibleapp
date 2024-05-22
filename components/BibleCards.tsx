@@ -1,9 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import { ButtonKeyPhrase } from "./button";
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import VerseCard from "./verses-card";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay'
 export function ChaptersNumber({
   number,
   path,
@@ -44,7 +49,15 @@ export function BookCards({ book }: { book: string }) {
 }
 let value: string;
 let versionValue: string;
-export function SearchBox({onChange, onClick , onChangeSelect}:{onChange:React.ChangeEventHandler<HTMLInputElement>, onClick: React.MouseEventHandler<HTMLButtonElement>, onChangeSelect:React.ChangeEventHandler<HTMLSelectElement>}) {
+export function SearchBox({
+  onChange,
+  onClick,
+  onChangeSelect,
+}: {
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onChangeSelect: React.ChangeEventHandler<HTMLSelectElement>;
+}) {
   // console.log(version, value, versionValue, text);
   return (
     <>
@@ -99,6 +112,23 @@ export function SearchBox({onChange, onClick , onChangeSelect}:{onChange:React.C
     </>
   );
 }
-export function searchValues() {
-  return [value, versionValue];
-}
+// export function KeyPhrases({ keyArray }: { keyArray: any[] }) {
+//   return (
+//     <div>
+//       <Swiper
+//       modules={[Navigation, Pagination, Autoplay]}
+//       slidesPerView={3}
+//       autoplay={{delay:2500}}
+//       navigation
+//       pagination={{ clickable: true }}>
+//         {keyArray.map((key: any, i: number) => {
+//           return (
+//             <SwiperSlide key={i}>
+//               <div><VerseCard verse={key.verse} text={key.text}/></div>
+//             </SwiperSlide>
+//           );
+//         })}
+//       </Swiper>
+//     </div>
+//   );
+// }
