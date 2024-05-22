@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { ButtonKeyPhrase } from "./button";
 
 export function ChaptersNumber({
   number,
@@ -43,25 +44,22 @@ export function BookCards({ book }: { book: string }) {
 }
 let value: string;
 let versionValue: string;
-export function SearchBox() {
-  const [text, setText] = useState("");
-  const [version, setVersion] = useState("kjv");
-  value = text;
-  versionValue = version;
+export function SearchBox({onChange, onClick , onChangeSelect}:{onChange:React.ChangeEventHandler<HTMLInputElement>, onClick: React.MouseEventHandler<HTMLButtonElement>, onChangeSelect:React.ChangeEventHandler<HTMLSelectElement>}) {
   // console.log(version, value, versionValue, text);
   return (
     <>
       <div className="flex flex-col gap-1 w-72">
-        <div className="wrap-input-6">
-          <input
-            className="input"
-            type="text"
-            placeholder="Enter key phrase in bible"
-            onChange={(e) => {
-              setText(e.target.value);
-            }}
-          />
-          <span className="focus-border" />
+        <div>
+          <div className="wrap-input-6">
+            <input
+              className="input"
+              type="text"
+              placeholder="Enter key phrase in bible"
+              onChange={onChange}
+            />
+            <span className="focus-border" />
+          </div>
+          <ButtonKeyPhrase onClick={onClick} />
         </div>
         <div className="relative group rounded-lg w-64 bg-gray-50 overflow-hidden before:absolute before:w-12 before:h-12 before:content[''] before:right-0 before:bg-violet-500 before:rounded-full before:blur-lg before:[box-shadow:-60px_20px_10px_10px_#F9B0B9]">
           <svg
@@ -84,9 +82,7 @@ export function SearchBox() {
             />
           </svg>
           <select
-            onChange={(e) => {
-              setVersion(e.target.value);
-            }}
+            onChange={onChangeSelect}
             className="appearance-none hover:placeholder-shown:bg-emerald-500 relative text-pink-400 bg-transparent ring-0 outline-none border border-neutral-500 placeholder-violet-700 text-sm font-bold rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5"
           >
             <option value={"kjv"}>King James Version</option>
