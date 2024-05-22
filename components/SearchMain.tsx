@@ -28,7 +28,7 @@ export default function SearchMain() {
     <>
       <div className="md:h-auto min-h-screen bg-cover lg:bg-center md:bg-center bg-center search">
         <div className="bg-neutral-700  min-h-full w-full  bg-opacity-50  ">
-          <div className="flex gap-5 lg:p-16 md:p-7 md:m-3 p-8 m-2 lg:m-5">
+          <div className="flex lg:flex-row md:flex-row flex-col gap-5 lg:p-16 md:p-7 md:m-3 p-8 m-2 lg:m-5">
             <SearchBox
               onChange={(e): void => {
                 setText(e.target.value);
@@ -40,7 +40,7 @@ export default function SearchMain() {
                 setIsClick(true);
               }}
             />
-            <div className="wrap-check-57">
+            <div className={ !isClick ? 'hidden' : `wrap-check-57`}>
               <input id="s1-57" type="checkbox" className="switch" onChange={()=>{
                 setIsClick(!isClick)
               }} />
