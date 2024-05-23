@@ -27,8 +27,8 @@ export default function SearchMain() {
   return (
     <>
       <div className="md:h-auto min-h-screen bg-cover lg:bg-center md:bg-center bg-center search">
-        <div className="bg-neutral-700  min-h-full w-full  bg-opacity-50  ">
-          <div className="flex lg:flex-row md:flex-row flex-col gap-5 lg:p-16 md:p-7 md:m-3 p-8 m-2 lg:m-5">
+        <div className="bg-neutral-700  min-h-full w-full  bg-opacity-50">
+          <div className="flex lg:flex-row md:flex-row flex-col gap-2 lg:p-16 md:p-7 md:m-3 p-2 lg:m-5">
             <SearchBox
               onChange={(e): void => {
                 setText(e.target.value);
@@ -47,7 +47,6 @@ export default function SearchMain() {
               <label htmlFor="s1-57">Show books</label>
             </div>
           </div>
-
           {!isClick && <PagesBook />}
           {isClick && <KeyMain phrase={text} version={version} />}
         </div>

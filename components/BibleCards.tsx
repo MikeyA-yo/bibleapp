@@ -61,7 +61,7 @@ export function SearchBox({
   // console.log(version, value, versionValue, text);
   return (
     <>
-      <div className="flex flex-col gap-1 w-72">
+      <div className="flex flex-col gap-1 w-[17rem] pt-6">
         <div>
           <div className="wrap-input-6">
             <input
