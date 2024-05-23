@@ -4,11 +4,12 @@ import { usePathname } from "next/navigation";
 import useQueryParams from "./query";
 import { ChaptersNumber } from "./BibleCards";
 import "./Sections.css";
+import { Montserrat } from "next/font/google";
 
 interface QueryParams {
   v: string;
 }
-
+const mont = Montserrat({weight:["700"], subsets:["latin"]})
 export default function Chapters({ chapters }: { chapters: number[] }) {
   const [version, setVersion] = useState("kjv");
   const { queryParams, setQueryParams } = useQueryParams<QueryParams>();
@@ -22,6 +23,7 @@ export default function Chapters({ chapters }: { chapters: number[] }) {
   return (
     <div className="h-screen  bg-center bg-cover bg-fixed chapters">
       <div className="h-full w-full bg-black bg-opacity-50 flex flex-col justify-center gap-3 items-center  lg:gap-3 md:gap-3">
+        <h1 className={`text-2xl text-white ${mont.className}`}>{pathname.split('/')[2].replace('%20', ' ')}</h1>
         <div className="pt-32 lg:pt-16 md:pt-16">
           <div className="relative group rounded-lg w-64  bg-gray-50 overflow-hidden before:absolute before:w-12 before:h-12 before:content[''] before:right-0 before:bg-violet-500 before:rounded-full before:blur-lg before:[box-shadow:-60px_20px_10px_10px_#F9B0B9]">
             <svg

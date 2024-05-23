@@ -2,9 +2,9 @@
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { Resolved } from "./verse";
 import mapUrl from "./urlMapper";
-import { Suspense } from "react";
 import Spinner from "./spinner";
-
+import { Montserrat } from "next/font/google";
+const mont = Montserrat({weight:["700"], subsets:["latin"]})
 export function Loading() {
   return (
     <>
@@ -29,8 +29,11 @@ export default function Result() {
   let verse = sp.get("v") ?? "nkjv";
   let chapter = params.chap + "";
   return (
-    <div className="mx-10 rounded-xl p-6 pb-10 my-8 bg-slate-200 bg-opacity-40 ">
-      <Resolved version={verse} book={book} chapter={chapter} />
-    </div>
+   <>
+   <h1 className={`${mont.className} pl-20 text-2xl text-white`}>{pathname.split("/")[2].replace("%20", " ")}  {chapter}</h1>
+       <div className="mx-10 rounded-xl p-6 pb-10 my-8 bg-slate-200 bg-opacity-40 ">
+        <Resolved version={verse} book={book} chapter={chapter} />
+      </div>
+   </>
   );
 }

@@ -41,8 +41,11 @@ export default function SearchMain() {
               }}
             />
             <div className={ !isClick ? 'hidden' : `wrap-check-57 pt-10`}>
-              <input id="s1-57" type="checkbox" className="switch" onChange={()=>{
-                setIsClick(!isClick)
+              <input id="s1-57" type="checkbox" className="switch" onChange={(e)=>{
+                if(e.target.checked){
+                  setIsClick(!isClick)
+                  setTimeout(()=>{e.target.checked = false}, 500)
+                }
               }} />
               <label htmlFor="s1-57">Show books</label>
             </div>

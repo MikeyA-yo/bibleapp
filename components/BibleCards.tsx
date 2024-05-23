@@ -1,14 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import { ButtonKeyPhrase } from "./button";
-import { Swiper, SwiperSlide } from "swiper/react";
-import VerseCard from "./verses-card";
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/autoplay'
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/autoplay";
 export function ChaptersNumber({
   number,
   path,

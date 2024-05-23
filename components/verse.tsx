@@ -13,7 +13,6 @@ export function Resolved({version, book, chapter}:{version:string, book:string, 
       setResult(data);
       setIsLoading(false)
     }
-
     fetchData();
   }, [version, book, chapter]);
   if(isLoading){
