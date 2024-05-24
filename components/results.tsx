@@ -102,7 +102,6 @@ export default function Result() {
     }
     fetchArray();
   }, [book, chapter]);
-  console.log(b)
   return (
     <>
       <h1 className={`${mont.className} pl-20 pb-8 text-2xl text-white`}>
