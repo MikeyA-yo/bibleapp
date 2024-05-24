@@ -17,7 +17,9 @@ export default async function KeyPhraseRes(phrase: string, version: string) {
       .replaceAll("<mark>", "")
       .replaceAll("</mark>", "")
       .replaceAll("<i>", "")
-      .replaceAll("</i>", "").replaceAll('</J>',''),
+      .replaceAll("</i>", "")
+      .replaceAll("</J>", "")
+      .replaceAll("<br/>", "\n \n"),
   }));
   // console.log(obResult)
   return (

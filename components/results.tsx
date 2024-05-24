@@ -4,7 +4,25 @@ import { Resolved } from "./verse";
 import mapUrl from "./urlMapper";
 import Spinner from "./spinner";
 import { Montserrat } from "next/font/google";
-const mont = Montserrat({weight:["700"], subsets:["latin"]})
+import { getNKJVVersesArray } from "@/app/api/fetch";
+import { useEffect, useState } from "react";
+import VerseNav from "./verseNav";
+const mont = Montserrat({ weight: ["700"], subsets: ["latin"] });
+function SelectNav({
+  onChange,
+}: {
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+}) {
+  return (
+    <div className="pl-7">
+      <p className="text-gray-300 text-sm">Show Verses Navigation</p>
+      <label className="switch">
+        <input type="checkbox" onChange={onChange} />
+        <span className="slider">Not</span>
+      </label>
+    </div>
+  );
+}
 export function Loading() {
   return (
     <>
@@ -22,18 +40,41 @@ export function Loading() {
 }
 
 export default function Result() {
+  const [resArray, setResArray] = useState(0);
+  const [a, setA] = useState(false);
+
   let sp = useSearchParams();
   const params = useParams();
   const pathname = usePathname();
   let book = mapUrl(pathname.split("/")[2].replace("%20", " "));
   let verse = sp.get("v") ?? "nkjv";
   let chapter = params.chap + "";
+  useEffect(() => {
+    async function fetchArray() {
+      const verseArray = await getNKJVVersesArray(book, chapter);
+      setResArray(verseArray);
+    }
+    fetchArray();
+  }, [book, chapter]);
+
   return (
-   <>
-   <h1 className={`${mont.className} pl-20 text-2xl text-white`}>{pathname.split("/")[2].replace("%20", " ")}  {chapter}</h1>
-       <div className="mx-10 rounded-xl p-6 pb-10 my-8 bg-slate-200 bg-opacity-40 ">
+    <>
+      <h1 className={`${mont.className} pl-20 text-2xl text-white`}>
+        {pathname.split("/")[2].replace("%20", " ")} {chapter}
+      </h1>
+      <SelectNav
+        onChange={(e) => {
+          if (e.target.checked) {
+            setA(true);
+          } else {
+            setA(false);
+          }
+        }}
+      />
+      <div className="mx-10 rounded-xl  pb-10 my-8 bg-slate-200 bg-opacity-40 ">
+        {a && resArray && <VerseNav verseNo={resArray} />}
         <Resolved version={verse} book={book} chapter={chapter} />
       </div>
-   </>
+    </>
   );
 }

@@ -6,9 +6,10 @@ const mont = Montserrat({
   subsets: ["latin"],
   style: ["normal"],
 });
-const openSans = Open_Sans({  weight: ["700"],
-subsets: ["latin"],
-style: ["normal"],
+const openSans = Open_Sans({
+  weight: ["700"],
+  subsets: ["latin"],
+  style: ["normal"],
 });
 export default function VerseCard({
   verse,
@@ -24,6 +25,7 @@ export default function VerseCard({
   return (
     <>
       <MotionDiv
+        id={verse.toString()}
         variants={variants}
         initial="initial"
         transition={{
