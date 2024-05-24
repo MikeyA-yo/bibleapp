@@ -714,14 +714,16 @@ export async function specialChapters(
       } else {
         bools.push(true);
       }
-      if(thing.chapters != currentChapter && currentChapter != 1){
+      if(currentChapter != 1){
         bools.push(true)
+      }else {
+        bools.push(false)
       }
     }
   });
-  if (currentChapter == 1) {
-    bools.push(false);
-  }
+  // if (currentChapter == 1) {
+  //   bools.push(false);
+  // }
 
   return bools;
 }

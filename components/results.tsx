@@ -1,5 +1,5 @@
 "use client";
-import { useParams, usePathname, useSearchParams } from "next/navigation";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Resolved } from "./verse";
 import mapUrl from "./urlMapper";
 import Spinner from "./spinner";
@@ -89,6 +89,7 @@ export default function Result() {
   let sp = useSearchParams();
   const params = useParams();
   const pathname = usePathname();
+  const router = useRouter()
   let book = mapUrl(pathname.split("/")[2].replace("%20", " "));
   let verse = sp.get("v") ?? "nkjv";
   let chapter = params.chap + "";
@@ -121,13 +122,18 @@ export default function Result() {
         <Resolved version={verse} book={book} chapter={chapter} />
         <div className="flex pt-8 justify-around items-center">
          {b && b[1] && <PrevChapter onClick={()=>{
-          alert(b[1])
+          let query = new URLSearchParams(window.location.search)
+          let positionNumber = Number(chapter) - 1
+          router.push(pathname.replace(chapter, `${positionNumber}?${query.toString()}`))
          }} /> }
           {b && b[0] && <NextChapter onClick={()=>{
-          alert(b[0])
+           let query = new URLSearchParams(window.location.search)
+           let positionNumber = Number(chapter) + 1
+           router.push(pathname.replace(chapter, `${positionNumber}?${query.toString()}`))
          }} /> }
         </div>
       </div>
     </>
   );
 }
+// alert(b[1])
