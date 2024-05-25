@@ -1,14 +1,13 @@
+import Contact from "@/components/Contact";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
     title:"Contact"
 }
-export default function Contact(){
+export default function ContactPage(){
   return (
     <>
-    <div className="bg-white mt-20">
-        welcome Contact
-    </div>
+    <Contact />
     </>
   )
 }
