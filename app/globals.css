@@ -147,11 +147,11 @@ transparent;
   display: block;
   mix-blend-mode: difference;
 }
-.btn-17 .text {
+.btn-17 .text-b {
   display: block;
   position: relative;
 }
-.btn-17:hover .text {
+.btn-17:hover .text-b {
   -webkit-animation: move-up-alternate 0.3s forwards;
   animation: move-up-alternate 0.3s forwards;
 }

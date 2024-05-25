@@ -19,7 +19,7 @@ export function ButtonSignUp() {
         <button className="btn-17">
           {" "}
           <span className="text-container">
-            <span className="text">Sign Up</span>
+            <span className="text-b">Sign Up</span>
           </span>
         </button>{" "}
       </Link>
