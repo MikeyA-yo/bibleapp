@@ -95,7 +95,6 @@ export default function Contact(){
                 onSubmit={(e)=>{
                     e.preventDefault();
                     handleSubmit(formState)
-                    
                 }}
                 className="flex flex-col gap-4">
                   <label htmlFor="Name" className="text-white"  >Name:</label>

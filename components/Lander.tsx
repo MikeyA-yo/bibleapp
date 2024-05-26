@@ -1,6 +1,3 @@
-import Image from "next/image";
-import { MotionP } from "./motions";
-import { rob } from "./Nav";
 import SwiperComponent from "./swipes";
 
 export default function Lander() {
