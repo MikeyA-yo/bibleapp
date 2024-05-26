@@ -721,9 +721,6 @@ export async function specialChapters(
       }
     }
   });
-  // if (currentChapter == 1) {
-  //   bools.push(false);
-  // }
 
   return bools;
 }
