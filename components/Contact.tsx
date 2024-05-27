@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import { useState } from "react";
-import { Check, X } from "./spinner";
+import Spinner, { Check, X } from "./spinner";
 import { Dancing_Script } from "next/font/google";
 interface message{
     name:string,
@@ -15,6 +15,7 @@ export default function Contact(){
     const [formState, setFormState] = useState<message>({name:'', email:'', tel:'', msg:''});
     const [successState, setSuccessState] = useState(false)
     const [failState, setFailState]=useState(false)
+    const [load, setLoad] = useState(false)
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {{
         setFormState(prevState => ({
           ...prevState,
@@ -42,10 +43,12 @@ export default function Contact(){
      const handleSubmit = async (data:message)=>{
         try {
             let jsonData = JSON.stringify(data);
+            setLoad(true)
             const res = await fetch('/api/contact',{
                 method:"POST",
                 body:jsonData
               })
+              setLoad(false)
               if(res.ok){
                 setSuccessState(true);
                 setTimeout(()=>{
@@ -113,7 +116,7 @@ export default function Contact(){
                   <textarea 
                    onChange={handleMessageChange}
                   className="h-20 required:hover:border-red-400" required />
-                  <button type="submit" className="bg-teal-100 rounded hover:bg-teal-400 hover:scale-110 transition duration-500 ease-in-out w-1/2" >Send</button>
+                  <button type="submit" className="bg-teal-100 rounded hover:bg-teal-400 hover:scale-110 transition duration-500 ease-in-out w-1/2" >{load && <Spinner className="size-6" />} Send</button>
                 </form>
               </div>
           </div>

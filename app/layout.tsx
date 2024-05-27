@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { getNKJV,getBibles } from "./fetch";
 import Nav from "@/components/Nav";
 
 const inter = Inter({ subsets: ["latin"] });
