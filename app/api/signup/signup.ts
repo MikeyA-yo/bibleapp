@@ -1,16 +1,26 @@
 import { clPromise } from "../mongodb";
 import bcrypt from "bcrypt";
+import { verifyUser } from "./verifyEmail";
 export async function createUser({email, username, password}:{email:string, username:string, password:string}){
     const client = await clPromise;
-   await  client.connect()
-   console.log('connected')
+//    await  client.connect()
+//    console.log('connected')
    const db =  client.db('BibleApp');
    const col = db.collection('Users');
+   
+    await verifyUser(email)
+   const existingUser = await col.findOne({ email });
+   if (existingUser) {
+     return {error: "User Already Exists", status:"403"}
+   }
 
+   
    const passwordHash = await bcrypt.hash(password, 10)
    const res = await col.insertOne({email, username, passwordHash})
    if (res.acknowledged ){
     return res;
+   }else{
+    return {error: "creation failed", status:"500"}
    }
 
 

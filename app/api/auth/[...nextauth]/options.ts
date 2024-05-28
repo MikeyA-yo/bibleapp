@@ -52,6 +52,9 @@ export const options: NextAuthOptions = {
       },
     }),
   ],
+  session:{
+    maxAge:  30 * 24 * 60 * 60,
+  }
   //    pages:{
   //     signIn:"/signup"
   //    }
