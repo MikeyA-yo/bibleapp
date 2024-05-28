@@ -1,9 +1,7 @@
-import { Account, NextAuthOptions, Profile, User } from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { AdapterUser } from "next-auth/adapters";
-import { clPromise } from "../../mongodb";
 export const options: NextAuthOptions = {
   providers: [
     GithubProvider({
@@ -11,15 +9,15 @@ export const options: NextAuthOptions = {
       clientSecret: process.env.GITHUB_SECRET as string,
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENTID as string,
+        clientId: process.env.GOOGLE_CLIENTID as string,
       clientSecret: process.env.GOOGLE_CLIENTSECRET as string,
     }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: {
-          label: "Email: ",
-          type: "email",
+        email:{
+            label:"Email: ",
+            type:"email"
         },
         username: {
           label: "Username:",
@@ -54,33 +52,10 @@ export const options: NextAuthOptions = {
       },
     }),
   ],
-  session: {
-    maxAge: 30 * 24 * 60 * 60,
+  session:{
+    maxAge:  30 * 24 * 60 * 60,
   },
-  callbacks: {
-    async signIn({
-      user,
-      account,
-      profile,
-      email,
-      credentials,
-    }: {
-      user: User | AdapterUser;
-      account: Account | null;
-      profile?: Profile;
-      email?: { verificationRequest?: boolean | undefined } | undefined;
-      credentials?: Record<string, unknown>;
-    }) {
-      const client = await clPromise;
-      const db =  client.db("BibleApp");
-      const col = db.collection("Users");;
-      const existingUser = await col.findOne({ email });
-      if (existingUser) {
-        return false
-      }
-      return true;
-    },
-  },
+ 
   //    pages:{
   //     signIn:"/signup"
   //    }

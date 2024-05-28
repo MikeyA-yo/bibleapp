@@ -6,7 +6,7 @@ export async function POST(req:NextRequest, res:NextResponse){
      const user = await checkUser(data);
      if(user === null || user === undefined ){
         //to do return a status code showing user exists
-        return {}
+        return {error:"User Not found", status:"404"}
      }
      return Response.json(user);
 }
