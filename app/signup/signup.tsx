@@ -1,5 +1,6 @@
 "use client"
 import { getSession, useSession } from "next-auth/react"
+import { redirect } from "next/navigation";
 
 export default function SignupP(){
     const { data: session, status } = useSession();
@@ -9,6 +10,11 @@ export default function SignupP(){
             <p>Hey {session.user?.name}</p>
           </div>
         )
+    }
+    if(!session){
+        if(status !== 'loading'){
+            redirect('/api/auth/signin')
+        }
     }
     return (
         <>
