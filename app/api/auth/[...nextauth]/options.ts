@@ -1,9 +1,11 @@
-import { Account, NextAuthOptions, Profile, User } from "next-auth";
+import { Account, NextAuthOptions, Profile, Session, User } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { AdapterUser } from "next-auth/adapters";
 import { clPromise } from "../../mongodb";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import { JWT } from "next-auth/jwt";
 export const options: NextAuthOptions = {
   providers: [
     GithubProvider({
@@ -54,6 +56,7 @@ export const options: NextAuthOptions = {
       },
     }),
   ],
+  adapter:MongoDBAdapter(clPromise) ,
   session: {
     maxAge: 30 * 24 * 60 * 60,
   },
@@ -71,14 +74,21 @@ export const options: NextAuthOptions = {
       email?: { verificationRequest?: boolean | undefined } | undefined;
       credentials?: Record<string, unknown>;
     }) {
-      const client = await clPromise;
-      const db =  client.db("BibleApp");
-      const col = db.collection("Users");;
-      const existingUser = await col.findOne({ email });
-      if (existingUser) {
-        return false
-      }
       return true;
+    },
+    async session({ session, token }: { session: Session; token: JWT }): Promise<Session> {
+      if (token) {
+         if(session.user){
+          session.user.email = token.email as string;
+         } // Ensure token.id is a string
+      }
+      return session;
+    },
+    async jwt({ token, user }: { token: JWT; user?: User }): Promise<JWT> {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
     },
   },
   //    pages:{

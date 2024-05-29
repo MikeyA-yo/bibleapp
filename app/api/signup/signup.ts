@@ -1,6 +1,6 @@
 import { clPromise } from "../mongodb";
 import bcrypt from "bcrypt";
-import { verifyUser } from "./verifyEmail";
+// import { verifyUser } from "./verifyEmail";
 export async function createUser({
   email,
   username,
