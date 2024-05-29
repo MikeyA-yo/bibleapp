@@ -49,7 +49,7 @@ export const options: NextAuthOptions = {
 
         // If no error and we have user data, return it
         if (res.ok && user) {
-          return user;
+          return {id:user._id, name:user.username, email:user.email};
         }
         // Return null if user data could not be retrieved
         return null;
@@ -90,6 +90,10 @@ export const options: NextAuthOptions = {
       }
       return token;
     },
+    async redirect({ url, baseUrl }) {
+      // Redirect to a specific URL after sign-in
+      return baseUrl + '/dashboard'; // Change '/dashboard' to your desired path
+    }
   },
   //    pages:{
   //     signIn:"/signup"

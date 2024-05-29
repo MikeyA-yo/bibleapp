@@ -1,12 +1,13 @@
+
 import { Metadata } from "next";
-import SignupP from "./signup";
+import SessionPage from "./Session";
 export const metadata: Metadata = {
     title:"Signup"
 }
 export default function Signup(){
   return (
     <>
-       <SignupP />
+      <SessionPage />
     </>
   )
 }
