@@ -6,6 +6,7 @@ import { AdapterUser } from "next-auth/adapters";
 import { clPromise } from "../../mongodb";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { JWT } from "next-auth/jwt";
+import bcrypt from "bcrypt";
 export const options: NextAuthOptions = {
   providers: [
     GithubProvider({
@@ -16,45 +17,55 @@ export const options: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENTID as string,
       clientSecret: process.env.GOOGLE_CLIENTSECRET as string,
     }),
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        email: {
-          label: "Email: ",
-          type: "email",
-        },
-        username: {
-          label: "Username:",
-          type: "text",
-          placeholder: "Your Username",
-        },
-        password: {
-          label: "Password: ",
-          type: "password",
-        },
-      },
-      async authorize(credentials) {
-        // You need to provide your own logic here that takes the credentials
-        // submitted and returns either a object representing a user or value
-        // that is false/null if the credentials are invalid.
-        // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-        // You can also use the `req` object to obtain additional parameters
-        // (i.e., the request IP address)
-        const res = await fetch("/api/signin", {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" },
-        });
-        const user = await res.json();
-
-        // If no error and we have user data, return it
-        if (res.ok && user) {
-          return {id:user._id, name:user.username, email:user.email};
-        }
-        // Return null if user data could not be retrieved
-        return null;
-      },
-    }),
+    // I'm leaving out credentials for now
+    // CredentialsProvider({
+    //   name: "Credentials",
+    //   credentials: {
+    //     email: {
+    //       label: "Email: ",
+    //       type: "email",
+    //     },
+    //     username: {
+    //       label: "Username:",
+    //       type: "text",
+    //       placeholder: "Your Username",
+    //     },
+    //     password: {
+    //       label: "Password: ",
+    //       type: "password",
+    //     },
+    //   },
+    //   async authorize(credentials) {
+    //     // You need to provide your own logic here that takes the credentials
+    //     // submitted and returns either a object representing a user or value
+    //     // that is false/null if the credentials are invalid.
+    //     // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
+    //     // You can also use the `req` object to obtain additional parameters
+    //     // (i.e., the request IP address)
+    //    const client = await clPromise
+    //     const db = client.db("BibleApp");
+    //     const col = db.collection("Users");
+    //     const findUser = await col.findOne({ email: credentials?.email });
+    //     const match = await bcrypt.compare(
+    //       credentials?.password as string,
+    //       findUser?.passwordHash as string
+    //     );
+    //     console.log(findUser);
+    //     if(match){
+    //       return {
+    //         id:findUser?._id + '',
+    //         email: findUser?.email,
+    //         name:findUser?.username
+    //       }
+    //     }
+    //     // If no error and we have user data, return it
+    //     // if (res.ok && user) {
+    //     //   return {id:user._id, email:user.email};
+    //     // }
+    //     // // Return null if user data could not be retrieved
+    //     return null;
+    //   },
+    // }),
   ],
   adapter:MongoDBAdapter(clPromise) ,
   session: {
@@ -92,7 +103,7 @@ export const options: NextAuthOptions = {
     },
     async redirect({ url, baseUrl }) {
       // Redirect to a specific URL after sign-in
-      return baseUrl + '/dashboard'; // Change '/dashboard' to your desired path
+      return baseUrl + '/signup'; // Change '/dashboard' to your desired path
     }
   },
   //    pages:{
