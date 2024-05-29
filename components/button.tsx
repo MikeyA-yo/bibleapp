@@ -1,3 +1,5 @@
+"use client"
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function Button() {
@@ -12,6 +14,24 @@ export default function Button() {
   );
 }
 export function ButtonSignUp() {
+  const { data: session, status } = useSession();
+  if(status !== 'loading'){
+    if(session){
+      return (
+        <>
+          <Link href={"/signup"}>
+            {" "}
+            <button className="btn-17">
+              {" "}
+              <span className="text-container">
+                <span className="text-b">Dashboard</span>
+              </span>
+            </button>{" "}
+          </Link>
+        </>
+      );
+    }
+  }
   return (
     <>
       <Link href={"/signup"}>
