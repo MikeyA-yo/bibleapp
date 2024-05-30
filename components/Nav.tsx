@@ -4,11 +4,68 @@ import Bar from "./bar";
 import { AnimateP, MotionDiv } from "./motions";
 import { useState } from "react";
 import { Roboto } from "next/font/google";
-import { pages } from "./pages";
+import { pages, signInPages } from "./pages";
 import { usePathname } from "next/navigation";
+import { SessionProvider, useSession } from "next-auth/react";
 const roboto = Roboto({ weight: ["700"], subsets: ["latin"] });
 export const rob = roboto.className;
 // <Bar className="h-6 w-6" />
+function LinksMobile() {
+  const { data: session, status } = useSession();
+  const pathname = usePathname();
+  if (!session) {
+    if (status !== "loading") {
+      return (
+        <>
+          <Link href={"/"}>
+            <p
+              className={`text-gray-700 hover:active-mobile ${
+                pathname == "/" ? "active-mobile" : ""
+              }`}
+            >
+              <span className="pl-2">HOME</span>
+            </p>
+          </Link>
+          {pages.map((page, i) => (
+            <Link key={i} href={`/${page.toLowerCase()}`}>
+              <p
+                className={`text-gray-700 hover:active-mobile ${
+                  pathname == "/" + page.toLowerCase() ? "active-mobile" : ""
+                }`}
+              >
+                <span className="pl-2">{page}</span>
+              </p>
+            </Link>
+          ))}
+        </>
+      );
+    }
+  }
+  return (
+    <>
+      <Link href={"/"}>
+        <p
+          className={`text-gray-700 hover:active-mobile ${
+            pathname == "/" ? "active-mobile" : ""
+          }`}
+        >
+          <span className="pl-2">HOME</span>
+        </p>
+      </Link>
+      {signInPages.map((page, i) => (
+        <Link key={i} href={`/${page.toLowerCase()}`}>
+          <p
+            className={`text-gray-700 hover:active-mobile ${
+              pathname == "/" + page.toLowerCase() ? "active-mobile" : ""
+            }`}
+          >
+            <span className="pl-2">{page}</span>
+          </p>
+        </Link>
+      ))}
+    </>
+  );
+}
 function MenuList({ state, pathname }: { state: boolean; pathname: string }) {
   const variants = {
     initial: {
@@ -43,29 +100,70 @@ function MenuList({ state, pathname }: { state: boolean; pathname: string }) {
           animate="animate"
           exit="end"
         >
+         <SessionProvider>
+         <LinksMobile />
+         </SessionProvider>
+
+        </MotionDiv>
+      )}
+    </AnimateP>
+  );
+}
+
+function LinkSMain() {
+  const { data: session, status } = useSession();
+  const pathname = usePathname();
+  if (!session) {
+    if (status !== "loading") {
+      return (
+        <>
           <Link href={"/"}>
             <p
-              className={`text-gray-700 hover:active-mobile ${
-                pathname == "/" ? "active-mobile" : ""
+              className={`text-gray-700 hover:active ${
+                pathname == "/" ? "active" : ""
               }`}
             >
-              <span className="pl-2">HOME</span>
+              HOME
             </p>
           </Link>
           {pages.map((page, i) => (
             <Link key={i} href={`/${page.toLowerCase()}`}>
               <p
-                className={`text-gray-700 hover:active-mobile ${
-                  pathname == "/" + page.toLowerCase() ? "active-mobile" : ""
+                className={`text-gray-700 hover:active ${
+                  pathname == "/" + page.toLowerCase() ? "active" : ""
                 }`}
               >
-                <span className="pl-2">{page}</span>
+                {page}
               </p>
             </Link>
           ))}
-        </MotionDiv>
-      )}
-    </AnimateP>
+        </>
+      );
+    }
+  }
+  return (
+    <>
+      <Link href={"/"}>
+        <p
+          className={`text-gray-700 hover:active ${
+            pathname == "/" ? "active" : ""
+          }`}
+        >
+          HOME
+        </p>
+      </Link>
+      {signInPages.map((page, i) => (
+        <Link key={i} href={`/${page.toLowerCase()}`}>
+          <p
+            className={`text-gray-700 hover:active ${
+              pathname == "/" + page.toLowerCase() ? "active" : ""
+            }`}
+          >
+            {page}
+          </p>
+        </Link>
+      ))}
+    </>
   );
 }
 export default function Nav() {
@@ -79,26 +177,9 @@ export default function Nav() {
             <p className="h-6 font-bold text-white">Spiritual Awakening</p>
           </div>
           <div className="flex gap-5">
-            <Link href={"/"}>
-              <p
-                className={`text-gray-700 hover:active ${
-                  pathname == "/" ? "active" : ""
-                }`}
-              >
-                HOME
-              </p>
-            </Link>
-            {pages.map((page, i) => (
-              <Link key={i} href={`/${page.toLowerCase()}`}>
-                <p
-                  className={`text-gray-700 hover:active ${
-                    pathname == "/" + page.toLowerCase() ? "active" : ""
-                  }`}
-                >
-                  {page}
-                </p>
-              </Link>
-            ))}
+            <SessionProvider>
+              <LinkSMain />
+            </SessionProvider>
           </div>
         </div>
         <div className="flex flex-col gap-2 md:hidden z-50 w-full    fixed top-0 lg:hidden p-4">

@@ -19,7 +19,7 @@ export function ButtonSignUp() {
     if(session){
       return (
         <>
-          <Link href={"/signup"}>
+          <Link href={"/dashboard"}>
             {" "}
             <button className="btn-17">
               {" "}

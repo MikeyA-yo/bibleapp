@@ -3,3 +3,9 @@ export  const pages =[
     'SEARCH',
     'CONTACT'
 ]
+
+export const signInPages = [
+    'DASHBOARD',
+    'SEARCH',
+    'CONTACT'
+]
