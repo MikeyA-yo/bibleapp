@@ -33,3 +33,6 @@ export async function createUser({
   //    const match = await bcrypt.compare('ayomide*2007', findTest?.passwordHash as string)
   //    console.log(match)
 }
+export async function UserStats(email:string){
+  
+}

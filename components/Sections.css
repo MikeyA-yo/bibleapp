@@ -26,6 +26,10 @@
   background-image: url('../public/sunset-low.jpg');
   background-attachment: fixed;
 }
+.dashboard{
+  background-image: url('../public/dashboard-high-bg.jpg');
+  background-attachment: fixed;  
+}
 /* Sections.css */
 .select-container {
   position: relative;
