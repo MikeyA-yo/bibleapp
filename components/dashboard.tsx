@@ -6,12 +6,18 @@ import Image from "next/image";
 import { Loading } from "./results";
 import "./Sections.css"
 async function CheckDataAndUpdate(email:string){
+   try{
     const data = {email}
-   const res = await fetch("/api/UserStats", {
-    method:"POST",
-    body:JSON.stringify(data)
-   });
-
+    const res = await fetch("/api/UserStats", {
+     method:"POST",
+     body:JSON.stringify(data)
+    });
+    if(res.ok){
+       return;
+    }
+   }catch(e){
+    console.log(e)
+   }
 }
 export default function UserDashboard() {
   const { data: session, status } = useSession();
@@ -29,6 +35,7 @@ export default function UserDashboard() {
     )
   }
   if (session && status == "authenticated") {
+    CheckDataAndUpdate(session.user?.email as string)
     return (
       <>
         <div className="dashboard bg-center bg-cover mt-20 flex h-screen">
