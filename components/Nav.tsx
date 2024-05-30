@@ -19,7 +19,7 @@ function LinksMobile() {
         <>
           <Link href={"/"}>
             <p
-              className={`text-gray-700 hover:active-mobile ${
+              className={`text-emerald-400 hover:active-mobile ${
                 pathname == "/" ? "active-mobile" : ""
               }`}
             >
@@ -29,7 +29,7 @@ function LinksMobile() {
           {pages.map((page, i) => (
             <Link key={i} href={`/${page.toLowerCase()}`}>
               <p
-                className={`text-gray-700 hover:active-mobile ${
+                className={`text-emerald-400 hover:active-mobile ${
                   pathname == "/" + page.toLowerCase() ? "active-mobile" : ""
                 }`}
               >
@@ -45,7 +45,7 @@ function LinksMobile() {
     <>
       <Link href={"/"}>
         <p
-          className={`text-gray-700 hover:active-mobile ${
+          className={`text-emerald-400 hover:active-mobile ${
             pathname == "/" ? "active-mobile" : ""
           }`}
         >
@@ -55,7 +55,7 @@ function LinksMobile() {
       {signInPages.map((page, i) => (
         <Link key={i} href={`/${page.toLowerCase()}`}>
           <p
-            className={`text-gray-700 hover:active-mobile ${
+            className={`text-emerald-400 hover:active-mobile ${
               pathname == "/" + page.toLowerCase() ? "active-mobile" : ""
             }`}
           >
@@ -100,10 +100,9 @@ function MenuList({ state, pathname }: { state: boolean; pathname: string }) {
           animate="animate"
           exit="end"
         >
-         <SessionProvider>
-         <LinksMobile />
-         </SessionProvider>
-
+          <SessionProvider>
+            <LinksMobile />
+          </SessionProvider>
         </MotionDiv>
       )}
     </AnimateP>
@@ -119,7 +118,7 @@ function LinkSMain() {
         <>
           <Link href={"/"}>
             <p
-              className={`text-gray-700 hover:active ${
+              className={`text-emerald-400 hover:active ${
                 pathname == "/" ? "active" : ""
               }`}
             >
@@ -129,7 +128,7 @@ function LinkSMain() {
           {pages.map((page, i) => (
             <Link key={i} href={`/${page.toLowerCase()}`}>
               <p
-                className={`text-gray-700 hover:active ${
+                className={`text-emerald-400 hover:active ${
                   pathname == "/" + page.toLowerCase() ? "active" : ""
                 }`}
               >
@@ -145,7 +144,7 @@ function LinkSMain() {
     <>
       <Link href={"/"}>
         <p
-          className={`text-gray-700 hover:active ${
+          className={`text-emerald-400 hover:active ${
             pathname == "/" ? "active" : ""
           }`}
         >
@@ -155,7 +154,7 @@ function LinkSMain() {
       {signInPages.map((page, i) => (
         <Link key={i} href={`/${page.toLowerCase()}`}>
           <p
-            className={`text-gray-700 hover:active ${
+            className={`text-emerald-400 hover:active ${
               pathname == "/" + page.toLowerCase() ? "active" : ""
             }`}
           >
