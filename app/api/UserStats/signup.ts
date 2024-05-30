@@ -33,6 +33,31 @@ export async function createUser({
   //    const match = await bcrypt.compare('ayomide*2007', findTest?.passwordHash as string)
   //    console.log(match)
 }
-export async function UserStats(email:string){
-  
+export async function UserStats(email: string) {
+  const client = await clPromise;
+  const db = client.db("test");
+  const col = db.collection("users");
+  const existingUser = await col.findOne({ email });
+  const day = new Date().getDate();
+  if (existingUser?.streak) {
+    if (existingUser.streak.day != day) {
+      const update = {
+        $inc: {
+          "streak.count": 1,
+        },
+        $set: {
+          "streak.day": day,
+        },
+      };
+      col.updateOne({ email }, update);
+    }
+  } else {
+    const update = {
+      $set: {
+        "streak.count": 0,
+        "streak.day": day,
+      },
+    };
+    col.updateOne({ email }, update);
+  }
 }

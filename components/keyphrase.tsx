@@ -4,22 +4,27 @@ import KeyPhrases from "./KeyPhcard";
 export default async function KeyPhraseRes(phrase: string, version: string) {
   const result = await versesKeyphrases(phrase, version);
   if (result.length == 0) {
-    return <p>Nothing found, i'll work on this ui later</p>;
+    return (
+      <p className="text-3xl pl-20">
+        Nothing found, i'll work on this ui later
+        <br /> Let me be honest, i won't work on this UI
+      </p>
+    );
   }
   const obResult = result.map((citation: any) => ({
-    book: citation.book.replace(
+    book: citation.book ? citation.book.replace(
       citation.book.charAt(0),
       citation.book.charAt(0).toUpperCase()
-    ),
+    ): " ",
     chapter: citation.chapter,
     verse: citation.verse,
-    text: citation.text
-      .replaceAll("<mark>", "")
-      .replaceAll("</mark>", "")
-      .replaceAll("<i>", "")
-      .replaceAll("</i>", "")
-      .replaceAll("</J>", "")
-      .replaceAll("<br/>", "\n \n"),
+    text:citation.text ?  citation.text
+    .replaceAll("<mark>", "")
+    .replaceAll("</mark>", "")
+    .replaceAll("<i>", "")
+    .replaceAll("</i>", "")
+    .replaceAll("</J>", "")
+    .replaceAll("<br/>", "\n \n") : "",
   }));
   // console.log(obResult)
   return (
