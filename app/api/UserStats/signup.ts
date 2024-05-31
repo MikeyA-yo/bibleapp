@@ -61,3 +61,14 @@ export async function UserStats(email: string) {
     col.updateOne({ email }, update);
   }
 }
+export async function GetUserStats(email:string){
+  const client = await clPromise;
+  const db = client.db("test");
+  const col = db.collection("users");
+  const userStats = await col.findOne({ email });
+  if(userStats){
+    return userStats
+  }else{
+    return {error:"user not found", status:"404"}
+  }
+}

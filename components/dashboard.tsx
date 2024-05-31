@@ -5,6 +5,12 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import { Loading } from "./results";
 import "./Sections.css"
+async function GetData(){
+    const res = await fetch("/api/UserStats");
+    const data = await res.json();
+    console.log(data);
+    return data;
+}
 async function CheckDataAndUpdate(email:string){
    try{
     const data = {email}
@@ -12,7 +18,8 @@ async function CheckDataAndUpdate(email:string){
      method:"POST",
      body:JSON.stringify(data)
     });
-    if(res.ok){
+
+    if(res.ok){  
        return;
     }
    }catch(e){
@@ -21,8 +28,7 @@ async function CheckDataAndUpdate(email:string){
 }
 export default function UserDashboard() {
   const { data: session, status } = useSession();
-
-  if (!session) {
+  if (!session?.user) {
     if (status !== "loading") {
       redirect("/api/auth/signin");
     }
@@ -34,6 +40,7 @@ export default function UserDashboard() {
        </div>
     )
   }
+
   if (session && status == "authenticated") {
     CheckDataAndUpdate(session.user?.email as string)
     return (
@@ -45,7 +52,7 @@ export default function UserDashboard() {
                 <Image src={session.user?.image ?? "/Avatar.png"} priority alt="Image of you" width={40} height={40} className="h-10 w-10 rounded-full" />
               </div>
               <div>
-                <p>Your Daily Streak</p>
+                <p>Your Daily Streak </p>
                 <p>Your reading Plan</p>
               </div>
           </div>

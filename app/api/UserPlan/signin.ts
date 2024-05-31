@@ -39,3 +39,6 @@ export async function checkUser({
   //     return res;
   //    }
 }
+export async function AddDailyPlan({numberPerDay, numberPerWeek}:{numberPerDay?:number, numberPerWeek?:number }){
+  
+}
