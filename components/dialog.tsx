@@ -1,7 +1,21 @@
 "use client"
 import { motion } from "framer-motion"
+import { verseOfTheDay } from "@/app/api/fetch"
+import { useEffect, useState } from "react"
+import { VerseOfTheDay } from "./votd"
+// interface VOTD{
+//     verse:String | undefined,
+//     text:String | undefined
+// }
 export default function Dialog({onClick}:{onClick:React.MouseEventHandler<HTMLButtonElement>}) {
-
+    const [votd, setVotd] = useState<any>()
+   useEffect(()=>{
+      async function getVotd(){
+        const data = await VerseOfTheDay();
+        setVotd(data)
+      }
+      getVotd()
+   }, [])
     return (
       <motion.div
         initial={{ y: -100, opacity: 0 }}
@@ -12,7 +26,7 @@ export default function Dialog({onClick}:{onClick:React.MouseEventHandler<HTMLBu
       >
         <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-gray-900">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-medium">Important Message</h3>
+            <h3 className="text-lg font-medium">Verse of the day</h3>
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -23,10 +37,7 @@ export default function Dialog({onClick}:{onClick:React.MouseEventHandler<HTMLBu
             </motion.button>
           </div>
           <div className="mt-4 text-gray-500 dark:text-gray-400">
-            <p>
-              This is an important message that requires your attention. Please take a moment to review the information
-              below.
-            </p>
+             {votd && votd }
           </div>
           <div className="mt-4 flex justify-end">
             <motion.button
@@ -35,7 +46,7 @@ export default function Dialog({onClick}:{onClick:React.MouseEventHandler<HTMLBu
               className="rounded-md bg-gray-900 px-4 py-2 text-white transition-colors hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-950 focus:ring-offset-2 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200 dark:focus:ring-gray-300 dark:focus:ring-offset-gray-900"
               onClick={onClick}
             >
-              Okay, got it
+              Blessed
             </motion.button>
           </div>
         </div>
