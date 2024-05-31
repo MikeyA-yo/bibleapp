@@ -6,6 +6,10 @@ import Image from "next/image";
 import { Loading } from "./results";
 import "./Sections.css";
 import { useEffect, useState } from "react";
+import { Roboto } from "next/font/google";
+import Dialog from "./dialog";
+
+const rob = Roboto({weight:["700"], subsets:["vietnamese"]});
 async function GetData() {
   const res = await fetch("/api/UserStats");
   const data = await res.json();
@@ -40,12 +44,19 @@ function SideBar() {
   return (
     <>
       {userData && (
-        <div>
+        <div className={`text-2xl flex flex-col justify-evenly ${rob.className}`}>
           <p>Your Daily Streak {userData.streak.count} </p>
+          <p>Your Reading Plan is {`${userData.readingPlan?.numberPerType ?? "none"} chapters ${userData.readingPlan?.type ?? "not available, set up a reading plan"}` ?? "non set yet"}</p>
         </div>
       )}
     </>
   );
+}
+function AddDailyPlanForm(){
+    return (
+        <>
+        </>
+    )
 }
 function DashMain({
   session,
@@ -58,6 +69,7 @@ function DashMain({
       }
     | undefined;
 }) {
+    const [isOpen, setIsOpen] = useState(false)
   useEffect(() => {
     CheckDataAndUpdate(session?.email as string);
   }, []);
@@ -65,8 +77,8 @@ function DashMain({
     <>
       <div className="dashboard bg-center bg-cover mt-20 flex h-screen">
         <div className="lg:min-h-screen bg-gray-500 bg-opacity-50 md:min-h-screen lg:flex w-80 md:flex md:flex-col hidden lg:flex-col">
-          <div className="flex w-full pt-4 justify-evenly gap-2">
-            <p>{session?.name}</p>
+          <div className="flex w-full py-4 justify-evenly gap-2">
+            <p className="text-xl text-gray-300">{session?.name}</p>
             <Image
               src={session?.image ?? "/Avatar.png"}
               priority
@@ -82,6 +94,10 @@ function DashMain({
         </div>
         <div className="flex w-full bg-white bg-opacity-50 justify-center">
           <p> Hey {session?.name} welcome to your dashboard</p>
+          <button onClick={()=>{
+            setIsOpen(true)
+          }}>See Verse of the Day</button>
+         {isOpen && <Dialog />}
         </div>
       </div>
     </>
