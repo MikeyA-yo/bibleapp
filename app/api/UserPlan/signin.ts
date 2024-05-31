@@ -39,6 +39,26 @@ export async function checkUser({
   //     return res;
   //    }
 }
-export async function AddDailyPlan({numberPerDay, numberPerWeek}:{numberPerDay?:number, numberPerWeek?:number }){
-  
+export async function AddDailyPlan({numberPerDay, numberPerWeek, email}:{numberPerDay?:number, numberPerWeek?:number, email:string }){
+  const client = await clPromise;
+  const db = client.db("test");
+  const col = db.collection("users");
+  const user = await col.findOne({ email });
+  if(numberPerDay){
+    const update = {
+      $set:{
+        "readingPlan.type": "daily",
+        "readingPlan.numberPerType":numberPerDay
+      }
+    }
+    col.updateOne({email}, update)
+  }else if(numberPerWeek){
+    const update = {
+      $set:{
+        "readingPlan.type": "weekly",
+        "readingPlan.numberPerType":numberPerWeek
+      }
+    }
+    col.updateOne({email}, update)  
+  }
 }
