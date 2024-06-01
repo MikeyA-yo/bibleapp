@@ -10,7 +10,7 @@ import { Open_Sans, Roboto } from "next/font/google";
 import Dialog from "./dialog";
 
 const rob = Roboto({ weight: ["700"], subsets: ["vietnamese"] });
-const openSans = Open_Sans({ weight: ["700"], subsets: ["vietnamese"] })
+const openSans = Open_Sans({ weight: ["700"], subsets: ["vietnamese"] });
 async function GetData() {
   const res = await fetch("/api/UserStats");
   const data = await res.json();
@@ -73,7 +73,7 @@ interface DailyPlan {
 }
 function AddDailyPlanForm({ email }: { email: string }) {
   const [dailyPlan, setDailyPlan] = useState<DailyPlan>();
-  const [daily, setDaily] = useState("");
+  const [daily, setDaily] = useState("daily");
   const handleDailyNumberChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     {
       setDailyPlan((prevState) => ({
@@ -111,12 +111,19 @@ function AddDailyPlanForm({ email }: { email: string }) {
   return (
     <>
       <div>
-        <form>
+        <Image src={`dailyplan.svg`} height={100} width={100} alt="dailyplan" />
+        <form className="flex flex-col gap-1">
           <p>You want to read x number of chapters per?</p>
-          <select>
+          <select
+            onChange={(e) => {
+              setDaily(e.target.value);
+            }}
+          >
             <option value={"daily"}>Daily</option>
             <option value={"weekly"}>Weekly</option>
           </select>
+          <input type="number" placeholder={`number of chapters ${daily}`} />
+          <button type="submit" className="rounded bg-slate-50 w-auto p-2 bg-opacity-50 hover:bg-opacity-50 hover:bg-slate-200">Save Changes</button>
         </form>
       </div>
     </>
@@ -141,7 +148,7 @@ function DashMain({
     <>
       <div className="dashboard bg-center bg-cover  h-screen">
         <div className="flex h-full overflow-auto">
-          <div className="lg:min-h-screen   bg-gray-500 bg-opacity-50 md:min-h-screen lg:flex md:flex w-80  hidden ">
+          <div className="lg:min-h-full   bg-gray-500 bg-opacity-50 md:min-h-full lg:flex md:flex w-80  hidden ">
             <div className="mt-20  flex-col gap-2 flex h-full">
               <div className="flex w-full py-4 justify-evenly gap-2">
                 <p className="text-xl text-gray-300">{session?.name}</p>
@@ -157,41 +164,46 @@ function DashMain({
               <SideBar />
             </div>
           </div>
-          <div className="flex w-full  gap-3 flex-col lg:flex-row md:flex-row justify-center  bg-white bg-opacity-50 items-center">
-            <div className={`text-3xl flex flex-col gap-1 ${openSans.className}  text-gray-600`}>
-              <p>
-                {" "}
-                Hey {session?.name}, <br /> Welcome to your Dashboard
-              </p>
-              <Image
-                src={"/dashboard.svg"}
-                alt="dashboard"
-                height={320}
-                width={320}
-                className="h-72 w-72"
-              />
-            </div>
-            <div>
-              <button
-                className="rounded bg-slate-50 bg-opacity-50"
-                onClick={() => {
-                  setIsOpen(true);
-                }}
+          <div className="flex w-full bg-white bg-opacity-50 justify-evenly items-center gap-4 flex-col">
+            <div className="flex w-full  gap-3 flex-col lg:flex-row md:flex-row justify-center   items-center">
+              <div
+                className={`text-3xl flex flex-col gap-1 ${openSans.className}  text-gray-600`}
               >
-                See Verse of the Day
-              </button>{" "}
-              <div>
-                Add daily plan or edit
-                <AddDailyPlanForm email={session?.email as string} />
+                <p>
+                  {" "}
+                  Hey {session?.name}, <br /> Welcome to your Dashboard
+                </p>
+                <Image
+                  src={"/dashboard.svg"}
+                  alt="dashboard"
+                  height={320}
+                  width={320}
+                  className="h-72 w-72"
+                />
               </div>
+              <div className={`flex flex-col gap-1`}>
+                <div>
+                  Add daily plan or edit
+                  <AddDailyPlanForm email={session?.email as string} />
+                </div>
+              </div>
+
+              {isOpen && (
+                <Dialog
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                />
+              )}
             </div>
-            {isOpen && (
-              <Dialog
-                onClick={() => {
-                  setIsOpen(false);
-                }}
-              />
-            )}
+            <button
+              className="rounded bg-slate-50 w-auto p-2 bg-opacity-50 hover:bg-opacity-50 hover:bg-slate-200"
+              onClick={() => {
+                setIsOpen(true);
+              }}
+            >
+              Verse of the Day
+            </button>{" "}
           </div>
         </div>
       </div>

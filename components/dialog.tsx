@@ -42,6 +42,7 @@ export default function Dialog({
             </motion.button>
           </div>
           <div className="mt-4 text-gray-500 dark:text-gray-400">
+            {!votd && "Verse of The day is ......"}
             {votd && votd}
           </div>
           <div className="mt-4 flex justify-end">
