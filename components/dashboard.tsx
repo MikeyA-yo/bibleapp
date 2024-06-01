@@ -72,23 +72,23 @@ interface DailyPlan {
   email: string;
 }
 function AddDailyPlanForm({ email }: { email: string }) {
-  const [dailyPlan, setDailyPlan] = useState<DailyPlan>();
+  const [dailyPlan, setDailyPlan] = useState<DailyPlan>({ email: email });
   const [daily, setDaily] = useState("daily");
-  const handleDailyNumberChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleDailyNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     {
       setDailyPlan((prevState) => ({
         ...prevState,
+        numberPerWeek: 0,
         numberPerDay: parseInt(e.target.value),
         email: email,
       }));
     }
   };
-  const handleWeeklyNumberChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleWeeklyNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     {
       setDailyPlan((prevState) => ({
         ...prevState,
+        numberPerDay: 0,
         numberPerWeek: parseInt(e.target.value),
         email: email,
       }));
@@ -122,8 +122,25 @@ function AddDailyPlanForm({ email }: { email: string }) {
             <option value={"daily"}>Daily</option>
             <option value={"weekly"}>Weekly</option>
           </select>
-          <input type="number" placeholder={`number of chapters ${daily}`} />
-          <button type="submit" className="rounded bg-slate-50 w-auto p-2 bg-opacity-50 hover:bg-opacity-50 hover:bg-slate-200">Save Changes</button>
+          {daily === "daily" ? (
+            <input
+              type="number"
+              placeholder={`number of chapters ${daily}`}
+              onChange={handleDailyNumberChange}
+            />
+          ) : (
+            <input
+              type="number"
+              placeholder={`number of chapters ${daily}`}
+              onChange={handleWeeklyNumberChange}
+            />
+          )}
+          <button
+            type="submit"
+            className="rounded bg-slate-50 w-auto p-2 bg-opacity-50 hover:bg-opacity-50 hover:bg-slate-200"
+          >
+            Save Changes
+          </button>
         </form>
       </div>
     </>
@@ -164,10 +181,10 @@ function DashMain({
               <SideBar />
             </div>
           </div>
-          <div className="flex w-full bg-white bg-opacity-50 justify-evenly items-center gap-4 flex-col">
+          <div className="flex  w-full bg-white bg-opacity-50 justify-evenly items-center gap-4 flex-col">
             <div className="flex w-full  gap-3 flex-col lg:flex-row md:flex-row justify-center   items-center">
               <div
-                className={`text-3xl flex flex-col gap-1 ${openSans.className}  text-gray-600`}
+                className={`lg:text-3xl text-xl md:text-2xl flex flex-col gap-1 ${openSans.className}  text-gray-600`}
               >
                 <p>
                   {" "}
@@ -178,12 +195,12 @@ function DashMain({
                   alt="dashboard"
                   height={320}
                   width={320}
-                  className="h-72 w-72"
+                  className="lg:h-72 lg:w-72 md:h-72 h-52 w-52 md:w-72"
                 />
               </div>
               <div className={`flex flex-col gap-1`}>
                 <div>
-                  Add daily plan or edit
+                  Add daily a plan or edit
                   <AddDailyPlanForm email={session?.email as string} />
                 </div>
               </div>
