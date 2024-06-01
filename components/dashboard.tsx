@@ -47,21 +47,55 @@ function SideBar() {
         <div
           className={`text-2xl flex flex-col justify-evenly ${rob.className}`}
         >
-          <p>Your Daily Streak {userData.streak.count} </p>
-          <p>
-            Your Reading Plan is{" "}
-            {`${userData.readingPlan?.numberPerType ?? "none"} chapters ${
-              userData.readingPlan?.type ??
-              "not available, set up a reading plan"
-            }` ?? "non set yet"}
-          </p>
+          <div>
+            <p>Current Daily Streak </p>
+            <p>{userData.streak.count} </p>
+          </div>
+          {userData.readingPlan && (
+            <p>
+              Your Reading Plan is{" "}
+              {`${userData.readingPlan?.numberPerType ?? "none"} chapters ${
+                userData.readingPlan?.type ??
+                "not available, set up a reading plan"
+              }` ?? "non set yet"}
+            </p>
+          )}
         </div>
       )}
     </>
   );
 }
-function AddDailyPlanForm() {
-  return <></>;
+interface DailyPlan {
+  numberPerDay?: number;
+  numberPerWeek?: number;
+  email: string;
+}
+function AddDailyPlanForm({email}:{email:string}) {
+  const [dailyPlan, setDailyPlan] = useState<DailyPlan>();
+  const [daily, setDaily] = useState("")
+  const handleDailyNumberChange = (e: React.ChangeEvent<HTMLSelectElement>) => {{
+    setDailyPlan(prevState => ({
+      ...prevState,
+      numberPerDay:parseInt(e.target.value),
+      email:email
+    }));
+  }};
+  const handleWeeklyNumberChange = (e: React.ChangeEvent<HTMLSelectElement>) => {{
+    setDailyPlan(prevState => ({
+      ...prevState,
+      numberPerWeek:parseInt(e.target.value),
+      email:email
+    }));
+  }};
+  return (
+    <>
+      <div>
+        <form>
+
+        </form>
+      </div>
+    </>
+  );
 }
 function DashMain({
   session,
@@ -82,7 +116,7 @@ function DashMain({
     <>
       <div className="dashboard bg-center bg-cover flex h-screen">
         <div className="lg:min-h-screen   bg-gray-500 bg-opacity-50 md:min-h-screen lg:flex md:flex w-80  hidden ">
-          <div className="mt-20 justify-evenly flex-col gap-2 flex h-full">
+          <div className="mt-20  flex-col gap-2 flex h-full">
             <div className="flex w-full py-4 justify-evenly gap-2">
               <p className="text-xl text-gray-300">{session?.name}</p>
               <Image
@@ -97,9 +131,10 @@ function DashMain({
             <SideBar />
           </div>
         </div>
-        <div className="flex w-full  bg-white bg-opacity-50 justify-center">
+        <div className="flex w-full   bg-white bg-opacity-50 items-center">
           <p> Hey {session?.name} welcome to your dashboard</p>
           <button
+            className="rounded bg-slate-50 bg-opacity-50"
             onClick={() => {
               setIsOpen(true);
             }}
@@ -128,7 +163,7 @@ export default function UserDashboard() {
   }
   if (status == "loading") {
     return (
-      <div className="w-full h-full bg-slate-50 bg-opacity-50 animate-pulse">
+      <div className="w-full h-screen flex justify-center dashboard bg-slate-50 bg-opacity-50 animate-pulse">
         <Loading />
       </div>
     );

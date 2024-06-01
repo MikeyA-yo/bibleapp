@@ -15,8 +15,8 @@ export default function SignupP(){
     // }
     return (
         <>
-            <div className="bg-white z-0 flex mt-20">
-              <p>Display Page</p> 
+            <div className="bg-white dashboard  flex justify-center h-screen">
+                 Empty
             </div>
         </>
     )
