@@ -43,7 +43,7 @@ export async function AddDailyPlan({numberPerDay, numberPerWeek, email}:{numberP
   const client = await clPromise;
   const db = client.db("test");
   const col = db.collection("users");
-  if(numberPerDay){
+  if(numberPerDay !== 0){
     const update = {
       $set:{
         "readingPlan.type": "daily",
@@ -51,7 +51,7 @@ export async function AddDailyPlan({numberPerDay, numberPerWeek, email}:{numberP
       }
     }
     col.updateOne({email}, update)
-  }else if(numberPerWeek){
+  }else if(numberPerWeek !== 0){
     const update = {
       $set:{
         "readingPlan.type": "weekly",

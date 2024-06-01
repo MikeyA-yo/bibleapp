@@ -95,7 +95,7 @@ function AddDailyPlanForm({ email }: { email: string }) {
     }
   };
   const handleSubmit = async (data: DailyPlan) => {
-    try {
+    try {  
       const jsonData = JSON.stringify(data);
       const res = await fetch("/api/UserPlan", {
         method: "POST",
@@ -112,7 +112,12 @@ function AddDailyPlanForm({ email }: { email: string }) {
     <>
       <div>
         <Image src={`dailyplan.svg`} height={100} width={100} alt="dailyplan" />
-        <form className="flex flex-col gap-1">
+        <form className="flex flex-col gap-1"
+        onSubmit={(e)=>{
+            e.preventDefault()
+            handleSubmit(dailyPlan);
+        }}
+        >
           <p>You want to read x number of chapters per?</p>
           <select
             onChange={(e) => {
