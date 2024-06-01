@@ -6,10 +6,11 @@ import Image from "next/image";
 import { Loading } from "./results";
 import "./Sections.css";
 import { useEffect, useState } from "react";
-import { Roboto } from "next/font/google";
+import { Open_Sans, Roboto } from "next/font/google";
 import Dialog from "./dialog";
 
 const rob = Roboto({ weight: ["700"], subsets: ["vietnamese"] });
+const openSans = Open_Sans({ weight: ["700"], subsets: ["vietnamese"] })
 async function GetData() {
   const res = await fetch("/api/UserStats");
   const data = await res.json();
@@ -138,55 +139,60 @@ function DashMain({
   }, []);
   return (
     <>
-      <div className="dashboard bg-center bg-cover flex h-screen">
-        <div className="lg:min-h-screen   bg-gray-500 bg-opacity-50 md:min-h-screen lg:flex md:flex w-80  hidden ">
-          <div className="mt-20  flex-col gap-2 flex h-full">
-            <div className="flex w-full py-4 justify-evenly gap-2">
-              <p className="text-xl text-gray-300">{session?.name}</p>
+      <div className="dashboard bg-center bg-cover  h-screen">
+        <div className="flex h-full overflow-auto">
+          <div className="lg:min-h-screen   bg-gray-500 bg-opacity-50 md:min-h-screen lg:flex md:flex w-80  hidden ">
+            <div className="mt-20  flex-col gap-2 flex h-full">
+              <div className="flex w-full py-4 justify-evenly gap-2">
+                <p className="text-xl text-gray-300">{session?.name}</p>
+                <Image
+                  src={session?.image ?? "/Avatar.png"}
+                  priority
+                  alt="Image of you"
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 rounded-full"
+                />
+              </div>
+              <SideBar />
+            </div>
+          </div>
+          <div className="flex w-full  gap-3 flex-col lg:flex-row md:flex-row justify-center  bg-white bg-opacity-50 items-center">
+            <div className={`text-3xl flex flex-col gap-1 ${openSans.className}  text-gray-600`}>
+              <p>
+                {" "}
+                Hey {session?.name}, <br /> Welcome to your Dashboard
+              </p>
               <Image
-                src={session?.image ?? "/Avatar.png"}
-                priority
-                alt="Image of you"
-                width={40}
-                height={40}
-                className="h-10 w-10 rounded-full"
+                src={"/dashboard.svg"}
+                alt="dashboard"
+                height={320}
+                width={320}
+                className="h-72 w-72"
               />
             </div>
-            <SideBar />
-          </div>
-        </div>
-        <div className="flex w-full  gap-3 flex-col lg:flex-row md:flex-row justify-center  bg-white bg-opacity-50 items-center">
-          <div className="text-3xl  text-gray-600">
-            <p> Hey {session?.name} welcome to your dashboard</p>
-            <Image
-              src={"/dashboard.svg"}
-              alt="dashboard"
-              height={320}
-              width={320}
-              className="h-72 w-72"
-            />
-          </div>
-          <div>
-            <button
-              className="rounded bg-slate-50 bg-opacity-50"
-              onClick={() => {
-                setIsOpen(true);
-              }}
-            >
-              See Verse of the Day
-            </button>{" "}
             <div>
-              Add daily plan or edit
-              <AddDailyPlanForm email={session?.email as string} />
+              <button
+                className="rounded bg-slate-50 bg-opacity-50"
+                onClick={() => {
+                  setIsOpen(true);
+                }}
+              >
+                See Verse of the Day
+              </button>{" "}
+              <div>
+                Add daily plan or edit
+                <AddDailyPlanForm email={session?.email as string} />
+              </div>
             </div>
+            {isOpen && (
+              <Dialog
+                onClick={() => {
+                  setIsOpen(false);
+                }}
+              />
+            )}
           </div>
-          {isOpen && (
-            <Dialog
-              onClick={() => {
-                setIsOpen(false);
-              }}
-            />
-          )}
         </div>
       </div>
     </>
