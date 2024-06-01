@@ -43,7 +43,6 @@ export async function AddDailyPlan({numberPerDay, numberPerWeek, email}:{numberP
   const client = await clPromise;
   const db = client.db("test");
   const col = db.collection("users");
-  const user = await col.findOne({ email });
   if(numberPerDay){
     const update = {
       $set:{

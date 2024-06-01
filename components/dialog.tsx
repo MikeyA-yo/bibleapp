@@ -25,7 +25,7 @@ export default function Dialog({
       <motion.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 100, opacity: 0 }}
+        exit={{ y: "100%", opacity: 0 }}
         transition={{ duration: 0.5 }}
         className={`fixed inset-0 z-50 flex  items-center justify-center bg-black/50 `}
       >

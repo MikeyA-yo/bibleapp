@@ -70,28 +70,52 @@ interface DailyPlan {
   numberPerWeek?: number;
   email: string;
 }
-function AddDailyPlanForm({email}:{email:string}) {
+function AddDailyPlanForm({ email }: { email: string }) {
   const [dailyPlan, setDailyPlan] = useState<DailyPlan>();
-  const [daily, setDaily] = useState("")
-  const handleDailyNumberChange = (e: React.ChangeEvent<HTMLSelectElement>) => {{
-    setDailyPlan(prevState => ({
-      ...prevState,
-      numberPerDay:parseInt(e.target.value),
-      email:email
-    }));
-  }};
-  const handleWeeklyNumberChange = (e: React.ChangeEvent<HTMLSelectElement>) => {{
-    setDailyPlan(prevState => ({
-      ...prevState,
-      numberPerWeek:parseInt(e.target.value),
-      email:email
-    }));
-  }};
+  const [daily, setDaily] = useState("");
+  const handleDailyNumberChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    {
+      setDailyPlan((prevState) => ({
+        ...prevState,
+        numberPerDay: parseInt(e.target.value),
+        email: email,
+      }));
+    }
+  };
+  const handleWeeklyNumberChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    {
+      setDailyPlan((prevState) => ({
+        ...prevState,
+        numberPerWeek: parseInt(e.target.value),
+        email: email,
+      }));
+    }
+  };
+  const handleSubmit = async (data: DailyPlan) => {
+    try {
+      const jsonData = JSON.stringify(data);
+      const res = await fetch("/api/UserPlan", {
+        method: "POST",
+        body: jsonData,
+      });
+      if (res.ok) {
+        return;
+      }
+    } catch (e) {
+      console.log("oops something went wrong");
+    }
+  };
   return (
     <>
       <div>
         <form>
-
+          <p>You want to read x number of chapters per?</p>
+          <select>
+            <option value={"daily"}>Daily</option>
+            <option value={"weekly"}>Weekly</option>
+          </select>
         </form>
       </div>
     </>
@@ -131,16 +155,31 @@ function DashMain({
             <SideBar />
           </div>
         </div>
-        <div className="flex w-full   bg-white bg-opacity-50 items-center">
-          <p> Hey {session?.name} welcome to your dashboard</p>
-          <button
-            className="rounded bg-slate-50 bg-opacity-50"
-            onClick={() => {
-              setIsOpen(true);
-            }}
-          >
-            See Verse of the Day
-          </button>
+        <div className="flex w-full  gap-3 flex-col lg:flex-row md:flex-row justify-center  bg-white bg-opacity-50 items-center">
+          <div className="text-3xl  text-gray-600">
+            <p> Hey {session?.name} welcome to your dashboard</p>
+            <Image
+              src={"/dashboard.svg"}
+              alt="dashboard"
+              height={320}
+              width={320}
+              className="h-72 w-72"
+            />
+          </div>
+          <div>
+            <button
+              className="rounded bg-slate-50 bg-opacity-50"
+              onClick={() => {
+                setIsOpen(true);
+              }}
+            >
+              See Verse of the Day
+            </button>{" "}
+            <div>
+              Add daily plan or edit
+              <AddDailyPlanForm email={session?.email as string} />
+            </div>
+          </div>
           {isOpen && (
             <Dialog
               onClick={() => {
