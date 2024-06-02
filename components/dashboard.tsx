@@ -115,6 +115,9 @@ function AddDailyPlanForm({ email }: { email: string }) {
       });
       if (res.ok) {
         setSuccess(true);
+        setTimeout(()=>{
+            setSuccess(!success)
+        })
         return;
       }
     } catch (e) {
@@ -183,10 +186,10 @@ function DashMain({
   }, []);
   return (
     <>
-      <div className="dashboard bg-center bg-cover  h-screen">
-        <div className="flex h-full overflow-auto">
+      <div className="dashboard bg-center bg-cover  min-h-screen">
+        <div className="flex min-h-full">
           <div className="lg:min-h-full   bg-gray-500 bg-opacity-50 md:min-h-full lg:flex md:flex w-80  hidden ">
-            <div className="mt-20  flex-col gap-2 flex h-full">
+            <div className="mt-20  flex-col gap-2 flex ">
               <div className="flex w-full py-4 justify-evenly gap-2">
                 <p className="text-xl text-gray-300">{session?.name}</p>
                 <Image
@@ -218,9 +221,9 @@ function DashMain({
                   className="lg:h-72 lg:w-72 md:h-72 h-52 w-52 md:w-72"
                 />
               </div>
-              <div className={`flex flex-col gap-1`}>
+              <div className={`flex flex-col gap-1  ${openSans.className}`}>
                 <div>
-                  Add daily a plan or edit
+                  <span className="text-xl">Add a daily plan or edit</span>
                   <AddDailyPlanForm email={session?.email as string} />
                 </div>
               </div>
