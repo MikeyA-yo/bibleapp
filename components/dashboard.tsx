@@ -115,9 +115,9 @@ function AddDailyPlanForm({ email }: { email: string }) {
       });
       if (res.ok) {
         setSuccess(true);
-        setTimeout(()=>{
-            setSuccess(!success)
-        })
+        setTimeout(() => {
+          setSuccess(!success);
+        });
         return;
       }
     } catch (e) {
@@ -133,7 +133,7 @@ function AddDailyPlanForm({ email }: { email: string }) {
         <form
           className="flex flex-col gap-1"
           onSubmit={(e) => {
-            e.preventDefault();
+            e.preventDefault(); // if i remove this line the page refreshes and updates data, but doesn't show saved message, what should i do?
             handleSubmit(dailyPlan);
           }}
         >

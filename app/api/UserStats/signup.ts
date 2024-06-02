@@ -40,7 +40,8 @@ export async function UserStats(email: string) {
   const existingUser = await col.findOne({ email });
   const day = new Date().getDate();
   if (existingUser?.streak) {
-    if (existingUser.streak.day != day) {
+    const condition = (day - existingUser.streak.day) === 1 || (existingUser.streak.day - day) === (30 || 29 || 28 || 27 )/*check new months */ 
+    if (condition) {
       const update = {
         $inc: {
           "streak.count": 1,
