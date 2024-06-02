@@ -51,7 +51,7 @@ function PrevChapter({
     <button className="button" onClick={onClick}>
       <span className="text text-sm">Previous</span>
       <svg
-        className="arrow-prev hover:!rotate-180 rotate-180"
+        className="arrow-prev rotate-180"
         viewBox="0 0 448 512"
         height="1em"
         xmlns="http://www.w3.org/2000/svg"
