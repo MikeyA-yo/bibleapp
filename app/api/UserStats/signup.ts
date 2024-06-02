@@ -63,6 +63,26 @@ export async function UserStats(email: string) {
       };
       col.updateOne({ email }, update); 
     }
+    // do best streak maths
+    const currentStreak = existingUser.streak.count;
+    if(!existingUser.streak.best){
+      const update = {
+        $set:{
+          "streak.best": currentStreak
+        }
+      }
+      col.updateOne({ email }, update); 
+    }
+    if(existingUser.streak.best){
+      if(currentStreak > existingUser.streak.best){
+        const update = {
+          $set:{
+            "streak.best": currentStreak
+          }
+        }
+        col.updateOne({ email }, update); 
+      }
+    }
 
   } else {
     const update = {

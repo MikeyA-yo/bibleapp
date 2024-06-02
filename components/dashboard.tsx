@@ -6,11 +6,12 @@ import Image from "next/image";
 import { Loading } from "./results";
 import "./Sections.css";
 import { useEffect, useState } from "react";
-import { Open_Sans, Roboto } from "next/font/google";
+import { Montserrat, Open_Sans, Roboto } from "next/font/google";
 import Dialog from "./dialog";
 import { Check } from "./spinner";
 
 const rob = Roboto({ weight: ["700"], subsets: ["vietnamese"] });
+const mont = Montserrat({ weight: ["700"], subsets: ["vietnamese"] })
 const openSans = Open_Sans({ weight: ["700"], subsets: ["vietnamese"] });
 async function GetData() {
   const res = await fetch("/api/UserStats");
@@ -49,18 +50,17 @@ function SideBar() {
         <div
           className={`text-2xl flex flex-col justify-evenly ${rob.className}`}
         >
-          <div>
+          <div className="flex flex-col items-center justify-between">
             <p>Current Daily Streak </p>
             <p>{userData.streak.count} </p>
+            <p>Best Streak</p>
+            <p>{userData.streak.best}</p>
           </div>
           {userData.readingPlan && (
-            <p>
-              Your Reading Plan is{" "}
-              {`${userData.readingPlan?.numberPerType ?? "none"} chapters ${
-                userData.readingPlan?.type ??
-                "not available, set up a reading plan"
-              }` ?? "non set yet"}
-            </p>
+            <div className="flex flex-col items-center justify-between">
+                <p className={`text-xl ${mont.className}`}>Reading Plan</p>
+                <p>{userData.readingPlan.numberPerType} Chapters {userData.readingPlan.type}</p>
+            </div>
           )}
         </div>
       )}
