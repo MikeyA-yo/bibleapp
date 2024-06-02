@@ -5,7 +5,7 @@ export default async function KeyPhraseRes(phrase: string, version: string) {
   const result = await versesKeyphrases(phrase, version);
   if (result.length == 0) {
     return (
-      <p className="text-3xl pl-20">
+      <p className="text-3xl text-center pl-20">
         Nothing found, i'll work on this ui later
         <br /> Let me be honest, i won't work on this UI
       </p>

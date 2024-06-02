@@ -8,6 +8,7 @@ import "./Sections.css";
 import { useEffect, useState } from "react";
 import { Open_Sans, Roboto } from "next/font/google";
 import Dialog from "./dialog";
+import { Check } from "./spinner";
 
 const rob = Roboto({ weight: ["700"], subsets: ["vietnamese"] });
 const openSans = Open_Sans({ weight: ["700"], subsets: ["vietnamese"] });
@@ -71,9 +72,20 @@ interface DailyPlan {
   numberPerWeek?: number;
   email: string;
 }
+function Success() {
+  return (
+    <>
+      <div className="flex gap-2 rounded-xl w-4/6 bg-green-500">
+        <Check className="size-6 text-lime-700" />
+        <p className="text-sm">Changes successfuly Made</p>
+      </div>
+    </>
+  );
+}
 function AddDailyPlanForm({ email }: { email: string }) {
   const [dailyPlan, setDailyPlan] = useState<DailyPlan>({ email: email });
   const [daily, setDaily] = useState("daily");
+  const [success, setSuccess] = useState(false);
   const handleDailyNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     {
       setDailyPlan((prevState) => ({
@@ -95,30 +107,33 @@ function AddDailyPlanForm({ email }: { email: string }) {
     }
   };
   const handleSubmit = async (data: DailyPlan) => {
-    try {  
+    try {
       const jsonData = JSON.stringify(data);
       const res = await fetch("/api/UserPlan", {
         method: "POST",
         body: jsonData,
       });
       if (res.ok) {
+        setSuccess(true);
         return;
       }
     } catch (e) {
+      setSuccess(false);
       console.log("oops something went wrong");
     }
   };
   return (
     <>
       <div>
+        {success && <Success />}
         <Image src={`dailyplan.svg`} height={100} width={100} alt="dailyplan" />
-        <form className="flex flex-col gap-1"
-        onSubmit={(e)=>{
-            e.preventDefault()
+        <form
+          className="flex flex-col gap-1"
+          onSubmit={(e) => {
+            e.preventDefault();
             handleSubmit(dailyPlan);
-        }}
+          }}
         >
-          <p>You want to read x number of chapters per?</p>
           <select
             onChange={(e) => {
               setDaily(e.target.value);
