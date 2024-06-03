@@ -43,7 +43,7 @@ export default function SearchMain() {
                 setIsClick(true);
               }}
             />
-            <div className={ !isClick ? 'hidden' : `wrap-check-57 pt-10`}>
+            <div className={ !isClick ? 'hidden' : `wrap-check-57 pt-10 pl-10 text-2xl`}>
               <input id="s1-57" type="checkbox" className="switch" onChange={(e)=>{
                 if(e.target.checked){
                   setIsClick(!isClick)

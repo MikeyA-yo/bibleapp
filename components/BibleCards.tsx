@@ -6,6 +6,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
+import { Reddit_Mono } from "next/font/google";
+const reddit = Reddit_Mono({ weight: ["700"], subsets: ["vietnamese"] });
 export function ChaptersNumber({
   number,
   path,
@@ -44,8 +46,7 @@ export function BookCards({ book }: { book: string }) {
     </>
   );
 }
-let value: string;
-let versionValue: string;
+
 export function SearchBox({
   onChange,
   onClick,
@@ -58,7 +59,10 @@ export function SearchBox({
   // console.log(version, value, versionValue, text);
   return (
     <>
-      <div className="flex flex-col gap-1 w-[17rem] pt-6">
+      <div className="flex flex-col gap-1 w-[17rem] pt-8">
+        <p className={`text-xl ${reddit.className}`}>
+          Search By Key phrase or Word
+        </p>
         <div>
           <div className="wrap-input-6">
             <input

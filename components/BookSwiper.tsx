@@ -14,7 +14,7 @@ export default function PagesBook() {
   return (
     <>
       <div>
-        <p className={`${oswald.className} text-center text-2xl`}>Books</p>
+        <p className={`${oswald.className} text-center text-2xl`}>Explore Books</p>
         <Swiper
         modules={[Navigation, Pagination]}
         slidesPerView={1}
