@@ -51,10 +51,10 @@ function SideBar() {
           className={`text-2xl flex flex-col justify-evenly ${rob.className}`}
         >
           <div className="flex flex-col items-center justify-between">
-            <p>Current Daily Streak </p>
-            <p>{userData.streak.count} </p>
+            <p >Current Daily Streak </p>
+            <p className=" font-light">{userData.streak.count} </p>
             <p>Best Streak</p>
-            <p>{userData.streak.best}</p>
+            <p className="font-light">{userData.streak.best}</p>
           </div>
           {userData.readingPlan && (
             <div className="flex flex-col items-center justify-between">
@@ -116,8 +116,8 @@ function AddDailyPlanForm({ email }: { email: string }) {
       if (res.ok) {
         setSuccess(true);
         setTimeout(() => {
-          setSuccess(!success);
-        });
+          setSuccess(false);
+        }, 2300);
         return;
       }
     } catch (e) {
@@ -204,12 +204,12 @@ function DashMain({
               <SideBar />
             </div>
           </div>
-          <div className="flex  w-full bg-white bg-opacity-50 justify-evenly items-center gap-4 flex-col">
+          <div className="flex  w-full bg-white bg-opacity-50 py-4 justify-evenly items-center gap-4 flex-col">
             <div className="flex w-full  gap-3 flex-col lg:flex-row md:flex-row justify-center   items-center">
               <div
                 className={`lg:text-3xl text-xl md:text-2xl flex flex-col gap-1 ${openSans.className}  text-gray-600`}
               >
-                <p>
+                <p className="pt-14">
                   {" "}
                   Hey {session?.name}, <br /> Welcome to your Dashboard
                 </p>
