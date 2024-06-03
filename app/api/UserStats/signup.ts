@@ -1,6 +1,7 @@
 import { clPromise } from "../mongodb";
 import bcrypt from "bcrypt";
 // import { verifyUser } from "./verifyEmail";
+//function currently not in use
 export async function createUser({
   email,
   username,
@@ -93,6 +94,27 @@ export async function UserStats(email: string) {
     };
     col.updateOne({ email }, update);
   }
+   //add levels, n rank, dedication e.t.c...
+   const ranks = ["Dedicated","Saint", "Disciple", "Prophet", "Minister", "Soul winner", "Grounded in The word"]
+   if(existingUser?.rank){
+      const level = Math.round((existingUser.streak.count * existingUser.streak.best) + existingUser.readingPlan.numberPerType)
+      const rank = ranks[Math.round(level/12)];
+      const update = {
+        $set: {
+          "rank.level": level,
+          "rank.name":rank ?? "Starter",
+        },
+      };
+      col.updateOne({ email }, update);  
+   }else{
+    const update = {
+      $set: {
+        "rank.level": 0,
+        "rank.name":"Starter",
+      },
+    };
+    col.updateOne({ email }, update);    
+   }
 }
 export async function GetUserStats(email:string){
   const client = await clPromise;

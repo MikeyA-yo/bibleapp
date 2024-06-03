@@ -43,7 +43,6 @@ function SideBar() {
     }
     getData();
   }, []);
-
   return (
     <>
       {userData && (
@@ -58,10 +57,14 @@ function SideBar() {
           </div>
           {userData.readingPlan && (
             <div className="flex flex-col items-center justify-between">
-                <p className={`text-xl ${mont.className}`}>Reading Plan</p>
+                <p className={`text-2xl ${mont.className}`}>Reading Plan</p>
                 <p>{userData.readingPlan.numberPerType} Chapters {userData.readingPlan.type}</p>
             </div>
           )}
+          <div>
+            <p>Rank: {userData.rank.name}</p>
+            <p>Level: {userData.rank.level}</p>
+          </div>
         </div>
       )}
     </>
@@ -129,7 +132,7 @@ function AddDailyPlanForm({ email }: { email: string }) {
     <>
       <div>
         {success && <Success />}
-        <Image src={`dailyplan.svg`} height={100} width={100} alt="dailyplan" />
+        <Image priority src={`dailyplan.svg`} height={100} width={100} alt="dailyplan" />
         <form
           className="flex flex-col gap-1"
           onSubmit={(e) => {
@@ -205,7 +208,7 @@ function DashMain({
             </div>
           </div>
           <div className="flex  w-full bg-white bg-opacity-50 py-4 justify-evenly items-center gap-4 flex-col">
-            <div className="flex w-full  gap-3 flex-col lg:flex-row md:flex-row justify-center   items-center">
+            <div className="flex w-full  gap-3 flex-col mt-10 lg:flex-row md:flex-row justify-center   items-center">
               <div
                 className={`lg:text-3xl text-xl md:text-2xl flex flex-col gap-1 ${openSans.className}  text-gray-600`}
               >
@@ -214,6 +217,7 @@ function DashMain({
                   Hey {session?.name}, <br /> Welcome to your Dashboard
                 </p>
                 <Image
+                  priority
                   src={"/dashboard.svg"}
                   alt="dashboard"
                   height={320}
