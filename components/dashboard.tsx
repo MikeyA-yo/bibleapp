@@ -33,6 +33,20 @@ async function CheckDataAndUpdate(email: string) {
     console.log(e);
   }
 }
+async function AddTask({email, state, task}:{email:string, state:string, task:string}){
+try {
+    const data = {email, state, task}
+    const res = await fetch("api/UserChecks",{
+        method:"POST",
+        body: JSON.stringify(data)
+    })
+    if(res.ok){
+        return
+    }
+} catch (e) {
+    console.log("oops something happened")
+}
+}
 function SideBar() {
   const [userData, setUserData] = useState<any>();
   useEffect(() => {
@@ -171,6 +185,15 @@ function AddDailyPlanForm({ email }: { email: string }) {
       </div>
     </>
   );
+}
+function UpdateTask({email}:{email:string}){
+    const [done, setDone] = useState(false);
+   useEffect(()=>{
+    async function AddTaskData(){
+
+    }
+    AddTaskData()
+   },[])
 }
 function DashMain({
   session,

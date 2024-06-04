@@ -1,33 +1,39 @@
 import { sendReminder } from "../contact/contact";
 import { clPromise } from "../mongodb";
-let emails:string[];
-export async function checker(){
-    const client = await clPromise;
-    const db = client.db("test");
-    const col = db.collection("users");
-    const users = col.find({ "task.state": false });
-    const usersArray = await users.toArray();
-    usersArray.forEach(user =>{
-        emails.push(user.email);
-    })
-    let i = 0;
-    while(i < emails.length){
-        setInterval(()=>{
-            sendReminder(emails[i], "Reminder");
-            i++;
-        }, 1000)
+let emails: string[] = [];
+let names: string[] = [];
+export async function checker() {
+  const client = await clPromise;
+  const db = client.db("test");
+  const col = db.collection("users");
+  const users = col.find({ "task.state": false });
+  const usersArray = await users.toArray();
+  usersArray.forEach((user) => {
+    emails.push(user.email);
+    names.push(user.name);
+  });
+  let i = 0;
+  let int = setInterval(() => {
+    if (i == emails.length) {
+      clearInterval(int);
     }
+    sendReminder(emails[i], "Reminder", names[i]);
+    i++;
+  }, 1000);
+
+  return users;
 }
 
-export async function addTask(task:string, done:boolean, email:string){
-    const client = await clPromise;
-    const db = client.db("test");
-    const col = db.collection("users");
-    const update = {
-        $set:{
-            "task.state":done,
-            "task.name":task
-        }
-    }
-    col.updateOne({email}, update)
+export async function addTask(task: string, done: boolean, email: string) {
+  const client = await clPromise;
+  const db = client.db("test");
+  const col = db.collection("users");
+  const update = {
+    $set: {
+      "task.state": done,
+      "task.name": task,
+    },
+  };
+
+  return col.updateOne({ email }, update);
 }
