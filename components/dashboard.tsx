@@ -61,7 +61,7 @@ function SideBar() {
                 <p>{userData.readingPlan.numberPerType} Chapters {userData.readingPlan.type}</p>
             </div>
           )}
-          <div>
+          <div className="flex flex-col items-center justify-between">
             <p>Rank: {userData.rank.name}</p>
             <p>Level: {userData.rank.level}</p>
           </div>

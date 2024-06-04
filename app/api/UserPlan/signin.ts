@@ -1,5 +1,6 @@
 import { clPromise } from "../mongodb";
 import bcrypt from "bcrypt";
+//no longer used
 export async function checkUser({
   email,
   username,
