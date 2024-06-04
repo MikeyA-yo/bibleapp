@@ -39,3 +39,11 @@ export default async function sendMessage({
     console.log(info.response);
   });
 }
+export async function sendReminder(email:string, message:string){
+  const mailoptions = {
+    from: process.env.EMAIL_SENDER,
+    to: email,
+    subject: `Reminder`,
+    text: `${message}`,
+  };
+}

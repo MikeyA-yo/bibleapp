@@ -62,8 +62,8 @@ function SideBar() {
             </div>
           )}
           <div className="flex flex-col items-center justify-between">
-            <p>Rank: {userData.rank.name}</p>
-            <p>Level: {userData.rank.level}</p>
+            <p className={`text-2xl ${mont.className}`}>Rank: {userData.rank.name}</p>
+            <p className={`text-2xl ${mont.className}`}>Level: {userData.rank.level}</p>
           </div>
         </div>
       )}
