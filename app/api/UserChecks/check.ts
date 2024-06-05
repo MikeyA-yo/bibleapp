@@ -7,7 +7,7 @@ export async function checker() {
   const db = client.db("test");
   const col = db.collection("users");
   const users = col.find({ "task.state": false });
-  if(new Date().getHours() < 12){
+  if (new Date().getHours() < 12) {
     return {};
   }
   const usersArray = await users.toArray();
@@ -15,20 +15,26 @@ export async function checker() {
     emails.push(user.email);
     names.push(user.name);
   });
+  console.log(emails.length);
+  if (emails.length == (0 || 1)) {
+    return;
+  }
   let i = 0;
   let int = setInterval(() => {
     if (i == emails.length) {
       clearInterval(int);
     }
-    sendReminder(emails[i], "Reminder", names[i]);
+    if(emails.length !== 0){
+        sendReminder(emails[i], "Reminder", names[i]);
+    }
     i++;
   }, 1000);
-  const day = new Date().getDate()
+  const day = new Date().getDate();
   const update = {
-    $set:{
-      "task.lastRemindDate":day
-    }
-  }
+    $set: {
+      "task.lastRemindDate": day,
+    },
+  };
   return users;
 }
 
@@ -41,7 +47,7 @@ export async function addTask(task: string, done: boolean, email: string) {
     $set: {
       "task.state": done,
       "task.name": task,
-      "task.lastUpdate":day,
+      "task.lastUpdate": day,
     },
   };
 
