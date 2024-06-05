@@ -185,7 +185,7 @@ interface NivData {
     book: string;
     chapter: string;
     verse: string;
-    text: string;
+    text: string ;
   };
 }
 interface SearchNKJVnKJV {
@@ -365,19 +365,24 @@ export async function getESV(book: string, chapter: string, verse: string) {
 export async function ChapterArray(book: string) {
   //example call:  ChapterArray('John') /  ChapterArray('firstJohn')
   let b;
+  let i = 1
   for (const key in booksA) {
     if (book.toLowerCase() == key.toLowerCase() || book == key) {
-      b = booksA[key];
+      break;
     }
+    i++
   }
-  const res = await fetch(`https://www.abibliadigital.com.br/api/books/${b}/`, {
-    headers: {
-      Authorization: authString,
-    },
-  });
+  //502 bad gateway hmm, now i have to use bolls.life
+  const res = await fetch(`https://bolls.life/get-books/NKJV/`);
   const data = await res.json();
+  let chap = 0;
+  data.forEach((book:any )=>{
+      if(book.bookid == i){
+         chap = book.chapters;
+      }
+  })
   let array = [];
-  for (let i = 1; i <= data.chapters; i++) {
+  for (let i = 1; i <= chap; i++) {
     array.push(i);
   }
   return array;

@@ -226,7 +226,7 @@ function UpdateTask({ email }: { email: string }) {
         <form
           className={`${openSans.className} flex flex-col items-center justify-evenly`}
         >
-          <p>Have you read your daily/weekly Bible plan for today?</p>
+          <p className="text-xl">Have you read your daily/weekly Bible plan for today?</p>
           <div className="checkbox-wrapper">
             <input
               type="checkbox"
