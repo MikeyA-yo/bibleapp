@@ -7,6 +7,9 @@ export async function checker() {
   const db = client.db("test");
   const col = db.collection("users");
   const users = col.find({ "task.state": false });
+  if(new Date().getHours() < 12){
+    return {};
+  }
   const usersArray = await users.toArray();
   usersArray.forEach((user) => {
     emails.push(user.email);
@@ -20,7 +23,12 @@ export async function checker() {
     sendReminder(emails[i], "Reminder", names[i]);
     i++;
   }, 1000);
-
+  const day = new Date().getDate()
+  const update = {
+    $set:{
+      "task.lastRemindDate":day
+    }
+  }
   return users;
 }
 

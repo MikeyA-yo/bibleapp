@@ -11,7 +11,7 @@ import Dialog from "./dialog";
 import { Check } from "./spinner";
 
 const rob = Roboto({ weight: ["700"], subsets: ["vietnamese"] });
-const mont = Montserrat({ weight: ["700"], subsets: ["vietnamese"] })
+const mont = Montserrat({ weight: ["700"], subsets: ["vietnamese"] });
 const openSans = Open_Sans({ weight: ["700"], subsets: ["vietnamese"] });
 async function GetData() {
   const res = await fetch("/api/UserStats");
@@ -33,19 +33,27 @@ async function CheckDataAndUpdate(email: string) {
     console.log(e);
   }
 }
-async function AddTask({email, state, task}:{email:string, state:string, task:string}){
-try {
-    const data = {email, state, task}
-    const res = await fetch("api/UserChecks",{
-        method:"POST",
-        body: JSON.stringify(data)
-    })
-    if(res.ok){
-        return
+async function AddTask({
+  email,
+  state,
+  task,
+}: {
+  email: string;
+  state: boolean;
+  task: string;
+}) {
+  try {
+    const data = { email, state, task };
+    const res = await fetch("api/UserChecks", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      return;
     }
-} catch (e) {
-    console.log("oops something happened")
-}
+  } catch (e) {
+    console.log("oops something happened");
+  }
 }
 function SideBar() {
   const [userData, setUserData] = useState<any>();
@@ -64,20 +72,27 @@ function SideBar() {
           className={`text-2xl flex flex-col justify-evenly ${rob.className}`}
         >
           <div className="flex flex-col items-center justify-between">
-            <p >Current Daily Streak </p>
+            <p>Current Daily Streak </p>
             <p className=" font-light">{userData.streak.count} </p>
             <p>Best Streak</p>
             <p className="font-light">{userData.streak.best}</p>
           </div>
           {userData.readingPlan && (
             <div className="flex flex-col items-center justify-between">
-                <p className={`text-2xl ${mont.className}`}>Reading Plan</p>
-                <p>{userData.readingPlan.numberPerType} Chapters {userData.readingPlan.type}</p>
+              <p className={`text-2xl ${mont.className}`}>Reading Plan</p>
+              <p>
+                {userData.readingPlan.numberPerType} Chapters{" "}
+                {userData.readingPlan.type}
+              </p>
             </div>
           )}
           <div className="flex flex-col items-center justify-between">
-            <p className={`text-2xl ${mont.className}`}>Rank: {userData.rank.name}</p>
-            <p className={`text-2xl ${mont.className}`}>Level: {userData.rank.level}</p>
+            <p className={`text-2xl ${mont.className}`}>
+              Rank: {userData.rank.name}
+            </p>
+            <p className={`text-2xl ${mont.className}`}>
+              Level: {userData.rank.level}
+            </p>
           </div>
         </div>
       )}
@@ -146,7 +161,13 @@ function AddDailyPlanForm({ email }: { email: string }) {
     <>
       <div>
         {success && <Success />}
-        <Image priority src={`dailyplan.svg`} height={100} width={100} alt="dailyplan" />
+        <Image
+          priority
+          src={`dailyplan.svg`}
+          height={100}
+          width={100}
+          alt="dailyplan"
+        />
         <form
           className="flex flex-col gap-1"
           onSubmit={(e) => {
@@ -186,14 +207,75 @@ function AddDailyPlanForm({ email }: { email: string }) {
     </>
   );
 }
-function UpdateTask({email}:{email:string}){
-    const [done, setDone] = useState(false);
-   useEffect(()=>{
-    async function AddTaskData(){
-
-    }
-    AddTaskData()
-   },[])
+function UpdateTask({ email }: { email: string }) {
+  const [done, setDone] = useState(false);
+  //   useEffect(() => {
+  async function AddTaskData() {
+    let obj = {
+      email,
+      state: done,
+      task: "chapters",
+    };
+    AddTask(obj);
+  }
+  //     AddTaskData();
+  //   }, []);
+  return (
+    <>
+      <div className="pt-8">
+        <form
+          className={`${openSans.className} flex flex-col items-center justify-evenly`}
+        >
+          <p>Have you read your daily/weekly Bible plan for today?</p>
+          <div className="checkbox-wrapper">
+            <input
+              type="checkbox"
+              className="check"
+              id="check1-61"
+              onChange={(e) => {
+                if (e.target.checked) {
+                  setDone(true);
+                } else {
+                  setDone(false);
+                }
+              }}
+            />
+            <label htmlFor="check1-61" className="label flex gap-1">
+              <svg width={45} height={45} viewBox="0 0 95 95">
+                <rect
+                  x={30}
+                  y={20}
+                  width={50}
+                  height={50}
+                  stroke="black"
+                  fill="none"
+                />
+                <g transform="translate(0,-952.36222)">
+                  <path
+                    d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4"
+                    stroke="black"
+                    strokeWidth={3}
+                    fill="none"
+                    className="path1"
+                  />
+                </g>
+              </svg>
+              <span>Have you Read?</span>
+            </label>
+          </div>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              AddTaskData();
+            }}
+            className="rounded bg-slate-50 w-auto p-2 bg-opacity-50 hover:bg-opacity-50 hover:bg-slate-200"
+          >
+            Save Changes
+          </button>
+        </form>
+      </div>
+    </>
+  );
 }
 function DashMain({
   session,
@@ -271,6 +353,9 @@ function DashMain({
             >
               Verse of the Day
             </button>{" "}
+            <div>
+              <UpdateTask email={session?.email as string} />
+            </div>
           </div>
         </div>
       </div>
