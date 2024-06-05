@@ -116,6 +116,6 @@ export async function sendReminder(email:string, message:string, name:string){
     if (e) {
       console.log(e);
     }
-    console.log(info);
+    console.log(info.response);
   })
 }

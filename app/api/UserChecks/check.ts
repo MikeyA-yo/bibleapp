@@ -3,6 +3,7 @@ import { clPromise } from "../mongodb";
 let emails: string[] = [];
 let names: string[] = [];
 export async function checker() {
+    let currentDay = new Date().getDate();
   const client = await clPromise;
   const db = client.db("test");
   const col = db.collection("users");
@@ -12,13 +13,23 @@ export async function checker() {
   }
   const usersArray = await users.toArray();
   usersArray.forEach((user) => {
+        if(currentDay != user.task.lastUpdateDate){
+            const update = {
+                $set:{
+                    "task.state":false
+                }
+            }
+            col.updateOne({email: user.email}, update)
+        }
+    if(user.task.lastRemindDate){
+        
+    }
     emails.push(user.email);
     names.push(user.name);
   });
-  console.log(emails.length);
-  if (emails.length == (0 || 1)) {
-    return;
-  }
+//   if (emails.length == (0 || 1)) {
+//     return;
+//   }
   let i = 0;
   let int = setInterval(() => {
     if (i == emails.length) {
@@ -35,6 +46,11 @@ export async function checker() {
       "task.lastRemindDate": day,
     },
   };
+  if(emails.length !== 0){
+    emails.forEach(async (email) =>{
+        await col.updateOne({ email }, update)
+    })
+  }
   return users;
 }
 
