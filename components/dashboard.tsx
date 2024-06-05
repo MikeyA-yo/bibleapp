@@ -223,8 +223,9 @@ function UpdateTask({ email }: { email: string }) {
     
   }, []);
   let checkstate = false;
+  let day = new Date().getDate()
   if(uData){
-    if(uData.task){
+    if(uData.task && uData.task.lastUpdate === day ){
         checkstate = uData.task.state
     }
   }
