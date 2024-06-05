@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import { Loading } from "./results";
 import "./Sections.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Montserrat, Open_Sans, Roboto } from "next/font/google";
 import Dialog from "./dialog";
 import { Check } from "./spinner";
@@ -209,6 +209,25 @@ function AddDailyPlanForm({ email }: { email: string }) {
 }
 function UpdateTask({ email }: { email: string }) {
   const [done, setDone] = useState(false);
+  const [change, setChange] = useState<boolean>()
+  const [uData, setUData] = useState<any>()
+
+  useEffect(() => {
+    async function getData() {
+      const data = await GetData();
+      setUData(data);
+      
+      return;
+    }
+    getData();
+    
+  }, []);
+  let checkstate = false;
+  if(uData){
+    if(uData.task){
+        checkstate = uData.task.state
+    }
+  }
   //   useEffect(() => {
   async function AddTaskData() {
     let obj = {
@@ -217,12 +236,14 @@ function UpdateTask({ email }: { email: string }) {
       task: "chapters",
     };
     AddTask(obj);
+    setChange(true)
   }
   //     AddTaskData();
   //   }, []);
   return (
     <>
       <div className="pt-8">
+        {change && <Success />}
         <form
           className={`${openSans.className} flex flex-col items-center justify-evenly`}
         >
@@ -232,6 +253,7 @@ function UpdateTask({ email }: { email: string }) {
               type="checkbox"
               className="check"
               id="check1-61"
+              checked={checkstate}
               onChange={(e) => {
                 if (e.target.checked) {
                   setDone(true);
