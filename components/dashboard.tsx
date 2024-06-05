@@ -210,25 +210,23 @@ function AddDailyPlanForm({ email }: { email: string }) {
 function UpdateTask({ email }: { email: string }) {
   const [done, setDone] = useState(false);
   const [change, setChange] = useState<boolean>()
-  const [uData, setUData] = useState<any>()
-
-  useEffect(() => {
-    async function getData() {
-      const data = await GetData();
-      setUData(data);
-      
-      return;
-    }
-    getData();
+//   const [uData, setUData] = useState<any>()
+//   const [checkstate, setCheckState] = useState(false)
+//   useEffect(() => {
+//     async function getData() {
+//       const data = await GetData();
+//       setUData(data);
+//       return;
+//     }
+//     getData();
     
-  }, []);
-  let checkstate = false;
-  let day = new Date().getDate()
-  if(uData){
-    if(uData.task && uData.task.lastUpdate === day ){
-        checkstate = uData.task.state
-    }
-  }
+//   }, []);
+//   let day = new Date().getDate()
+//   if(uData){
+//     if(uData.task && uData.task.lastUpdate === day ){
+//         setCheckState(true)
+//     }
+//   }
   //   useEffect(() => {
   async function AddTaskData() {
     let obj = {
@@ -254,7 +252,6 @@ function UpdateTask({ email }: { email: string }) {
               type="checkbox"
               className="check"
               id="check1-61"
-              checked={checkstate}
               onChange={(e) => {
                 if (e.target.checked) {
                   setDone(true);

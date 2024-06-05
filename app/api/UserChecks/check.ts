@@ -31,9 +31,15 @@ export async function checker() {
 //     return;
 //   }
   let i = 0;
-  let int = setInterval(() => {
+  let int = setInterval(async () => {
     if (i == emails.length) {
       clearInterval(int);
+    }
+    const user = await col.findOne({email: emails[i]})
+    if(user?.task?.lastRemindDate){
+        if(currentDay == user.task.lastRemindDate){
+            clearInterval(int);
+        }
     }
     if(emails.length !== 0){
         sendReminder(emails[i], "Reminder", names[i]);

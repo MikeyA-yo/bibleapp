@@ -98,7 +98,7 @@ export async function UserStats(email: string) {
    const ranks = ["Dedicated","Saint", "Disciple", "Prophet", "Minister", "Soul winner", "Grounded in The word"]
    if(existingUser?.rank){
       const level = Math.round((existingUser.streak.count * existingUser.streak.best) + existingUser.readingPlan.numberPerType)
-      const rank = ranks[Math.round(level/12)];
+      const rank = ranks[Math.round(level/(12 + (existingUser.streak.best - existingUser.readingPlan.numberPerType)))];
       const update = {
         $set: {
           "rank.level": level,
