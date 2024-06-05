@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import { Loading } from "./results";
@@ -8,7 +8,7 @@ import "./Sections.css";
 import { useEffect, useRef, useState } from "react";
 import { Montserrat, Open_Sans, Roboto } from "next/font/google";
 import Dialog from "./dialog";
-import { Check } from "./spinner";
+import { Check, LogOutArr } from "./spinner";
 
 const rob = Roboto({ weight: ["700"], subsets: ["vietnamese"] });
 const mont = Montserrat({ weight: ["700"], subsets: ["vietnamese"] });
@@ -54,6 +54,21 @@ async function AddTask({
   } catch (e) {
     console.log("oops something happened");
   }
+}
+function SignOut() {
+  return (
+    <>
+      <div
+        className={`flex justify-center gap-2 ${mont.className} `}
+        onClick={() => {
+          signOut({ callbackUrl: "/" });
+        }}
+      >
+        <LogOutArr />
+        <button>Sign Out</button>
+      </div>
+    </>
+  );
 }
 function SideBar() {
   const [userData, setUserData] = useState<any>();
@@ -209,25 +224,24 @@ function AddDailyPlanForm({ email }: { email: string }) {
 }
 function UpdateTask({ email }: { email: string }) {
   const [done, setDone] = useState(false);
-  const [change, setChange] = useState<boolean>()
-//   const [uData, setUData] = useState<any>()
-//   const [checkstate, setCheckState] = useState(false)
-//   useEffect(() => {
-//     async function getData() {
-//       const data = await GetData();
-//       setUData(data);
-//       return;
-//     }
-//     getData();
-    
-//   }, []);
-//   let day = new Date().getDate()
-//   if(uData){
-//     if(uData.task && uData.task.lastUpdate === day ){
-//         setCheckState(true)
-//     }
-//   }
+  const [change, setChange] = useState<boolean>();
+  //   const [uData, setUData] = useState<any>()
+  //   const [checkstate, setCheckState] = useState(false)
   //   useEffect(() => {
+  //     async function getData() {
+  //       const data = await GetData();
+  //       setUData(data);
+  //       return;
+  //     }
+  //     getData();
+
+  //   }, []);
+  //   let day = new Date().getDate()
+  //   if(uData){
+  //     if(uData.task && uData.task.lastUpdate === day ){
+  //         setCheckState(true)
+  //     }
+  //   }
   async function AddTaskData() {
     let obj = {
       email,
@@ -235,10 +249,8 @@ function UpdateTask({ email }: { email: string }) {
       task: "chapters",
     };
     AddTask(obj);
-    setChange(true)
+    setChange(true);
   }
-  //     AddTaskData();
-  //   }, []);
   return (
     <>
       <div className="pt-8">
@@ -246,7 +258,9 @@ function UpdateTask({ email }: { email: string }) {
         <form
           className={`${openSans.className} flex flex-col items-center justify-evenly`}
         >
-          <p className="text-xl">Have you read your daily/weekly Bible plan for today?</p>
+          <p className="text-xl">
+            Have you read your daily/weekly Bible plan for today?
+          </p>
           <div className="checkbox-wrapper">
             <input
               type="checkbox"
@@ -317,7 +331,7 @@ function DashMain({
       <div className="dashboard bg-center bg-cover  min-h-screen">
         <div className="flex min-h-full">
           <div className="lg:min-h-full   bg-gray-500 bg-opacity-50 md:min-h-full lg:flex md:flex w-80  hidden ">
-            <div className="mt-20  flex-col gap-2 flex ">
+            <div className="mt-20  flex-col justify-evenly gap-2 flex ">
               <div className="flex w-full py-4 justify-evenly gap-2">
                 <p className="text-xl text-gray-300">{session?.name}</p>
                 <Image
@@ -330,6 +344,7 @@ function DashMain({
                 />
               </div>
               <SideBar />
+              <SignOut />
             </div>
           </div>
           <div className="flex  w-full bg-white bg-opacity-50 py-4 justify-evenly items-center gap-4 flex-col">
