@@ -13,33 +13,35 @@ export const rob = roboto.className;
 function LinksMobile() {
   const { data: session, status } = useSession();
   const pathname = usePathname();
-  if (!session) {
-    if (status !== "loading") {
-      return (
-        <>
-          <Link href={"/"}>
+  // if (!session) {
+  //   if (status !== "loading") {
+  //   }
+  // }
+  if (session) {
+    return (
+      <>
+        <Link href={"/"}>
+          <p
+            className={`text-emerald-400 hover:active-mobile ${
+              pathname == "/" ? "active-mobile" : ""
+            }`}
+          >
+            <span className="pl-2">HOME</span>
+          </p>
+        </Link>
+        {signInPages.map((page, i) => (
+          <Link key={i} href={`/${page.toLowerCase()}`}>
             <p
               className={`text-emerald-400 hover:active-mobile ${
-                pathname == "/" ? "active-mobile" : ""
+                pathname == "/" + page.toLowerCase() ? "active-mobile" : ""
               }`}
             >
-              <span className="pl-2">HOME</span>
+              <span className="pl-2">{page}</span>
             </p>
           </Link>
-          {pages.map((page, i) => (
-            <Link key={i} href={`/${page.toLowerCase()}`}>
-              <p
-                className={`text-emerald-400 hover:active-mobile ${
-                  pathname == "/" + page.toLowerCase() ? "active-mobile" : ""
-                }`}
-              >
-                <span className="pl-2">{page}</span>
-              </p>
-            </Link>
-          ))}
-        </>
-      );
-    }
+        ))}
+      </>
+    );
   }
   return (
     <>
@@ -52,7 +54,7 @@ function LinksMobile() {
           <span className="pl-2">HOME</span>
         </p>
       </Link>
-      {signInPages.map((page, i) => (
+      {pages.map((page, i) => (
         <Link key={i} href={`/${page.toLowerCase()}`}>
           <p
             className={`text-emerald-400 hover:active-mobile ${
@@ -112,33 +114,35 @@ function MenuList({ state, pathname }: { state: boolean; pathname: string }) {
 function LinkSMain() {
   const { data: session, status } = useSession();
   const pathname = usePathname();
-  if (!session) {
-    if (status !== "loading") {
-      return (
-        <>
-          <Link href={"/"}>
+  // if (!session) {
+  //   if (status !== "loading") {
+  //   }
+  // }
+  if (session) {
+    return (
+      <>
+        <Link href={"/"}>
+          <p
+            className={`text-emerald-400 hover:active ${
+              pathname == "/" ? "active" : ""
+            }`}
+          >
+            HOME
+          </p>
+        </Link>
+        {signInPages.map((page, i) => (
+          <Link key={i} href={`/${page.toLowerCase()}`}>
             <p
               className={`text-emerald-400 hover:active ${
-                pathname == "/" ? "active" : ""
+                pathname == "/" + page.toLowerCase() ? "active" : ""
               }`}
             >
-              HOME
+              {page}
             </p>
           </Link>
-          {pages.map((page, i) => (
-            <Link key={i} href={`/${page.toLowerCase()}`}>
-              <p
-                className={`text-emerald-400 hover:active ${
-                  pathname == "/" + page.toLowerCase() ? "active" : ""
-                }`}
-              >
-                {page}
-              </p>
-            </Link>
-          ))}
-        </>
-      );
-    }
+        ))}
+      </>
+    );
   }
   return (
     <>
@@ -151,7 +155,7 @@ function LinkSMain() {
           HOME
         </p>
       </Link>
-      {signInPages.map((page, i) => (
+      {pages.map((page, i) => (
         <Link key={i} href={`/${page.toLowerCase()}`}>
           <p
             className={`text-emerald-400 hover:active ${

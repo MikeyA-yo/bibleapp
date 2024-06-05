@@ -28,10 +28,12 @@ export async function addTask(task: string, done: boolean, email: string) {
   const client = await clPromise;
   const db = client.db("test");
   const col = db.collection("users");
+  const day = new Date().getDate();
   const update = {
     $set: {
       "task.state": done,
       "task.name": task,
+      "task.lastUpdate":day,
     },
   };
 
