@@ -95,10 +95,10 @@ export async function UserStats(email: string) {
     col.updateOne({ email }, update);
   }
    //add levels, n rank, dedication e.t.c...
-   const ranks = ["Dedicated","Saint", "Disciple", "Prophet", "Minister", "Soul winner", "Grounded in The word"]
+   const ranks = ["Faithful Servant","Dedicated","Generous Giver","Compassionate Healer","Saint","Wise Counselor","Joyful Witness", "Disciple", "Humble Disciple","Prophet", "Peacemaker","Devoted Follower","Minister", "Loving Shepherd","Soul winner", "Prayer Warrior","Grounded in The word"]
    if(existingUser?.rank){
       const level = Math.round((existingUser.streak.count * existingUser.streak.best) + existingUser.readingPlan.numberPerType)
-      const rank = ranks[Math.round(level/(12 + (existingUser.streak.best - existingUser.readingPlan.numberPerType)))];
+      const rank = ranks[Math.round(level/(22 + (existingUser.streak.best - existingUser.readingPlan.numberPerType)))];
       const update = {
         $set: {
           "rank.level": level,

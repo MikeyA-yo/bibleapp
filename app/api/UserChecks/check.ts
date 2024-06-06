@@ -37,9 +37,9 @@ export async function checker() {
       names.push(user.name);
     }
   });
-  // if (new Date().getHours() < 12) {
-  //   return {};
-  // }
+  if (new Date().getHours() < 12) {
+    return {};
+  }
   if (emails.length === 0 ) {
     return {};
   }
