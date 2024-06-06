@@ -1,3 +1,4 @@
+"use server"
 //links
 //https://www.abibliadigital.com.br/api/books
 //https://bolls.life/get-text/NKJV/19/119/

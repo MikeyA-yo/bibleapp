@@ -25,8 +25,8 @@ async function CheckDataAndUpdate(email: string) {
       method: "POST",
       body: JSON.stringify(data),
     });
-
-    if (res.ok) {
+    const reminderApi = await fetch("/api/UserChecks");
+    if (res.ok && reminderApi.ok) {
       return;
     }
   } catch (e) {
@@ -174,7 +174,7 @@ function AddDailyPlanForm({ email }: { email: string }) {
   };
   return (
     <>
-      <div>
+      <div className="flex flex-col justify-evenly gap-4">
         {success && <Success />}
         <Image
           priority
@@ -250,10 +250,13 @@ function UpdateTask({ email }: { email: string }) {
     };
     AddTask(obj);
     setChange(true);
+    setTimeout(()=>{
+      setChange(false)
+    }, 1000)
   }
   return (
     <>
-      <div className="pt-8">
+      <div className="pt-8 pl-4">
         {change && <Success />}
         <form
           className={`${openSans.className} flex flex-col items-center justify-evenly`}
@@ -367,7 +370,7 @@ function DashMain({
               </div>
               <div className={`flex flex-col gap-1  ${openSans.className}`}>
                 <div>
-                  <span className="text-xl">Add a daily plan or edit</span>
+                  <span className="text-xl p-2">Add a daily plan or edit</span>
                   <AddDailyPlanForm email={session?.email as string} />
                 </div>
               </div>
@@ -390,6 +393,9 @@ function DashMain({
             </button>{" "}
             <div>
               <UpdateTask email={session?.email as string} />
+            </div>
+            <div>
+              <h1 className={`text-2xl ${mont.className}`}>Favorite Verses</h1>
             </div>
           </div>
         </div>
