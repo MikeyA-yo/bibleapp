@@ -7,29 +7,42 @@ export async function checker() {
   const client = await clPromise;
   const db = client.db("test");
   const col = db.collection("users");
+  const otherUsers = col.find({ "task.state": true });
+  const otherArray = await otherUsers.toArray();
+
+  otherArray.forEach(async (person) =>{
+    if(person.task.lastUpdate != currentDay){
+      const update={
+        $set:{
+          "task.state":false,
+          "task.lastUpdate": currentDay
+        }
+      }
+      await col.updateOne({email: person.email}, update)
+    }
+  })
+
   const users = col.find({ "task.state": false });
-  if (new Date().getHours() < 12) {
+  
+  const usersArray = await users.toArray();
+
+  usersArray.forEach((user) => {
+    if(user.task.lastRemindDate){
+      if(user.task.lastRemindDate !== currentDay){
+        emails.push(user.email);
+        names.push(user.name);
+      }
+    }else{
+      emails.push(user.email);
+      names.push(user.name);
+    }
+  });
+  // if (new Date().getHours() < 12) {
+  //   return {};
+  // }
+  if (emails.length === 0 ) {
     return {};
   }
-  const usersArray = await users.toArray();
-  usersArray.forEach((user) => {
-        if(currentDay != user.task.lastUpdateDate){
-            const update = {
-                $set:{
-                    "task.state":false
-                }
-            }
-            col.updateOne({email: user.email}, update)
-        }
-    if(user.task.lastRemindDate){
-        
-    }
-    emails.push(user.email);
-    names.push(user.name);
-  });
-//   if (emails.length == (0 || 1)) {
-//     return;
-//   }
   let i = 0;
   let int = setInterval(async () => {
     if (i == emails.length) {
