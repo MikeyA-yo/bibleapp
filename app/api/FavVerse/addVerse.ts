@@ -1,6 +1,6 @@
 import { clPromise } from "../mongodb";
 
-export async function addFav(verse:string, email:string, version:string){
+export async function addFav(verse:string, email:string, version?:string){
     const client= await clPromise;
     const db = client.db("test");
     const col = db.collection("users");
@@ -17,6 +17,7 @@ export async function addFav(verse:string, email:string, version:string){
         let verseSide = components.slice(components.indexOf(":"));
         url =  "/" + chapterSide.slice(0, -1).join("") + "/" + chapterSide.slice(-1)
     }
+    version = version ??  "nkjv";
     type versesArr = {
         verse:string,
         url:string,

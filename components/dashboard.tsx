@@ -225,23 +225,6 @@ function AddDailyPlanForm({ email }: { email: string }) {
 function UpdateTask({ email }: { email: string }) {
   const [done, setDone] = useState(false);
   const [change, setChange] = useState<boolean>();
-  //   const [uData, setUData] = useState<any>()
-  //   const [checkstate, setCheckState] = useState(false)
-  //   useEffect(() => {
-  //     async function getData() {
-  //       const data = await GetData();
-  //       setUData(data);
-  //       return;
-  //     }
-  //     getData();
-
-  //   }, []);
-  //   let day = new Date().getDate()
-  //   if(uData){
-  //     if(uData.task && uData.task.lastUpdate === day ){
-  //         setCheckState(true)
-  //     }
-  //   }
   async function AddTaskData() {
     let obj = {
       email,
@@ -313,6 +296,25 @@ function UpdateTask({ email }: { email: string }) {
       </div>
     </>
   );
+}
+interface VersesList{
+  email:string,
+  verse:string,
+  version?:string
+}
+type ListVerses = VersesList[]
+function FavoriteVerses({email}:{email:string}){
+  const [verses, setVerses]= useState<ListVerses>()
+  useEffect(()=>{
+
+  },[verses])
+  return (
+    <>
+      <div>
+        <p>Instructions:Type in a verse in this format 1 John 2 : 3 or John 1 : 3, so as to automatically get a URL created that points to that chapter</p>
+      </div>
+    </>
+  )
 }
 function DashMain({
   session,
