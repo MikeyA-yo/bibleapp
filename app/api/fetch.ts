@@ -268,13 +268,14 @@ export async function getNKJV(book: string, chapter: string, verse: string) {
     }
   })();
   const res = await fetch(
-    `https://bolls.life/get-verse/NKJV/${index}/${chapter}/${verse}/ `
+    `https://bolls.life/get-chapter/NKJV/${index}/${chapter}/ `
   );
-  const data: NKJV = await res.json();
-  return {
-    verse: data.text,
-    verseNo: data.verse,
-  };
+  const data: NKJV[] = await res.json();
+  let obj = data.map((verses)=>({
+    verse: verses.text,
+    verseNo: verses.verse,
+  }))
+  return obj;
 }
 export async function getMSG(book: string, chapter: string, verse: string) {
   let index = (() => {
@@ -560,7 +561,7 @@ export async function Bible(version: string, book: string, chapter: string) {
     let length = await getNKJVVersesArray(book, chapter);
     for (let i = 1; i <= length; i++) {
       let verse = await getNKJV(book, chapter, `${i}`);
-      verses.push(verse);
+      verses = verse;
     }
   } else if (version == "esv") {
     let length = await getNKJVVersesArray(book, chapter);
