@@ -287,7 +287,7 @@ export async function getMSG(book: string, chapter: string, verse: string) {
     }
   })();
   const res = await fetch(
-    `https://bolls.life/get-verse/MSG/${index}/${chapter}/${verse}/ `
+    `https://bolls.life/get-chapter/MSG/${index}/${chapter}/${verse}/ `
   );
   const data: NKJV[] = await res.json();
   let obj = data.map((verses)=>({
