@@ -339,13 +339,14 @@ function FavoriteVerses({ email }: { email: string }) {
   const [verses, setVerses] = useState<ListVerses>();
   const [verse, setVerse] = useState("Joshua 1 : 8");
   const [version, setVersion] = useState("nkjv");
+  const [submit, setSubmit] = useState(false)
   useEffect(() => {
     async function GetArray() {
       const data = await getFavVer();
       setVerses(data);
     }
     GetArray();
-  }, [verse,version]);
+  }, [verse,version, submit]);
   async function submitFav(){
     const data = {
       email,
@@ -376,6 +377,7 @@ function FavoriteVerses({ email }: { email: string }) {
         <form className="w-72 flex flex-col justify-evenly gap-3" onSubmit={(e)=>{
           e.preventDefault()
           submitFav()
+          setSubmit(true)
         }}>
           <CoolInput
             onChange={(e) => {
@@ -412,7 +414,7 @@ function FavoriteVerses({ email }: { email: string }) {
                       query: { v: verseObj.version },
                     }}
                   >
-                    <p>{verseObj.verse}</p>
+                    <p className="text-gray-800">{verseObj.verse}</p>
                   </Link>
                 </li>
               );

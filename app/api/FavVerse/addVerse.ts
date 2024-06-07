@@ -47,3 +47,27 @@ export async function getFav(email:string){
         return []
     }   
 }
+export async function editFav(email:string, prev:string, edit:string){
+    const client= await clPromise;
+    const db = client.db("test");
+    const col = db.collection("users");
+    const user = await col.findOne({email});
+    let components = edit.split(" ");
+    let url = "";
+    if(!isNaN(parseInt(components[0]))){
+        components[0] = components[0] == "1" ? "1st" : components[0] == "2" ? "2nd" : components[0] == "3" ? "3rd" : ""; 
+        let chapterSide = components.slice(0, (components.indexOf(":")));
+        url =  "/" + chapterSide.slice(0,-1).join(" ") + "/" + chapterSide.slice(-1)
+    }else{
+        let chapterSide = components.slice(0, (components.indexOf(":")));
+        url =  "/" + chapterSide.slice(0, -1).join("") + "/" + chapterSide.slice(-1)
+    }
+    const filter = {email, "favoritesVerse.verses.verse": prev}
+    const update = {
+        $set:{
+            "favoritesVerse.verses.$.verse":edit,
+            "favoritesVerse.verses.$.url":url
+        }
+    }
+    col.updateOne(filter, update)
+}
