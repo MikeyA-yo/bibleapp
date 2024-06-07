@@ -10,6 +10,7 @@ import { Montserrat, Open_Sans, Roboto, Roboto_Mono } from "next/font/google";
 import Dialog from "./dialog";
 import { Check, LogOutArr } from "./spinner";
 import Link from "next/link";
+import helper, { secondHelper } from "@/components/dashboardHelper";
 
 const rob = Roboto({ weight: ["700"], subsets: ["vietnamese"] });
 const robMon = Roboto_Mono({ weight: ["700"], subsets: ["vietnamese"] });
@@ -314,20 +315,22 @@ type UserFavorites = Pick<VersesList, "verse" | "url" | "version">;
 type ListVerses = VersesList[];
 function CoolInput({
   onChange,
+  fieldName,
 }: {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
+  fieldName?: string;
 }) {
   return (
     <>
       <div className="coolinput !w-72">
         <label htmlFor="verse" className="text">
-          Favorite Verse:
+          {fieldName ?? "Favorite Verse:"}
         </label>
         <input
           type="text"
           placeholder="e.g Joshua 1 : 8 or SongofSongs 2 : 3"
           name="verse"
-          id="cool"
+          id={fieldName ?? "cool"}
           className="input w-full"
           onChange={onChange}
         />
@@ -339,26 +342,45 @@ function FavoriteVerses({ email }: { email: string }) {
   const [verses, setVerses] = useState<ListVerses>();
   const [verse, setVerse] = useState("Joshua 1 : 8");
   const [version, setVersion] = useState("nkjv");
-  const [submit, setSubmit] = useState(false)
+  const [submit, setSubmit] = useState(false);
+  const [prev, setPrev] = useState("");
+  const [edit, setEdit] = useState("");
   useEffect(() => {
     async function GetArray() {
       const data = await getFavVer();
       setVerses(data);
     }
     GetArray();
-  }, [verse,version, submit]);
-  async function submitFav(){
+  }, [verse, version, submit]);
+  async function editFav(){
+    const data = {
+      email,
+      prev,
+      edit
+    }
+    const jsonData = JSON.stringify(data);
+    const res = await fetch("/api/FavVerse", {
+      method: "PUT",
+      body: jsonData,
+    });
+    if (res.ok) {
+      secondHelper();
+      return;
+    }
+  }
+  async function submitFav() {
     const data = {
       email,
       verse,
-      version
-    }
+      version,
+    };
     const jsonData = JSON.stringify(data);
-    const res = await fetch("/api/FavVerse",{
-      method:"POST",
-      body:jsonData
-    })
-    if(res.ok){
+    const res = await fetch("/api/FavVerse", {
+      method: "POST",
+      body: jsonData,
+    });
+    if (res.ok) {
+      helper();
       return;
     }
   }
@@ -373,12 +395,18 @@ function FavoriteVerses({ email }: { email: string }) {
           you type in something invalid, a url will not be created for you
           <br /> Also note that you can add a version, which defaults to New
           King James
+          <br /> If you typed in a verse in the correct format above, you will
+          get a valid URL, meaning you can directly click the verse in the list
+          and it takes you to where it is located
         </p>
-        <form className="w-72 flex flex-col justify-evenly gap-3" onSubmit={(e)=>{
-          e.preventDefault()
-          submitFav()
-          setSubmit(true)
-        }}>
+        <form
+          className="w-72 flex flex-col justify-evenly gap-3"
+          onSubmit={(e) => {
+            e.preventDefault();
+            submitFav();
+            setSubmit(!submit);
+          }}
+        >
           <CoolInput
             onChange={(e) => {
               setVerse(e.target.value);
@@ -399,7 +427,10 @@ function FavoriteVerses({ email }: { email: string }) {
             <option value={"esv"}>English Standard Version</option>
             <option value={"msg"}>The Message Translation</option>
           </select>
-          <button type="submit" className="rounded bg-slate-50 w-auto p-2 bg-opacity-50 hover:bg-opacity-50 hover:bg-slate-200">
+          <button
+            type="submit"
+            className="rounded bg-slate-50 w-auto p-2 bg-opacity-50 hover:bg-opacity-50 hover:bg-slate-200"
+          >
             Add Verse
           </button>
         </form>
@@ -414,12 +445,42 @@ function FavoriteVerses({ email }: { email: string }) {
                       query: { v: verseObj.version },
                     }}
                   >
-                    <p className="text-gray-800">{verseObj.verse}</p>
+                    <p className="text-gray-800 hover:text-gray-600">
+                      {verseObj.verse}
+                    </p>
                   </Link>
                 </li>
               );
             })}
         </ul>
+        <div className="flex flex-col gap-2 items-center">
+          <h3>Edit a Verse</h3>
+          <p>You made a typo? worry not, just fill this edit form</p>
+          <form className="flex flex-col justify-evenly gap-2" onSubmit={(e)=>{
+            e.preventDefault()
+            editFav()
+            setSubmit(!submit)
+          }}>
+            <CoolInput
+              fieldName="Previous"
+              onChange={(e) => {
+                setPrev(e.target.value);
+              }}
+            />
+            <CoolInput
+              fieldName="Corrected"
+              onChange={(e) => {
+                setEdit(e.target.value);
+              }}
+            />
+            <button
+              type="submit"
+              className="rounded bg-slate-50 w-auto p-2 bg-opacity-50 hover:bg-opacity-50 hover:bg-slate-200"
+            >
+              Save Changes
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );
