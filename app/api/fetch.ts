@@ -244,18 +244,19 @@ export async function getBibles(
     }
   }
   const res = await fetch(
-    `https://www.abibliadigital.com.br/api/verses/${version}/${book}/${chap}/${ver}`,
+    `https://www.abibliadigital.com.br/api/verses/${version}/${book}/${chap}/`,
     {
       headers: {
         Authorization: authString,
       },
     }
   );
-  const data: VersesOtherVersions = await res.json();
-  return {
-    verse: data.text,
-    verseNo: data.number,
-  };
+  const data: VersesOtherVersions[] = await res.json();
+  let obj = data.map((verses)=>({
+    verse: verses.text,
+    verseNo: verses.number,
+  }))
+  return obj;
   //console.log(data.text)
   //verse sample : data.verses[0].text
 }
@@ -288,11 +289,12 @@ export async function getMSG(book: string, chapter: string, verse: string) {
   const res = await fetch(
     `https://bolls.life/get-verse/MSG/${index}/${chapter}/${verse}/ `
   );
-  const data: NKJV = await res.json();
-  return {
-    verse: data.text,
-    verseNo: data.verse,
-  };
+  const data: NKJV[] = await res.json();
+  let obj = data.map((verses)=>({
+    verse: verses.text,
+    verseNo: verses.verse,
+  }))
+  return obj ;
 }
 export async function getNIV(book: string, chapter: string, verse: string) {
   //example call: getNIV('1 samuel', '23', '18');
@@ -547,10 +549,10 @@ export async function Bible(version: string, book: string, chapter: string) {
   let verses: verses[] = [];
   if (version == "kjv" || version == "nvi") {
     let length = await getNKJVVersesArray(book, chapter);
-    for (let i = 1; i <= length; i++) {
-      let verse = await getBibles(version, book, chapter, `${i}`);
-      verses.push(verse);
-    }
+  
+      let verse = await getBibles(version, book, chapter, `0`);
+      verses = verse;
+    
   } else if (version == "amp") {
     let length = await getNKJVVersesArray(book, chapter);
     for (let i = 1; i <= length; i++) {
@@ -583,10 +585,10 @@ export async function Bible(version: string, book: string, chapter: string) {
     }
   } else if (version == "msg") {
     let length = await getNKJVVersesArray(book, chapter);
-    for (let i = 1; i <= length; i++) {
-      let verse = await getMSG(book, chapter, `${i}`);
-      verses.push(verse);
-    }
+    
+      let verse = await getMSG(book, chapter, `0`);
+      verses=verse;
+    
   }
   return verses;
 }
