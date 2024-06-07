@@ -547,10 +547,10 @@ export async function Bible(version: string, book: string, chapter: string) {
   let verses: verses[] = [];
   if (version == "kjv" || version == "nvi") {
     let length = await getNKJVVersesArray(book, chapter);
-    for (let i = 1; i <= length; i++) {
-      let verse = await getBibles(version, book, chapter, `${i}`);
+    
+      let verse = await getBibles(version, book, chapter, `0`);
       verses.push(verse);
-    }
+    
   } else if (version == "amp") {
     let length = await getNKJVVersesArray(book, chapter);
     for (let i = 1; i <= length; i++) {
