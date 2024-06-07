@@ -35,7 +35,7 @@ export default function Features() {
             </h1>
             <p>
               Easily locate specific Bible passages or explore thematic <br />
-              connections with our intuitive search feature. Whether you're{" "}
+              connections with our intuitive search feature. Whether you&apos;re{" "}
               <br />
               searching for a beloved parable, a foundational doctrine, or a{" "}
               <br />
@@ -59,7 +59,7 @@ export default function Features() {
               <br />
               plans and devotionals. When you sign up with Spiritual Awakening
               <br />
-               you'll receive curated follow-up content tailored to your
+               you&apos;ll receive curated follow-up content tailored to your
               <br />
               chosen plan, including reading schedules, reflections, and
               <br />
@@ -67,7 +67,7 @@ export default function Features() {
               <br />
               motivated, and inspired as you grow in your understanding and
               <br />
-              application of God's Word.
+              application of God&apos;s Word.
             </p>
           </MotionDiv>
         </div>
