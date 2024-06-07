@@ -12,6 +12,7 @@ import { Check, LogOutArr } from "./spinner";
 import Link from "next/link";
 import helper, { secondHelper } from "@/components/dashboardHelper";
 
+
 const rob = Roboto({ weight: ["700"], subsets: ["vietnamese"] });
 const robMon = Roboto_Mono({ weight: ["700"], subsets: ["vietnamese"] });
 const mont = Montserrat({ weight: ["700"], subsets: ["vietnamese"] });
@@ -345,7 +346,9 @@ function FavoriteVerses({ email }: { email: string }) {
   const [submit, setSubmit] = useState(false);
   const [prev, setPrev] = useState("");
   const [edit, setEdit] = useState("");
+  const [edt, setEdt] = useState(false);
   useEffect(() => {
+    
     async function GetArray() {
       const data = await getFavVer();
       setVerses(data);
@@ -365,6 +368,10 @@ function FavoriteVerses({ email }: { email: string }) {
     });
     if (res.ok) {
       secondHelper();
+      setEdt(true);
+      setTimeout(()=>{
+        setEdt(false)
+      }, 2000)
       return;
     }
   }
@@ -480,6 +487,7 @@ function FavoriteVerses({ email }: { email: string }) {
               Save Changes
             </button>
           </form>
+          {edt && <p>Edit was a Success</p>}
         </div>
       </div>
     </>
