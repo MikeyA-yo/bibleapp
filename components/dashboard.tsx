@@ -6,15 +6,21 @@ import Image from "next/image";
 import { Loading } from "./results";
 import "./Sections.css";
 import { useEffect, useRef, useState } from "react";
-import { Montserrat, Open_Sans, Roboto } from "next/font/google";
+import { Montserrat, Open_Sans, Roboto, Roboto_Mono } from "next/font/google";
 import Dialog from "./dialog";
 import { Check, LogOutArr } from "./spinner";
 
 const rob = Roboto({ weight: ["700"], subsets: ["vietnamese"] });
+const robMon = Roboto_Mono({ weight: ["700"], subsets: ["vietnamese"] });
 const mont = Montserrat({ weight: ["700"], subsets: ["vietnamese"] });
 const openSans = Open_Sans({ weight: ["700"], subsets: ["vietnamese"] });
 async function GetData() {
   const res = await fetch("/api/UserStats");
+  const data = await res.json();
+  return data;
+}
+async function getFavVer() {
+  const res = await fetch("/api/FavVerse");
   const data = await res.json();
   return data;
 }
@@ -233,9 +239,9 @@ function UpdateTask({ email }: { email: string }) {
     };
     AddTask(obj);
     setChange(true);
-    setTimeout(()=>{
-      setChange(false)
-    }, 1000)
+    setTimeout(() => {
+      setChange(false);
+    }, 1000);
   }
   return (
     <>
@@ -297,24 +303,63 @@ function UpdateTask({ email }: { email: string }) {
     </>
   );
 }
-interface VersesList{
-  email:string,
-  verse:string,
-  version?:string
+interface VersesList {
+  email: string;
+  verse: string;
+  version?: string;
 }
-type ListVerses = VersesList[]
-function FavoriteVerses({email}:{email:string}){
-  const [verses, setVerses]= useState<ListVerses>()
-  useEffect(()=>{
-
-  },[verses])
+type ListVerses = VersesList[];
+function CoolInput({onChange}:{onChange:React.ChangeEventHandler<HTMLInputElement>}) {
   return (
     <>
-      <div>
-        <p>Instructions:Type in a verse in this format 1 John 2 : 3 or John 1 : 3, so as to automatically get a URL created that points to that chapter</p>
+      <div className="coolinput">
+        <label htmlFor="verse" className="text">
+          Favorite Verse:
+        </label>
+        <input
+          type="text"
+          placeholder="e.g Joshua 1 : 8 or SongofSongs 2 : 3"
+          name="verse"
+          className="input w-full"
+          onChange={onChange}
+        />
       </div>
     </>
-  )
+  );
+}
+function FavoriteVerses({ email }: { email: string }) {
+  const [verses, setVerses] = useState<ListVerses>();
+  const [verse, setVerse] = useState("Joshua 1 : 8");
+  useEffect(() => {
+    async function GetArray() {
+      const data = await getFavVer();
+      setVerses(data);
+    }
+    GetArray();
+  }, []);
+
+  return (
+    <>
+      <div className={`${robMon.className} flex flex-col items-center`}>
+        <p className="p-8">
+          Instructions:<br />Type in a verse in this format 1 John 2 : 3 or John 1 :
+          3, so as to automatically get a URL created that points to that
+          chapter
+        </p>
+        <form className="w-72">
+          <CoolInput onChange={(e) => {
+              setVerse(e.target.value);
+            }} />
+        </form>
+        <ul>
+          {verses &&
+            verses.map((verseObj: VersesList, i: number) => {
+              return <li key={i}>{verseObj.verse}</li>;
+            })}
+        </ul>
+      </div>
+    </>
+  );
 }
 function DashMain({
   session,
@@ -398,6 +443,7 @@ function DashMain({
             </div>
             <div>
               <h1 className={`text-2xl ${mont.className}`}>Favorite Verses</h1>
+              <FavoriteVerses email={session?.email as string} />
             </div>
           </div>
         </div>
