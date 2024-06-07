@@ -103,7 +103,7 @@ export const options: NextAuthOptions = {
     },
     async redirect({ url, baseUrl }) {
       // Redirect to a specific URL after sign-in
-      return baseUrl + '/signup'; // Change '/dashboard' to your desired path
+      return baseUrl + '/dashboard'; // Change '/dashboard' to your desired path
     }
   },
   //    pages:{
