@@ -638,7 +638,13 @@ export async function versesKeyphrases(phrase: string, version: string) {
         let scripture = new citations(book, chapter, verse, text);
         resArray.push(scripture);
       });
-      return resArray;
+      let obResArray = resArray.map((citation:any)=>({
+        book:citation.book,
+        chapter:citation.chapter,
+        verse:citation.verse,
+        text:citation.text
+      }))
+      return obResArray;
     }
   } catch (e) {
     console.log(`text not found`);

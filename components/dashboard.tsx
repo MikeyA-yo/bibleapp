@@ -350,6 +350,17 @@ function FavoriteVerses({ email }: { email: string }) {
           <CoolInput onChange={(e) => {
               setVerse(e.target.value);
             }} />
+            <select>
+              <option disabled>Select a version optionally</option>
+              <option value={"kjv"}>King James Version</option>
+              <option value={"nkjv"}>New king James Version</option>
+              <option value={"amp"}>Amplified Version</option>
+              <option value={"nvi"}>NVI (portuegues)</option>
+              <option value={"niv"}>New International Version</option>
+              <option value={"nlt"}>New Living Translation</option>
+              <option value={"esv"}>English Standard Version</option>
+              <option value={"msg"}>The Message Translation</option>
+            </select>
         </form>
         <ul>
           {verses &&
