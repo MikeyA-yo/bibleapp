@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { Montserrat, Open_Sans, Roboto, Roboto_Mono } from "next/font/google";
 import Dialog from "./dialog";
 import { Check, LogOutArr } from "./spinner";
+import Link from "next/link";
 
 const rob = Roboto({ weight: ["700"], subsets: ["vietnamese"] });
 const robMon = Roboto_Mono({ weight: ["700"], subsets: ["vietnamese"] });
@@ -90,16 +91,16 @@ function SideBar() {
     <>
       {userData && (
         <div
-          className={`text-2xl flex flex-col justify-evenly ${rob.className}`}
+          className={`text-2xl  flex flex-col justify-evenly ${rob.className}`}
         >
-          <div className="flex flex-col items-center justify-between">
+          <div className="flex flex-col gap-4 items-center justify-between">
             <p>Current Daily Streak </p>
             <p className=" font-light">{userData.streak.count} </p>
             <p>Best Streak</p>
             <p className="font-light">{userData.streak.best}</p>
           </div>
           {userData.readingPlan && (
-            <div className="flex flex-col items-center justify-between">
+            <div className="flex flex-col gap-4 items-center justify-between">
               <p className={`text-2xl ${mont.className}`}>Reading Plan</p>
               <p>
                 {userData.readingPlan.numberPerType} Chapters{" "}
@@ -107,8 +108,8 @@ function SideBar() {
               </p>
             </div>
           )}
-          <div className="flex flex-col items-center justify-between">
-            <p className={`text-2xl ${mont.className}`}>
+          <div className="flex flex-col items-center gap-4 justify-between">
+            <p className={`text-2xl p-5 ${mont.className}`}>
               Rank: {userData.rank.name}
             </p>
             <p className={`text-2xl ${mont.className}`}>
@@ -306,13 +307,19 @@ function UpdateTask({ email }: { email: string }) {
 interface VersesList {
   email: string;
   verse: string;
+  url?: string;
   version?: string;
 }
+type UserFavorites = Pick<VersesList, "verse" | "url" | "version">;
 type ListVerses = VersesList[];
-function CoolInput({onChange}:{onChange:React.ChangeEventHandler<HTMLInputElement>}) {
+function CoolInput({
+  onChange,
+}: {
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+}) {
   return (
     <>
-      <div className="coolinput">
+      <div className="coolinput !w-72">
         <label htmlFor="verse" className="text">
           Favorite Verse:
         </label>
@@ -320,6 +327,7 @@ function CoolInput({onChange}:{onChange:React.ChangeEventHandler<HTMLInputElemen
           type="text"
           placeholder="e.g Joshua 1 : 8 or SongofSongs 2 : 3"
           name="verse"
+          id="cool"
           className="input w-full"
           onChange={onChange}
         />
@@ -330,42 +338,84 @@ function CoolInput({onChange}:{onChange:React.ChangeEventHandler<HTMLInputElemen
 function FavoriteVerses({ email }: { email: string }) {
   const [verses, setVerses] = useState<ListVerses>();
   const [verse, setVerse] = useState("Joshua 1 : 8");
+  const [version, setVersion] = useState("nkjv");
   useEffect(() => {
     async function GetArray() {
       const data = await getFavVer();
       setVerses(data);
     }
     GetArray();
-  }, []);
-
+  }, [verse,version]);
+  async function submitFav(){
+    const data = {
+      email,
+      verse,
+      version
+    }
+    const jsonData = JSON.stringify(data);
+    const res = await fetch("/api/FavVerse",{
+      method:"POST",
+      body:jsonData
+    })
+    if(res.ok){
+      return;
+    }
+  }
   return (
     <>
       <div className={`${robMon.className} flex flex-col items-center`}>
         <p className="p-8">
-          Instructions:<br />Type in a verse in this format 1 John 2 : 3 or John 1 :
-          3, so as to automatically get a URL created that points to that
-          chapter
+          Instructions:
+          <br />
+          Type in a verse in this format 1 John 2 : 3 or John 1 : 3, so as to
+          automatically get a URL created that points to that chapter, but if
+          you type in something invalid, a url will not be created for you
+          <br /> Also note that you can add a version, which defaults to New
+          King James
         </p>
-        <form className="w-72">
-          <CoolInput onChange={(e) => {
+        <form className="w-72 flex flex-col justify-evenly gap-3" onSubmit={(e)=>{
+          e.preventDefault()
+          submitFav()
+        }}>
+          <CoolInput
+            onChange={(e) => {
               setVerse(e.target.value);
-            }} />
-            <select>
-              <option disabled>Select a version optionally</option>
-              <option value={"kjv"}>King James Version</option>
-              <option value={"nkjv"}>New king James Version</option>
-              <option value={"amp"}>Amplified Version</option>
-              <option value={"nvi"}>NVI (portuegues)</option>
-              <option value={"niv"}>New International Version</option>
-              <option value={"nlt"}>New Living Translation</option>
-              <option value={"esv"}>English Standard Version</option>
-              <option value={"msg"}>The Message Translation</option>
-            </select>
+            }}
+          />
+          <select
+            onChange={(e) => {
+              setVersion(e.target.value);
+            }}
+          >
+            <option disabled>Select a version optionally</option>
+            <option value={"kjv"}>King James Version</option>
+            <option value={"nkjv"}>New king James Version</option>
+            <option value={"amp"}>Amplified Version</option>
+            <option value={"nvi"}>NVI (portuegues)</option>
+            <option value={"niv"}>New International Version</option>
+            <option value={"nlt"}>New Living Translation</option>
+            <option value={"esv"}>English Standard Version</option>
+            <option value={"msg"}>The Message Translation</option>
+          </select>
+          <button type="submit" className="rounded bg-slate-50 w-auto p-2 bg-opacity-50 hover:bg-opacity-50 hover:bg-slate-200">
+            Add Verse
+          </button>
         </form>
         <ul>
           {verses &&
-            verses.map((verseObj: VersesList, i: number) => {
-              return <li key={i}>{verseObj.verse}</li>;
+            verses.map((verseObj: UserFavorites, i: number) => {
+              return (
+                <li key={i}>
+                  <Link
+                    href={{
+                      pathname: "/search" + verseObj.url,
+                      query: { v: verseObj.version },
+                    }}
+                  >
+                    <p>{verseObj.verse}</p>
+                  </Link>
+                </li>
+              );
             })}
         </ul>
       </div>
@@ -392,7 +442,7 @@ function DashMain({
       <div className="dashboard bg-center bg-cover  min-h-screen">
         <div className="flex min-h-full">
           <div className="lg:min-h-full   bg-gray-500 bg-opacity-50 md:min-h-full lg:flex md:flex w-80  hidden ">
-            <div className="mt-20  flex-col justify-evenly gap-2 flex ">
+            <div className="mt-10  flex-col justify-evenly gap-2 flex ">
               <div className="flex w-full py-4 justify-evenly gap-2">
                 <p className="text-xl text-gray-300">{session?.name}</p>
                 <Image
@@ -452,7 +502,7 @@ function DashMain({
             <div>
               <UpdateTask email={session?.email as string} />
             </div>
-            <div>
+            <div className="flex flex-col gap-2 items-center justify-evenly">
               <h1 className={`text-2xl ${mont.className}`}>Favorite Verses</h1>
               <FavoriteVerses email={session?.email as string} />
             </div>

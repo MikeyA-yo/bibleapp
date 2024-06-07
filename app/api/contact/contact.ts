@@ -102,7 +102,7 @@ export async function sendReminder(email:string, message:string, name:string){
                 <p>Dear ${name},</p>
                 <p>This is a friendly reminder about your weekly/daily Bible reading task. Please make sure to complete it Today.</p>
                 <p>God bless you!</p>
-                <a href="" class="button">View Details</a>
+                <a href="http://localhost:3000/dashboard" class="button">View Details</a>
             </div>
             <div class="footer">
                 <p>© 2024 Spiritual Awakening. All rights reserved.</p>

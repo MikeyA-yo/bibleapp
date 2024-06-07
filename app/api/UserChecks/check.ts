@@ -58,7 +58,7 @@ export async function checker() {
         sendReminder(emails[i], "Reminder", names[i]);
     }
     i++;
-  }, 1000);
+  }, 2500);
   const day = new Date().getDate();
   const update = {
     $set: {

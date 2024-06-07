@@ -412,27 +412,14 @@ export async function versesKeyphrases(phrase: string, version: string) {
         `https://bolls.life/find/KJV/?search=${phrase}&match_case=false&match_whole=true`
       );
       const data: SearchNKJVnKJV[] = await res.json();
-      class citations {
-        [x: string]: string | number;
-        constructor(
-          book: string,
-          chapter: number,
-          verse: number,
-          text: string
-        ) {
-          this.book = book;
-          this.chapter = chapter;
-          this.verse = verse;
-          this.text = text;
-        }
-      }
+     //unfortunately i had to remove all classes, since it can't be passed down from server to client
       let resArray: any = [];
       data.forEach((result) => {
         let chapter = result.chapter;
         let verse = result.verse;
         let book = indexToChapter(result.book);
         let text = result.text;
-        let scripture = new citations(book, chapter, verse, text);
+        let scripture = {book, chapter, verse, text};
         resArray.push(scripture);
       });
       return resArray;
@@ -441,27 +428,14 @@ export async function versesKeyphrases(phrase: string, version: string) {
         `https://bolls.life/find/NKJV/?search=${phrase}&match_case=false&match_whole=true`
       );
       const data: SearchNKJVnKJV[] = await res.json();
-      class citations {
-        [x: string]: string | number;
-        constructor(
-          book: string,
-          chapter: number,
-          verse: number,
-          text: string
-        ) {
-          this.book = book;
-          this.chapter = chapter;
-          this.verse = verse;
-          this.text = text;
-        }
-      }
+
       let resArray: any = [];
       data.forEach((result) => {
         let chapter = result.chapter;
         let verse = result.verse;
         let book = indexToChapter(result.book);
         let text = result.text;
-        let scripture = new citations(book, chapter, verse, text);
+        let scripture ={book, chapter, verse, text};
         resArray.push(scripture);
       });
       return resArray;
@@ -470,27 +444,14 @@ export async function versesKeyphrases(phrase: string, version: string) {
         `https://bolls.life/find/NIV/?search=${phrase}&match_case=false&match_whole=true`
       );
       const data: SearchNKJVnKJV[] = await res.json();
-      class citations {
-        [x: string]: string | number;
-        constructor(
-          book: string,
-          chapter: number,
-          verse: number,
-          text: string
-        ) {
-          this.book = book;
-          this.chapter = chapter;
-          this.verse = verse;
-          this.text = text;
-        }
-      }
+ 
       let resArray: any = [];
       data.forEach((result) => {
         let chapter = result.chapter;
         let verse = result.verse;
         let book = indexToChapter(result.book);
         let text = result.text;
-        let scripture = new citations(book, chapter, verse, text);
+        let scripture = {book, chapter, verse, text};
         resArray.push(scripture);
       });
       return resArray;
@@ -499,27 +460,14 @@ export async function versesKeyphrases(phrase: string, version: string) {
         `https://bolls.life/find/NLT/?search=${phrase}&match_case=false&match_whole=true`
       );
       const data: SearchNKJVnKJV[] = await res.json();
-      class citations {
-        [x: string]: string | number;
-        constructor(
-          book: string,
-          chapter: number,
-          verse: number,
-          text: string
-        ) {
-          this.book = book;
-          this.chapter = chapter;
-          this.verse = verse;
-          this.text = text;
-        }
-      }
+
       let resArray: any = [];
       data.forEach((result) => {
         let chapter = result.chapter;
         let verse = result.verse;
         let book = indexToChapter(result.book);
         let text = result.text;
-        let scripture = new citations(book, chapter, verse, text);
+        let scripture ={book, chapter, verse, text};
         resArray.push(scripture);
       });
       return resArray;
@@ -528,27 +476,14 @@ export async function versesKeyphrases(phrase: string, version: string) {
         `https://bolls.life/find/ESV/?search=${phrase}&match_case=false&match_whole=true`
       );
       const data: SearchNKJVnKJV[] = await res.json();
-      class citations {
-        [x: string]: string | number;
-        constructor(
-          book: string,
-          chapter: number,
-          verse: number,
-          text: string
-        ) {
-          this.book = book;
-          this.chapter = chapter;
-          this.verse = verse;
-          this.text = text;
-        }
-      }
+
       let resArray: any = [];
       data.forEach((result) => {
         let chapter = result.chapter;
         let verse = result.verse;
         let book = indexToChapter(result.book);
         let text = result.text;
-        let scripture = new citations(book, chapter, verse, text);
+        let scripture = {book, chapter, verse, text};
         resArray.push(scripture);
       });
       return resArray;
@@ -557,27 +492,14 @@ export async function versesKeyphrases(phrase: string, version: string) {
         `https://bolls.life/find/AMP/?search=${phrase}&match_case=false&match_whole=true`
       );
       const data: SearchNKJVnKJV[] = await res.json();
-      class citations {
-        [x: string]: string | number;
-        constructor(
-          book: string,
-          chapter: number,
-          verse: number,
-          text: string
-        ) {
-          this.book = book;
-          this.chapter = chapter;
-          this.verse = verse;
-          this.text = text;
-        }
-      }
+
       let resArray: any = [];
       data.forEach((result) => {
         let chapter = result.chapter;
         let verse = result.verse;
         let book = indexToChapter(result.book);
         let text = result.text;
-        let scripture = new citations(book, chapter, verse, text);
+        let scripture = {book, chapter, verse, text};
         resArray.push(scripture);
       });
       return resArray;
@@ -586,27 +508,14 @@ export async function versesKeyphrases(phrase: string, version: string) {
         `https://bolls.life/find/NVIPT/?search=${phrase}&match_case=false&match_whole=true`
       );
       const data: SearchNKJVnKJV[] = await res.json();
-      class citations {
-        [x: string]: string | number;
-        constructor(
-          book: string,
-          chapter: number,
-          verse: number,
-          text: string
-        ) {
-          this.book = book;
-          this.chapter = chapter;
-          this.verse = verse;
-          this.text = text;
-        }
-      }
+
       let resArray: any = [];
       data.forEach((result) => {
         let chapter = result.chapter;
         let verse = result.verse;
         let book = indexToChapter(result.book);
         let text = result.text;
-        let scripture = new citations(book, chapter, verse, text);
+        let scripture = {book, chapter, verse, text};
         resArray.push(scripture);
       });
       return resArray;
@@ -615,36 +524,18 @@ export async function versesKeyphrases(phrase: string, version: string) {
         `https://bolls.life/find/MSG/?search=${phrase}&match_case=false&match_whole=true`
       );
       const data: SearchNKJVnKJV[] = await res.json();
-      class citations {
-        [x: string]: string | number;
-        constructor(
-          book: string,
-          chapter: number,
-          verse: number,
-          text: string
-        ) {
-          this.book = book;
-          this.chapter = chapter;
-          this.verse = verse;
-          this.text = text;
-        }
-      }
+
       let resArray: any = [];
       data.forEach((result) => {
         let chapter = result.chapter;
         let verse = result.verse;
         let book = indexToChapter(result.book);
         let text = result.text;
-        let scripture = new citations(book, chapter, verse, text);
+        let scripture = {book, chapter, verse, text};
         resArray.push(scripture);
       });
-      let obResArray = resArray.map((citation:any)=>({
-        book:citation.book,
-        chapter:citation.chapter,
-        verse:citation.verse,
-        text:citation.text
-      }))
-      return obResArray;
+
+      return resArray;
     }
   } catch (e) {
     console.log(`text not found`);

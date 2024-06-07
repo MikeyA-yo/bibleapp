@@ -12,3 +12,6 @@ export async function POST(req:NextRequest, res:Response){
     addFav(data.verse, data.email, data.version);
     return Response.json(data)
 }
+export async function DELETE(req: Request, res:Response) {
+   
+}
