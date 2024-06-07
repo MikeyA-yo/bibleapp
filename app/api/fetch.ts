@@ -238,25 +238,41 @@ export async function getBibles(
   ver: string
 ) {
   // example call : getBibles('kjv', 'Joshua','1', '8') kjv or nvi
-  for (const key in booksA) {
-    if (book.toLowerCase() == key.toLowerCase()) {
-      book = booksA[key];
+  let index = (() => {
+    for (const key in BooksIndex) {
+      if (key.toLowerCase().includes(book.toLowerCase())) {
+        return BooksIndex[key];
+      }
     }
-  }
+  })();
   const res = await fetch(
-    `https://www.abibliadigital.com.br/api/verses/${version}/${book}/${chap}/`,
-    {
-      headers: {
-        Authorization: authString,
-      },
-    }
+    `https://bolls.life/get-chapter/${version == 'kjv' ? "KJV" : "NVIPT"}/${index}/${chap}/ `
   );
-  const data: VersesOtherVersions[] = await res.json();
+  const data: NKJV[] = await res.json();
   let obj = data.map((verses)=>({
     verse: verses.text,
-    verseNo: verses.number,
+    verseNo: verses.verse,
   }))
   return obj;
+  // for (const key in booksA) {
+  //   if (book.toLowerCase() == key.toLowerCase()) {
+  //     book = booksA[key];
+  //   }
+  // }
+  // const res = await fetch(
+  //   `https://www.abibliadigital.com.br/api/verses/${version}/${book}/${chap}/`,
+  //   {
+  //     headers: {
+  //       Authorization: authString,
+  //     },
+  //   }
+  // );
+  // const data: VersesOtherVersions[] = await res.json();
+  // let obj = data.map((verses)=>({
+  //   verse: verses.text,
+  //   verseNo: verses.number,
+  // }))
+  // return obj;
   //console.log(data.text)
   //verse sample : data.verses[0].text
 }
