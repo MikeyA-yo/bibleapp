@@ -547,10 +547,10 @@ export async function Bible(version: string, book: string, chapter: string) {
   let verses: verses[] = [];
   if (version == "kjv" || version == "nvi") {
     let length = await getNKJVVersesArray(book, chapter);
-    
-      let verse = await getBibles(version, book, chapter, `0`);
+    for (let i = 1; i <= length; i++) {
+      let verse = await getBibles(version, book, chapter, `${i}`);
       verses.push(verse);
-    
+    }
   } else if (version == "amp") {
     let length = await getNKJVVersesArray(book, chapter);
     for (let i = 1; i <= length; i++) {
@@ -559,10 +559,10 @@ export async function Bible(version: string, book: string, chapter: string) {
     }
   } else if (version == "nkjv") {
     let length = await getNKJVVersesArray(book, chapter);
-    for (let i = 1; i <= length; i++) {
-      let verse = await getNKJV(book, chapter, `${i}`);
+ 
+      let verse = await getNKJV(book, chapter, `0`);
       verses = verse;
-    }
+    
   } else if (version == "esv") {
     let length = await getNKJVVersesArray(book, chapter);
     for (let i = 1; i <= length; i++) {
