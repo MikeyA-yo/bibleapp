@@ -12,7 +12,6 @@ import { Check, LogOutArr } from "./spinner";
 import Link from "next/link";
 import helper, { secondHelper } from "@/components/dashboardHelper";
 
-
 const rob = Roboto({ weight: ["700"], subsets: ["vietnamese"] });
 const robMon = Roboto_Mono({ weight: ["700"], subsets: ["vietnamese"] });
 const mont = Montserrat({ weight: ["700"], subsets: ["vietnamese"] });
@@ -348,19 +347,18 @@ function FavoriteVerses({ email }: { email: string }) {
   const [edit, setEdit] = useState("");
   const [edt, setEdt] = useState(false);
   useEffect(() => {
-    
     async function GetArray() {
       const data = await getFavVer();
       setVerses(data);
     }
     GetArray();
   }, [verse, version, submit]);
-  async function editFav(){
+  async function editFav() {
     const data = {
       email,
       prev,
-      edit
-    }
+      edit,
+    };
     const jsonData = JSON.stringify(data);
     const res = await fetch("/api/FavVerse", {
       method: "PUT",
@@ -369,9 +367,9 @@ function FavoriteVerses({ email }: { email: string }) {
     if (res.ok) {
       secondHelper();
       setEdt(true);
-      setTimeout(()=>{
-        setEdt(false)
-      }, 2000)
+      setTimeout(() => {
+        setEdt(false);
+      }, 2000);
       return;
     }
   }
@@ -462,12 +460,17 @@ function FavoriteVerses({ email }: { email: string }) {
         </ul>
         <div className="flex flex-col gap-2 items-center">
           <h3>Edit a Verse</h3>
-          <p>You made a typo? worry not, just fill this edit form</p>
-          <form className="flex flex-col justify-evenly gap-2" onSubmit={(e)=>{
-            e.preventDefault()
-            editFav()
-            setSubmit(!submit)
-          }}>
+          <p className="p-3">
+            You made a typo? worry not, just fill this edit form
+          </p>
+          <form
+            className="flex flex-col justify-evenly gap-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+              editFav();
+              setSubmit(!submit);
+            }}
+          >
             <CoolInput
               fieldName="Previous"
               onChange={(e) => {
@@ -493,6 +496,27 @@ function FavoriteVerses({ email }: { email: string }) {
     </>
   );
 }
+function MobileSidebar({ session }: { session: any }) {
+  return (
+    <>
+      <div className="lg:hidden md:hidden bg-gray-500 bg-opacity-50 gap-5 justify-evenly flex flex-col">
+        <div className="flex flex-col items-center  py-4 justify-evenly gap-2">
+          <p className="text-xl text-gray-300">{session?.name}</p>
+          <Image
+            src={session?.image ?? "/Avatar.png"}
+            priority
+            alt="Image of you"
+            width={40}
+            height={40}
+            className="h-10 w-10 rounded-full"
+          />
+        </div>
+        <SideBar />
+        <SignOut />
+      </div>
+    </>
+  );
+}
 function DashMain({
   session,
 }: {
@@ -513,7 +537,7 @@ function DashMain({
       <div className="dashboard bg-center bg-cover  min-h-screen">
         <div className="flex min-h-full">
           <div className="lg:min-h-full   bg-gray-500 bg-opacity-50 md:min-h-full lg:flex md:flex w-80  hidden ">
-            <div className="mt-10  flex-col justify-evenly gap-2 flex ">
+            <div className=" flex-col h-5/6 justify-around  flex ">
               <div className="flex w-full py-4 justify-evenly gap-2">
                 <p className="text-xl text-gray-300">{session?.name}</p>
                 <Image
@@ -577,6 +601,7 @@ function DashMain({
               <h1 className={`text-2xl ${mont.className}`}>Favorite Verses</h1>
               <FavoriteVerses email={session?.email as string} />
             </div>
+            <MobileSidebar session={session} />
           </div>
         </div>
       </div>
