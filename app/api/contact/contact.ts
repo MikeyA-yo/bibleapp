@@ -32,7 +32,7 @@ export default async function sendMessage({
     }`,
   };
 
-  await transport.sendMail(mailoptions, (e: any, info: any) => {
+   transport.sendMail(mailoptions, (e: any, info: any) => {
     if (e) {
       console.log(e);
     }
