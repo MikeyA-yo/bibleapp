@@ -3,7 +3,7 @@ import { clPromise } from "../mongodb";
 let emails: string[] = [];
 let names: string[] = [];
 export async function checker() {
-    let currentDay = new Date().getDate();
+  let currentDay = new Date().getDate();
   const client = await clPromise;
   const db = client.db("test");
   const col = db.collection("users");
@@ -22,7 +22,7 @@ export async function checker() {
     }
   })
 
-  const users = col.find({ "task.state": false });
+  const users = db.collection("users").find({ "task.state": false });
   
   const usersArray = await users.toArray();
 
@@ -58,7 +58,7 @@ export async function checker() {
         sendReminder(emails[i], "Reminder", names[i]);
     }
     i++;
-  }, 2500);
+  }, 4500);
   const day = new Date().getDate();
   const update = {
     $set: {
