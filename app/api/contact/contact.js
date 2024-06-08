@@ -23,17 +23,16 @@ export default async function sendMessage({ name, email, tel, msg }) {
     subject: `New Message from ${name}`,
     text: `Name: ${name}\nEmail: ${email}\nMessage: ${msg}\nTelephone Number: ${tel ?? "No number given"}`,
   };
-
-  await new Promise((resolve, reject) => {
-    transport.sendMail(mailoptions, (err, info) => {
-      if (err) {
-        console.error(err);
-        reject(err);
-      } else {
-        resolve(info);
-      }
-    });
-  });
+  let data = {
+    name, email, tel, msg
+  }
+const res = await fetch("https://unable-tana-chobyayo-ca985f68.koyeb.app/",{
+    method:"POST", 
+    headers: {
+        "Content-Type": "application/json",
+      },
+    body:JSON.stringify(data)
+})
 }
 
 // Function to send a reminder email
@@ -109,12 +108,14 @@ export async function sendReminder(email, message, name) {
     </body>
     </html>`
   };
-
- await  transport.sendMail(mailoptions, (e, info) => {
-    if (e) {
-      console.error(e);
-    } else {
-      console.log(info.response);
-    }
-  });
+  const res = await fetch("https://unable-tana-chobyayo-ca985f68.koyeb.app/reminder", {
+    method:"POST",
+    headers: {
+        "Content-Type": "application/json",
+      },
+    body:JSON.stringify({email, message, name})
+  })
+  if(res.ok){
+    return res
+  }
 }

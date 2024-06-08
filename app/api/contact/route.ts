@@ -4,6 +4,7 @@ export async function POST(req:Request, res:Response){
     try{
         const data = await req.json();
         await  sendMessage(data)
+        console.log(data)
       return  Response.json({message:"Sent successfuly"})
     }catch(e:any){
       console.log(e.message)
