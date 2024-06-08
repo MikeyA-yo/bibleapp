@@ -24,7 +24,7 @@ export default async function sendMessage({ name, email, tel, msg }) {
     text: `Name: ${name}\nEmail: ${email}\nMessage: ${msg}\nTelephone Number: ${tel ?? "No number given"}`,
   };
 
-  transport.sendMail(mailoptions, (e, info) => {
+ await transport.sendMail(mailoptions, (e, info) => {
     if (e) {
       console.error(e);
     } else {
@@ -107,7 +107,7 @@ export async function sendReminder(email, message, name) {
     </html>`
   };
 
-  transport.sendMail(mailoptions, (e, info) => {
+ await  transport.sendMail(mailoptions, (e, info) => {
     if (e) {
       console.error(e);
     } else {
