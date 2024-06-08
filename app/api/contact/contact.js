@@ -24,12 +24,15 @@ export default async function sendMessage({ name, email, tel, msg }) {
     text: `Name: ${name}\nEmail: ${email}\nMessage: ${msg}\nTelephone Number: ${tel ?? "No number given"}`,
   };
 
- await transport.sendMail(mailoptions, (e, info) => {
-    if (e) {
-      console.error(e);
-    } else {
-      console.log(info.response);
-    }
+  await new Promise((resolve, reject) => {
+    transport.sendMail(mailoptions, (err, info) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve(info);
+      }
+    });
   });
 }
 
