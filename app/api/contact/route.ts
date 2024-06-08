@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import sendMessage from "./contact";
-
 export async function POST(req:Request, res:Response){
     try{
         const data = await req.json();

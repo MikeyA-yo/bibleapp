@@ -1,9 +1,11 @@
 // import { createTransport } from "nodemailer";
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
+
+// Create the transport configuration
 const transport = nodemailer.createTransport({
   host: process.env.MAIL_HOST,
   port: 587,
-  secure: false,
+  secure: false, // secureConnection is not a valid property, use 'secure'
   auth: {
     user: process.env.EMAIL_SENDER,
     pass: process.env.PASS,
@@ -12,39 +14,32 @@ const transport = nodemailer.createTransport({
     ciphers: "SSLv3",
   },
 });
-export default async function sendMessage({
-  name,
-  email,
-  tel,
-  msg,
-}: {
-  name: string;
-  email: string;
-  tel?: string;
-  msg: string;
-}) {
+
+// Function to send a message
+export default async function sendMessage({ name, email, tel, msg }) {
   const mailoptions = {
     from: process.env.EMAIL_SENDER,
     to: process.env.EMAIL_RECEIVER,
     subject: `New Message from ${name}`,
-    text: `Name: ${name}\nEmail: ${email}\nMessage: ${msg}\nTelephone Number: ${
-      tel ?? "No number given"
-    }`,
+    text: `Name: ${name}\nEmail: ${email}\nMessage: ${msg}\nTelephone Number: ${tel ?? "No number given"}`,
   };
 
-   transport.sendMail(mailoptions, (e: any, info: any) => {
+  transport.sendMail(mailoptions, (e, info) => {
     if (e) {
-      console.log(e);
+      console.error(e);
+    } else {
+      console.log(info.response);
     }
-    console.log(info.response);
   });
 }
-export async function sendReminder(email:string, message:string, name:string){
+
+// Function to send a reminder email
+export async function sendReminder(email, message, name) {
   const mailoptions = {
     from: process.env.EMAIL_SENDER,
     to: email,
     subject: `Reminder`,
-    html:` <!DOCTYPE html>
+    html: `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -112,10 +107,11 @@ export async function sendReminder(email:string, message:string, name:string){
     </html>`
   };
 
-   transport.sendMail(mailoptions, (e:any, info:any)=>{
+  transport.sendMail(mailoptions, (e, info) => {
     if (e) {
-      console.log(e);
+      console.error(e);
+    } else {
+      console.log(info.response);
     }
-    console.log(info.response);
-  })
+  });
 }
