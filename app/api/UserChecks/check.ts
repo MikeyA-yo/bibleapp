@@ -1,7 +1,6 @@
 import { sendReminder } from "../contact/contact";
 import { clPromise } from "../mongodb";
-let emails: string[] = [];
-let names: string[] = [];
+
 export async function checker() {
   let currentDay = new Date().getDate();
   const client = await clPromise;
@@ -9,7 +8,8 @@ export async function checker() {
   const col = db.collection("users");
   const otherUsers = col.find({ "task.state": true });
   const otherArray = await otherUsers.toArray();
-
+    let emails: string[] = [];
+    let names: string[] = [];
   otherArray.forEach(async (person) =>{
     if(person.task.lastUpdate != currentDay){
       const update={
@@ -37,28 +37,30 @@ export async function checker() {
       names.push(user.name);
     }
   });
+  console.log(emails)
   if (new Date().getHours() < 12) {
     return {};
   }
   if (emails.length === 0 ) {
     return {};
   }
-  let i = 0;
-  let int = setInterval(async () => {
-    if (i == emails.length) {
-      clearInterval(int);
-    }
-    const user = await col.findOne({email: emails[i]})
-    if(user?.task?.lastRemindDate){
-        if(currentDay == user.task.lastRemindDate){
-            clearInterval(int);
-        }
-    }
-    if(emails.length !== 0){
-        sendReminder(emails[i], "Reminder", names[i]);
-    }
-    i++;
-  }, 4500);
+  //the below failed me greatly
+  // let i = 0;
+  // let int = setInterval(async () => {
+  //   if (i == emails.length) {
+  //     clearInterval(int);
+  //   }
+  //   const user = await col.findOne({email: emails[i]})
+  //   if(user?.task?.lastRemindDate){
+  //       if(currentDay == user.task.lastRemindDate){
+  //           clearInterval(int);
+  //       }
+  //   }
+  //   if(emails.length !== 0){
+  //       sendReminder(emails[i], "Reminder", names[i]);
+  //   }
+  //   i++;
+  // }, 1500);
   const day = new Date().getDate();
   const update = {
     $set: {
@@ -66,6 +68,7 @@ export async function checker() {
     },
   };
   if(emails.length !== 0){
+    sendReminder(emails, "Reminder", names)
     emails.forEach(async (email) =>{
         await col.updateOne({ email }, update)
     })
