@@ -118,6 +118,18 @@ export default function Result() {
       />
       <div className="mx-10 rounded-xl  pb-10 my-8 bg-slate-200 bg-opacity-40 ">
         {a && resArray && <VerseNav verseNo={resArray} />}
+        <div className="flex pt-8 justify-around items-center">
+         {b && b[1] && <PrevChapter onClick={()=>{
+          let query = new URLSearchParams(window.location.search)
+          let positionNumber = Number(chapter) - 1
+          router.push(pathname.replace(chapter, `${positionNumber}?${query.toString()}`))
+         }} /> }
+          {b && b[0] && <NextChapter onClick={()=>{
+           let query = new URLSearchParams(window.location.search)
+           let positionNumber = Number(chapter) + 1
+           router.push(pathname.replace(chapter, `${positionNumber}?${query.toString()}`))
+         }} /> }
+        </div>
         <Resolved version={verse} book={book} chapter={chapter} />
         <div className="flex pt-8 justify-around items-center">
          {b && b[1] && <PrevChapter onClick={()=>{
