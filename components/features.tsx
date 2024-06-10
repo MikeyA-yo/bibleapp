@@ -11,9 +11,12 @@ export default function Features() {
             whileInView={{ y: 0, opacity: 1, backdropFilter: "blur(0px)" }}
             transition={{ delay: 0.1, duration: 0.65 }}
           >
-            <h1 className="lg:text-2xl md:text-2xl text-xl text-white"> Multiple Bible Versions</h1>
+            <h1 className="lg:text-2xl md:text-2xl text-xl text-white">
+              {" "}
+              Multiple Bible Versions.
+            </h1>
             <p>
-              Dive deeper into the scriptures with access to a diverse array of
+              Dive deeper into the scriptures with access to an array of
               <br />
               Bible translations and versions. Whether you prefer the poetic
               <br />
@@ -31,11 +34,12 @@ export default function Features() {
             transition={{ delay: 0.2, duration: 0.65 }}
           >
             <h1 className="lg:text-2xl md:text-2xl text-xl text-white">
-              Search by Bible Story or Word Phrase
+              Search by Bible Story or Word Phrase.
             </h1>
             <p>
-              Easily locate specific Bible passages or explore thematic <br />
-              connections with our intuitive search feature. Whether you&apos;re{" "}
+              Easily locate specific Bible passages or explore thematic
+              connections
+              <br /> with our intuitive search feature. Whether you&apos;re{" "}
               <br />
               searching for a beloved parable, a foundational doctrine, or a{" "}
               <br />
@@ -52,14 +56,14 @@ export default function Features() {
             transition={{ delay: 0.1, duration: 0.65 }}
           >
             <h1 className="lg:text-2xl md:text-2xl text-xl text-white">
-              Signing Up Offers Bible Plan Follow-Ups
+              Signing Up Offers Bible Plan Follow-Ups.
             </h1>
             <p>
               Take your Bible study to the next level with personalized reading
               <br />
               plans and devotionals. When you sign up with Spiritual Awakening
               <br />
-               you&apos;ll receive curated follow-up content tailored to your
+              you&apos;ll receive curated follow-up content tailored to your
               <br />
               chosen plan, including reading schedules, reflections, and
               <br />

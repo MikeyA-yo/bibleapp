@@ -61,14 +61,14 @@ export function SearchBox({
     <>
       <div className="flex flex-col gap-1 w-[17rem] pt-8">
         <p className={`text-xl ${reddit.className}`}>
-          Search By Key phrase or Word
+          Search by Key Phrase or Word
         </p>
         <div>
           <div className="wrap-input-6">
             <input
               className="input"
               type="text"
-              placeholder="Enter key phrase in bible"
+              placeholder="Enter Key Phrase in Bible"
               onChange={onChange}
             />
             <span className="focus-border" />
