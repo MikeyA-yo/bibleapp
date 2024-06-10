@@ -17,7 +17,7 @@ return (
              Experience the joy of navigating the Bible effortlessly with our intuitive search feature,
              designed specifically to help you find significant events and verses with ease.
              Say goodbye to endless scrolling and searching,
-             and embark on a journey of discovery with simplicity and joy  
+             and embark on a journey of discovery with simplicity and joy.  
             </MotionP>
           </div>
           <div className=" gap-8 mx-5 flex-col flex lg:hidden md:hidden ">
@@ -28,7 +28,7 @@ return (
              Experience the joy of navigating the Bible effortlessly with our intuitive search feature,
              designed specifically to help you find significant events and verses with ease.
              Say goodbye to endless scrolling and searching,
-             and embark on a journey of discovery with simplicity and joy  
+             and embark on a journey of discovery with simplicity and joy.  
             </MotionP>
           </div>
         </div>

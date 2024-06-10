@@ -113,7 +113,8 @@ export async function sendReminder(emails, message,  names) {
     headers: {
         "Content-Type": "application/json",
       },
-    body:JSON.stringify({emails, message, names})
+    body:JSON.stringify({emails, message, names}),
+    cache:"no-cache"
   })
   if(res.ok){
     return res

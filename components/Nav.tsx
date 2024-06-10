@@ -68,7 +68,7 @@ function LinksMobile() {
     </>
   );
 }
-function MenuList({ state, pathname }: { state: boolean; pathname: string }) {
+function MenuList({ state, pathname, onClick }: { state: boolean; pathname: string, onClick?:React.MouseEventHandler<HTMLDivElement> }) {
   const variants = {
     initial: {
       y: "-100%",
@@ -101,6 +101,7 @@ function MenuList({ state, pathname }: { state: boolean; pathname: string }) {
           initial="initial"
           animate="animate"
           exit="end"
+          onClick={onClick}
         >
           <SessionProvider>
             <LinksMobile />
@@ -202,7 +203,7 @@ export default function Nav() {
               </div>
             </div>
           </div>
-          <MenuList state={open} pathname={pathname} />
+          <MenuList state={open} pathname={pathname} onClick={(e)=> setOpen(false)} />
         </div>
       </div>
     </>

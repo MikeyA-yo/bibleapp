@@ -44,23 +44,6 @@ export async function checker() {
   if (emails.length === 0 ) {
     return {};
   }
-  //the below failed me greatly
-  // let i = 0;
-  // let int = setInterval(async () => {
-  //   if (i == emails.length) {
-  //     clearInterval(int);
-  //   }
-  //   const user = await col.findOne({email: emails[i]})
-  //   if(user?.task?.lastRemindDate){
-  //       if(currentDay == user.task.lastRemindDate){
-  //           clearInterval(int);
-  //       }
-  //   }
-  //   if(emails.length !== 0){
-  //       sendReminder(emails[i], "Reminder", names[i]);
-  //   }
-  //   i++;
-  // }, 1500);
   const day = new Date().getDate();
   const update = {
     $set: {
@@ -69,9 +52,9 @@ export async function checker() {
   };
   if(emails.length !== 0){
     sendReminder(emails, "Reminder", names)
-    emails.forEach(async (email) =>{
-        await col.updateOne({ email }, update)
-    })
+    // emails.forEach(async (email) =>{
+    //     await col.updateOne({ email }, update)
+    // })
   }
   return users;
 }
