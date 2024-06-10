@@ -40,7 +40,9 @@ export default function SearchMain() {
                 setVersion(e.target.value);
               }}
               onClick={() => {
-                setIsClick(true);
+                if(text.length !== 2){
+                  setIsClick(true);
+                }
               }}
             />
             <div className={ !isClick ? 'hidden' : `wrap-check-57 pt-10 pl-10 text-2xl`}>

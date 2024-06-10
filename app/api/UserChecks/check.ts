@@ -52,9 +52,9 @@ export async function checker() {
   };
   if(emails.length !== 0){
     sendReminder(emails, "Reminder", names)
-    // emails.forEach(async (email) =>{
-    //     await col.updateOne({ email }, update)
-    // })
+    emails.forEach(async (email) =>{
+        await col.updateOne({ email }, update)
+    })
   }
   return users;
 }
