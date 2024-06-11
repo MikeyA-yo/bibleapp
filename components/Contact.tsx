@@ -41,6 +41,9 @@ export default function Contact(){
         }));
       }};
      const handleSubmit = async (data:message)=>{
+      if(formState.name.length <= 2 || formState.msg.length <= 2){
+        return;
+      }
         try {
             let jsonData = JSON.stringify(data);
             setLoad(true)
