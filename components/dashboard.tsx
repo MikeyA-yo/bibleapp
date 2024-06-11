@@ -435,8 +435,8 @@ function FavoriteVerses({ email }: { email: string }) {
             }}
           >
             <option disabled>Select a version optionally</option>
-            <option value={"kjv"}>King James Version</option>
             <option value={"nkjv"}>New king James Version</option>
+            <option value={"kjv"}>King James Version</option>
             <option value={"amp"}>Amplified Version</option>
             <option value={"nvi"}>NVI (portuegues)</option>
             <option value={"niv"}>New International Version</option>
