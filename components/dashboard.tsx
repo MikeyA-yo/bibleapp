@@ -402,7 +402,7 @@ function FavoriteVerses({ email }: { email: string }) {
             <br />
             <li className={mont.className}>
               Once you type in the verse, a URL will automatically be created that points
-              to the verse. Click the link on the lis to take you to where it is located
+              to the verse. Click the link on the list to take you to where it is located
             </li>
             <br />
             <li className={mont.className}>
