@@ -397,7 +397,7 @@ function FavoriteVerses({ email }: { email: string }) {
           <ul className="list-disc">
             <br />
             <li className={mont.className}>
-              Type in a verse in this format 1 John 2 : 3 or John 1 : 3
+              Type in a verse in this format: 1 John 2 : 3 or John 1 : 3
             </li>
             <br />
             <li className={mont.className}>
@@ -435,7 +435,7 @@ function FavoriteVerses({ email }: { email: string }) {
             }}
           >
             <option disabled>Select a version optionally</option>
-            <option value={"nkjv"}>New king James Version</option>
+            <option value={"nkjv"}>New King James Version</option>
             <option value={"kjv"}>King James Version</option>
             <option value={"amp"}>Amplified Version</option>
             <option value={"nvi"}>NVI (portuegues)</option>
