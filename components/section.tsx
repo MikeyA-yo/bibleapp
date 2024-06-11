@@ -20,7 +20,7 @@ return (
              and embark on a journey of discovery with simplicity and joy.  
             </MotionP>
           </div>
-          <div className=" gap-8 mx-5 flex-col flex lg:hidden md:hidden ">
+          <div className=" gap-8 mx-5 flex-col h-auto flex lg:hidden md:hidden ">
           <h1 className={`${rob} pt-4 text-xl text-white `}>Navigate the Bible with simplicity and joy, aided by our intuitive search feature for significant events </h1>
             <MotionP
             className={`${rob} pt-4  leading-8 text-white ` }
