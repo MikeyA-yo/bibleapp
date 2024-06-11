@@ -445,7 +445,7 @@ function FavoriteVerses({ email }: { email: string }) {
           {verses &&
             verses.map((verseObj: UserFavorites, i: number) => {
               return (
-                <li key={i}>
+                <li className="list-disc" key={i}>
                   <Link
                     href={{
                       pathname: "/search" + verseObj.url,
