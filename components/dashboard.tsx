@@ -94,7 +94,7 @@ function SideBar() {
         <div
           className={`text-2xl  flex flex-col justify-evenly ${rob.className}`}
         >
-          <div className="flex flex-col gap-4 items-center justify-between">
+          <div className="flex flex-col p-5 gap-4 items-center justify-between">
             <p>Current Daily Streak </p>
             <p className=" font-light">{userData.streak.count} </p>
             <p>Best Streak</p>
@@ -395,15 +395,25 @@ function FavoriteVerses({ email }: { email: string }) {
         <p className="p-8">
           Instructions:
           <ul className="list-disc">
-          <br />
-           <li>Type in a verse in this format 1 John 2 : 3 or John 1 : 3, so as to
-          automatically get a URL created that points to that chapter, but if
-          you type in something invalid, a url will not be created for you</li>
-          <br /> <li>Also note that you can add a version, which defaults to New
-          King James</li>
-          <br /><li> If you typed in a verse in the correct format above, you will
-          get a valid URL, meaning you can directly click the verse in the list
-          and it takes you to where it is located</li>
+            <br />
+            <li className={mont.className}>
+              Type in a verse in this format 1 John 2 : 3 or John 1 : 3
+            </li>
+            <br />
+            <li className={mont.className}>
+              Once you type in the verse, a URL will automatically be created that points
+              to the verse. Click the link on the lis to take you to where it is located
+            </li>
+            <br />
+            <li className={mont.className}>
+              {" "}
+              If you type in a verse that is invalid, a URL will not be created for you
+            </li>
+            <br />{" "}
+            <li className={mont.className}>
+              Also note that you can add a Bible version, although the default version is the New King
+              James
+            </li>
           </ul>
         </p>
         <form
