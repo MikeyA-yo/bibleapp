@@ -394,15 +394,17 @@ function FavoriteVerses({ email }: { email: string }) {
       <div className={`${robMon.className} flex flex-col items-center`}>
         <p className="p-8">
           Instructions:
+          <ul className="list-disc">
           <br />
-          Type in a verse in this format 1 John 2 : 3 or John 1 : 3, so as to
+           <li>Type in a verse in this format 1 John 2 : 3 or John 1 : 3, so as to
           automatically get a URL created that points to that chapter, but if
-          you type in something invalid, a url will not be created for you
-          <br /> Also note that you can add a version, which defaults to New
-          King James
-          <br /> If you typed in a verse in the correct format above, you will
+          you type in something invalid, a url will not be created for you</li>
+          <br /> <li>Also note that you can add a version, which defaults to New
+          King James</li>
+          <br /><li> If you typed in a verse in the correct format above, you will
           get a valid URL, meaning you can directly click the verse in the list
-          and it takes you to where it is located
+          and it takes you to where it is located</li>
+          </ul>
         </p>
         <form
           className="w-72 flex flex-col justify-evenly gap-3"
