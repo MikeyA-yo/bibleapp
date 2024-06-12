@@ -89,7 +89,7 @@ export default function Contact(){
      }
     return (
         <>
-          <div className="flex items-center gap-3 flex-col-reverse lg:flex-row bg-gray-300 bg-opacity-50 min-h-screen justify-evenly p-10">
+          <div className="flex items-center gap-3 flex-col-reverse lg:flex-row bg-gray-300 bg-opacity-50 min-h-screen justify-evenly md:p-12 p-20 lg:p-10">
               <div>
                 <Image src={`/sunset.jpg`} alt="Image of Bible study" priority height={500} width={500} className="h-full w-full" />
               </div>
