@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import { Loading } from "./results";
 import "./Sections.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Montserrat, Open_Sans, Roboto, Roboto_Mono } from "next/font/google";
 import Dialog from "./dialog";
 import { Check, LogOutArr } from "./spinner";
