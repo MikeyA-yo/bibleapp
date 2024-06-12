@@ -28,7 +28,7 @@ export default function SearchMain() {
     <>
       <div className="md:h-auto min-h-screen bg-cover lg:bg-center md:bg-center bg-center search">
         <div className="bg-neutral-700  min-h-screen w-full  bg-opacity-50">
-          <div className="flex lg:flex-row md:flex-row flex-col gap-2 lg:p-16 md:p-7  p-4 ">
+          <div className="flex lg:flex-row md:flex-row flex-col gap-2 lg:p-16 md:p-7  p-8 ">
             <SearchBox
               onChange={(e): void => {
                 if(e.target.value == ''){
