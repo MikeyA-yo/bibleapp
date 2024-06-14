@@ -73,6 +73,7 @@ export function SearchBox({
             />
             <span className="focus-border" />
           </div>
+          <p className={reddit.className}>Click the search button below</p>
           <ButtonKeyPhrase onClick={onClick} />
         </div>
         <div className="relative group rounded-lg w-64 bg-gray-50 overflow-hidden before:absolute before:w-12 before:h-12 before:content[''] before:right-0 before:bg-violet-500 before:rounded-full before:blur-lg before:[box-shadow:-60px_20px_10px_10px_#F9B0B9]">

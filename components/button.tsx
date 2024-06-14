@@ -53,7 +53,7 @@ export function ButtonKeyPhrase(props: React.ButtonHTMLAttributes<HTMLButtonElem
       <button className="cta"
       {...props}
       >
-        <span className="hover-underline-animation"> Search Key Phrase </span>
+        <span className="hover-underline-animation font-semibold"> Search Key Phrase </span>
         <svg
           id="arrow-horizontal"
           xmlns="http://www.w3.org/2000/svg"
