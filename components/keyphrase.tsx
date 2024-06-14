@@ -12,19 +12,24 @@ export default async function KeyPhraseRes(phrase: string, version: string) {
     );
   }
   const obResult = result.map((citation: any) => ({
-    book: citation.book ? citation.book.replace(
-      citation.book.charAt(0),
-      citation.book.charAt(0).toUpperCase()
-    ): " ",
+    book: citation.book
+      ? citation.book.replace(
+          citation.book.charAt(0),
+          citation.book.charAt(0).toUpperCase()
+        )
+      : " ",
     chapter: citation.chapter,
     verse: citation.verse,
-    text:citation.text ?  citation.text
-    .replaceAll("<mark>", "")
-    .replaceAll("</mark>", "")
-    .replaceAll("<i>", "")
-    .replaceAll("</i>", "")
-    .replaceAll("</J>", "")
-    .replaceAll("<br/>", "\n \n").replaceAll("<br>", "/n") : "",
+    text: citation.text
+      ? citation.text
+          .replaceAll("<mark>", "")
+          .replaceAll("</mark>", "")
+          .replaceAll("<i>", "")
+          .replaceAll("</i>", "")
+          .replaceAll("</J>", "")
+          .replaceAll("<br/>", "\n \n")
+          .replaceAll("<br>", "/n")
+      : "",
   }));
   // console.log(obResult)
   return (
