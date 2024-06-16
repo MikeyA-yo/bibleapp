@@ -9,7 +9,7 @@ export async function VersesArray(version:string, book:string, chapter:string){
       <div className="flex items-center justify-center pt-3 gap-4 flex-col">
       {data.map((verse:verses, i:number)=>{
         let nVerse = verse.verse
-        nVerse = nVerse.replace('<i>', '').replaceAll('<i>', '').replaceAll('</i>', '').replaceAll('&#x27;','').replaceAll("<br/>", "  ")
+        nVerse = nVerse.replace('<i>', '').replaceAll('<i>', '').replaceAll('</i>', '').replaceAll('&#x27;','').replaceAll("<br/>", "  ").replaceAll("</j>", "")
         return <VerseCard key={verse.verseNo} verse={verse.verseNo} text={nVerse} />
       })}
       </div>

@@ -27,6 +27,7 @@ export default async function KeyPhraseRes(phrase: string, version: string) {
           .replaceAll("<i>", "")
           .replaceAll("</i>", "")
           .replaceAll("</J>", "")
+          .replaceAll("</j>", "")
           .replaceAll("<br/>", "\n \n")
           .replaceAll("<br>", "\n")
       : "",
