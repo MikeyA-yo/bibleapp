@@ -97,8 +97,8 @@ export async function UserStats(email: string) {
    //add levels, n rank, dedication e.t.c...
    const ranks = ["Faithful Servant","Dedicated","Generous Giver","Compassionate Healer","Saint","Wise Counselor","Joyful Witness", "Disciple", "Humble Disciple","Prophet", "Peacemaker","Devoted Follower","Minister", "Loving Shepherd","Soul winner", "Prayer Warrior","Grounded in The word"]
    if(existingUser?.rank){
-      const level = Math.round((existingUser.streak.count * existingUser.streak.best) + existingUser.readingPlan.numberPerType) + (existingUser.favoritesVerse.verses.length ?? 1)
-      const rank = ranks[Math.round(level/(22 + (existingUser.streak.best - existingUser.readingPlan.numberPerType)))];
+      const level = Math.round(((existingUser.streak.count * existingUser.streak.best) - 10) + existingUser.readingPlan.numberPerType) + (existingUser.favoritesVerse.verses.length ?? 1)
+      const rank = ranks[Math.round(level/(24 + (existingUser.streak.best - existingUser.readingPlan.numberPerType)))];
       const update = {
         $set: {
           "rank.level": level,
