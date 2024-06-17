@@ -27,9 +27,9 @@ export default function SwiperComponent() {
         >
           {strings.map((str, i) => {
             return (
-              <SwiperSlide className="w-full p-10" key={i}>
+              <SwiperSlide className="w-full lg:p-10 md:p-10 p-4" key={i}>
                 <div className="flex flex-col gap-5 items-center py-24 justify-center">
-                  <p className="text-2xl text-white">{str}</p>
+                  <p className="text-2xl text-center text-white">{str}</p>
                   <Button />
                   <ButtonSignUp />
                 </div>
