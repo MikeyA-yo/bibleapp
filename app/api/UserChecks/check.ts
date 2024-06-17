@@ -53,8 +53,8 @@ export async function checker() {
    let sentEmails =  await sendReminder(emails, "Reminder", names)
   //  let emailsSent = sentEmails.emails
    console.log(sentEmails)
-    emails.forEach(async (email:string) =>{
-      await  col.updateOne({ email }, update);
+    emails.forEach( (email:string) =>{
+       col.updateOne({ email }, update);
     })
   }
   return users;
