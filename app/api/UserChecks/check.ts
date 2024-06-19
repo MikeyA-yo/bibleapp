@@ -50,9 +50,8 @@ export async function checker() {
     },
   };
   if(emails.length !== 0){
-   let sentEmails =  await sendReminder(emails, "Reminder", names)
+   sendReminder(emails, "Reminder", names)
   //  let emailsSent = sentEmails.emails
-   console.log(sentEmails)
     emails.forEach( (email:string) =>{
        col.updateOne({ email }, update);
     })
