@@ -40,7 +40,7 @@ export default function SearchMain() {
                 setVersion(e.target.value);
               }}
               onClick={() => {
-                if(text.length !== 2){
+                if(text.length > 2){
                   setIsClick(true);
                 }
               }}
