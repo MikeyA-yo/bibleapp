@@ -70,6 +70,7 @@ export function SearchBox({
               type="text"
               placeholder="Enter Key Phrase in Bible"
               onChange={onChange}
+              autoFocus
             />
             <span className="focus-border" />
           </div>
