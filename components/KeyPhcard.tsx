@@ -19,7 +19,7 @@ export default function KeyPhrases({ keyArray , mobile}: { keyArray: any[], mobi
         {keyArray.map((key: any, i: number) => {
           return (
             <SwiperSlide key={i}>
-              <div className="flex flex-col gap-1">
+              <div className="flex items-center justify-center flex-col gap-1">
                 <VerseCard
                   verse={`${key.book} ${key.chapter} : ${key.verse}`}
                   text={key.text}
