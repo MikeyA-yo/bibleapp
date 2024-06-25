@@ -31,7 +31,7 @@ export default function Dialog({
       >
         <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-gray-900">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-medium">Verse of the day</h3>
+            <h3 className="text-lg font-medium dark:text-white">Verse of the day</h3>
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
