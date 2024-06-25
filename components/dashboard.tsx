@@ -547,11 +547,11 @@ function DashMain({
   return (
     <>
       <div className="dashboard bg-center bg-cover  min-h-screen">
-        <div className="flex  pt-20 overflow-auto">
+        <div className="flex  overflow-auto">
           <div className=" lg:min-h-full  md:min-h-full bg-gray-500 bg-opacity-50  lg:flex md:flex w-80  hidden ">
             <div className=" flex-col h-5/6 justify-around fixed  flex ">
               <div className="flex w-full py-4 justify-evenly gap-2">
-                <p className="text-xl text-gray-300">{session?.name}</p>
+                <p className="text-xl pt-20 text-gray-300">{session?.name}</p>
                 <Image
                   src={session?.image ?? "/Avatar.png"}
                   priority
