@@ -34,6 +34,7 @@ export default function VerseCard({
           duration: 0.5,
         }}
         whileInView={"animate"}
+        viewport={{ once: true }}
         className=" bg-gradient-to-b rounded-2xl hover:bg-gradient-to-t transition hover:scale-110 duration-500 delay-75 h-auto p-4 w-4/5 from-gray-300 via-slate-600 to-zinc-900  "
       >
         <div

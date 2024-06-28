@@ -9,6 +9,7 @@ export default function Features() {
             className="bg-slate-600  rounded-3xl p-10 m-3 lg:p-8 md:p-8 bg-opacity-65"
             initial={{ y: "100%", opacity: 0.3, backdropFilter: "blur(10px)" }}
             whileInView={{ y: 0, opacity: 1, backdropFilter: "blur(0px)" }}
+            viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.65 }}
           >
             <h1 className="lg:text-2xl md:text-2xl text-xl text-white">
@@ -29,6 +30,7 @@ export default function Features() {
           <MotionDiv
             className="bg-[#948979] m-3 rounded-3xl p-10 lg:p-8 md:p-8 bg-opacity-65"
             initial={{ y: "100%", opacity: 0.3, backdropFilter: "blur(10px)" }}
+            viewport={{ once: true }}
             whileInView={{ y: 0, opacity: 1, backdropFilter: "blur(0px)" }}
             transition={{ delay: 0.2, duration: 0.65 }}
           >
@@ -50,6 +52,7 @@ export default function Features() {
           <MotionDiv
             className="bg-slate-600 m-3 rounded-3xl p-10 lg:p-8 md:p-8  bg-opacity-65"
             initial={{ y: "100%", opacity: 0.3, backdropFilter: "blur(10px)" }}
+            viewport={{ once: true }}
             whileInView={{ y: 0, opacity: 1, backdropFilter: "blur(0px)" }}
             transition={{ delay: 0.1, duration: 0.65 }}
           >

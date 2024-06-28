@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { VersesArray } from "./verseRes"
 import { Loading } from "./results";
 
