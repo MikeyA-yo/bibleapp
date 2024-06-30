@@ -565,7 +565,7 @@ function DashMain({
               <SignOut />
             </div>
           </div>
-          <div className="flex  bg-white bg-opacity-50 py-4 justify-evenly items-center gap-4 flex-col">
+          <div className="flex shrink bg-white bg-opacity-50 py-4 justify-evenly items-center gap-4 flex-col">
             <div className="flex w-full  gap-3 flex-col mt-10 lg:flex-row md:flex-row justify-center   items-center">
               <div
                 className={`lg:text-3xl text-xl md:text-2xl flex flex-col gap-1 ${openSans.className}  text-gray-600`}
