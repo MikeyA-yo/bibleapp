@@ -92,16 +92,16 @@ function SideBar() {
     <>
       {userData && (
         <div
-          className={`text-2xl  flex flex-col justify-evenly ${rob.className}`}
+          className={`text-2xl text-wrap max-w-80  flex flex-col justify-evenly ${rob.className}`}
         >
-          <div className="flex flex-col p-5 gap-4 items-center justify-between">
+          <div className="flex flex-col pr-5 pl-2 gap-4 items-center justify-between">
             <p>Current Daily Streak </p>
             <p className=" font-light">{userData.streak.count} </p>
             <p>Best Streak</p>
             <p className="font-light">{userData.streak.best}</p>
           </div>
           {userData.readingPlan && (
-            <div className="flex flex-col gap-4 items-center justify-between">
+            <div className="flex flex-col text-wrap gap-4 items-center justify-between">
               <p className={`text-2xl ${mont.className}`}>Reading Plan</p>
               <p>
                 {userData.readingPlan.numberPerType} Chapters{" "}
@@ -109,8 +109,8 @@ function SideBar() {
               </p>
             </div>
           )}
-          <div className="flex flex-col items-center gap-4 justify-between">
-            <p className={`text-2xl p-5 ${mont.className}`}>
+          <div className="flex flex-col text-wrap items-center gap-4 justify-between">
+            <p className={`text-2xl pr-5 pl-2 ${mont.className}`}>
               Rank: {userData.rank.name}
             </p>
             <p className={`text-2xl ${mont.className}`}>
@@ -511,7 +511,7 @@ function FavoriteVerses({ email }: { email: string }) {
 function MobileSidebar({ session }: { session: any }) {
   return (
     <>
-      <div className="lg:hidden md:hidden bg-gray-500 bg-opacity-50 gap-5 justify-evenly flex flex-col">
+      <div className="lg:hidden  bg-gray-500 bg-opacity-50 gap-5 justify-evenly flex flex-col">
         <div className="flex flex-col items-center  py-4 justify-evenly gap-2">
           <p className="text-xl text-gray-300">{session?.name}</p>
           <Image
@@ -548,9 +548,9 @@ function DashMain({
     <>
       <div className="dashboard bg-center bg-cover  min-h-screen">
         <div className="flex  overflow-auto">
-          <div className=" lg:min-h-full  md:min-h-full bg-gray-500 bg-opacity-50  lg:flex md:flex w-80  hidden ">
-            <div className=" flex-col h-5/6 justify-around fixed  flex ">
-              <div className="flex w-full pt-20 pb-4 justify-evenly gap-2">
+          <div className=" lg:min-h-full  md:min-h-full bg-gray-500 bg-opacity-50 lg:flex w-96 hidden ">
+            <div className=" flex-col w-auto justify-around items-center fixed text-wrap  flex ">
+              <div className="flex w-full pt-24 pb-4 justify-evenly gap-2">
                 <p className="text-xl  text-gray-300">{session?.name}</p>
                 <Image
                   src={session?.image ?? "/Avatar.png"}
@@ -565,7 +565,7 @@ function DashMain({
               <SignOut />
             </div>
           </div>
-          <div className="flex  w-full bg-white bg-opacity-50 py-4 justify-evenly items-center gap-4 flex-col">
+          <div className="flex  bg-white bg-opacity-50 py-4 justify-evenly items-center gap-4 flex-col">
             <div className="flex w-full  gap-3 flex-col mt-10 lg:flex-row md:flex-row justify-center   items-center">
               <div
                 className={`lg:text-3xl text-xl md:text-2xl flex flex-col gap-1 ${openSans.className}  text-gray-600`}
