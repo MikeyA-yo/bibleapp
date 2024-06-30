@@ -548,7 +548,7 @@ function DashMain({
     <>
       <div className="dashboard bg-center bg-cover  min-h-screen">
         <div className="flex  overflow-auto">
-          <div className=" lg:min-h-full  md:min-h-full bg-gray-500 bg-opacity-50 lg:flex w-96 hidden ">
+          <div className=" lg:min-h-full shrink-0 md:min-h-full bg-gray-500 bg-opacity-50 lg:flex w-96 hidden ">
             <div className=" flex-col w-auto justify-around items-center fixed text-wrap  flex ">
               <div className="flex w-full pt-24 pb-4 justify-evenly gap-2">
                 <p className="text-xl  text-gray-300">{session?.name}</p>
