@@ -94,7 +94,7 @@ function SideBar() {
         <div
           className={`text-2xl text-wrap max-w-80  flex flex-col justify-evenly ${rob.className}`}
         >
-          <div className="flex flex-col pr-5 pl-2 gap-4 items-center justify-between">
+          <div className="flex flex-col p-5 gap-4 items-center justify-between">
             <p>Current Daily Streak </p>
             <p className=" font-light">{userData.streak.count} </p>
             <p>Best Streak</p>
@@ -110,7 +110,7 @@ function SideBar() {
             </div>
           )}
           <div className="flex flex-col text-wrap items-center gap-4 justify-between">
-            <p className={`text-2xl pr-5 pl-2 ${mont.className}`}>
+            <p className={`text-2xl p-5 ${mont.className}`}>
               Rank: {userData.rank.name}
             </p>
             <p className={`text-2xl ${mont.className}`}>
