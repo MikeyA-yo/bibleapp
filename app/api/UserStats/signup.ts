@@ -54,11 +54,18 @@ export async function UserStats(email: string) {
       };
       col.updateOne({ email }, update);
     }else if(day - existingUser.streak.day === 0){
-     //here it is same day, so no need to do anything  
+     //here it is same day, so no need to do anything
+     const update = {
+      $set: {
+        "streak.count": 32,
+        "streak.day": day,
+      },
+    };
+    col.updateOne({ email }, update);   
     }else{
       const update = {
         $set: {
-          "streak.count": 32,
+          "streak.count": 1,
           "streak.day": day,
         },
       };
