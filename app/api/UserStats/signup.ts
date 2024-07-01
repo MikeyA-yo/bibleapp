@@ -42,7 +42,7 @@ export async function UserStats(email: string) {
   const day = new Date().getDate();
   if (existingUser?.streak) {
     //add streak
-    const condition = (day - existingUser.streak.day) === 1 || (existingUser.streak.day - day) === (30 || 29 || 28 || 27 )/*check new months */ 
+    const condition = (day - existingUser.streak.day) === 1 || (existingUser.streak.day - day) == 30 || 29 || 28 || 27 /*check new months */ 
     if (condition) {
       const update = {
         $inc: {
@@ -58,7 +58,7 @@ export async function UserStats(email: string) {
     }else{
       const update = {
         $set: {
-          "streak.count": 0,
+          "streak.count": 32,
           "streak.day": day,
         },
       };
