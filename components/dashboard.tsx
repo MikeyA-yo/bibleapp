@@ -550,7 +550,7 @@ function DashMain({
         <div className="flex  overflow-auto">
           <div className=" lg:min-h-full shrink-0 md:min-h-full bg-gray-500 bg-opacity-50 lg:flex w-96 hidden ">
             <div className=" flex-col w-auto justify-around items-center fixed text-wrap  flex ">
-              <div className="flex w-full pt-24 pb-4 pl-4 justify-evenly gap-2">
+              <div className="flex w-full pt-24 pb-4 pl-4 items-center justify-evenly gap-2">
                 <p className="text-xl  text-gray-300">{session?.name}</p>
                 <Image
                   src={session?.image ?? "/Avatar.png"}

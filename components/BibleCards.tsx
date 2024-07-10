@@ -66,7 +66,7 @@ export function SearchBox({
         <div>
           <div className="wrap-input-6">
             <input
-              className="input"
+              className="input text-slate-300"
               type="text"
               placeholder="Enter Key Phrase in Bible"
               onChange={onChange}
