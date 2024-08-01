@@ -11,6 +11,7 @@ import Dialog from "./dialog";
 import { Check, LogOutArr } from "./spinner";
 import Link from "next/link";
 import helper, { secondHelper } from "@/components/dashboardHelper";
+import { revalidate } from "./verseRes";
 
 const rob = Roboto({ weight: ["700"], subsets: ["vietnamese"] });
 const robMon = Roboto_Mono({ weight: ["700"], subsets: ["vietnamese"] });
@@ -352,7 +353,7 @@ function FavoriteVerses({ email }: { email: string }) {
       setVerses(data);
     }
     GetArray();
-  }, [verse, version, submit]);
+  }, [version, submit]);
   async function editFav() {
     const data = {
       email,
@@ -386,6 +387,7 @@ function FavoriteVerses({ email }: { email: string }) {
     });
     if (res.ok) {
       helper();
+      revalidate();
       return;
     }
   }

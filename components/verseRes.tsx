@@ -1,6 +1,7 @@
 'use server'
 import { Bible, verses } from "@/app/api/fetch";
 import VerseCard from "./verses-card";
+import { revalidatePath } from "next/cache";
 
 export async function VersesArray(version:string, book:string, chapter:string){
  let data = await Bible(version,book,chapter)
@@ -15,4 +16,10 @@ export async function VersesArray(version:string, book:string, chapter:string){
       </div>
     </>
  )
+}
+
+// some revalidate server action
+
+export async function revalidate(){
+  revalidatePath("/dashboard")
 }

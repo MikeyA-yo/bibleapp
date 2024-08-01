@@ -121,13 +121,28 @@ export default function Result() {
         <div className="flex pt-8 justify-around items-center">
          {b && b[1] && <PrevChapter onClick={()=>{
           let query = new URLSearchParams(window.location.search)
-          let positionNumber = Number(chapter) - 1
-          router.push(pathname.replace(chapter, `${positionNumber}?${query.toString()}`))
+          let positionNumber = Number(chapter) - 1;
+          let path = pathname;
+          path = pathname.replaceAll("%20", " ");
+          let splitPath = path.split("/");
+          let splitChapNo = Number(splitPath[splitPath.length - 1]) - 1
+          splitPath[splitPath.length - 1] = `${splitChapNo}`
+          let urlUpdate = `${splitPath.join("/")}?${query.toString()}`
+       // } path.replace(chapter, `${positionNumber}?${query.toString()}`)
+           router.push(urlUpdate)
          }} /> }
           {b && b[0] && <NextChapter onClick={()=>{
            let query = new URLSearchParams(window.location.search)
            let positionNumber = Number(chapter) + 1
-           router.push(pathname.replace(chapter, `${positionNumber}?${query.toString()}`))
+           let path = pathname;
+           //if(pathname.includes("%20") && pathname.includes(chapter)){
+             path = pathname.replaceAll("%20", " ");
+             let splitPath = path.split("/");
+             let splitChapNo = Number(splitPath[splitPath.length - 1]) + 1
+             splitPath[splitPath.length - 1] = `${splitChapNo}`
+             let urlUpdate = `${splitPath.join("/")}?${query.toString()}`
+          // } path.replace(chapter, `${positionNumber}?${query.toString()}`)
+              router.push(urlUpdate)
          }} /> }
         </div>
         <Resolved version={verse} book={book} chapter={chapter} />
@@ -135,12 +150,26 @@ export default function Result() {
          {b && b[1] && <PrevChapter onClick={()=>{
           let query = new URLSearchParams(window.location.search)
           let positionNumber = Number(chapter) - 1
-          router.push(pathname.replace(chapter, `${positionNumber}?${query.toString()}`))
+          let path = pathname;
+          path = pathname.replaceAll("%20", " ");
+          let splitPath = path.split("/");
+          let splitChapNo = Number(splitPath[splitPath.length - 1]) - 1
+          splitPath[splitPath.length - 1] = `${splitChapNo}`
+          let urlUpdate = `${splitPath.join("/")}?${query.toString()}`
+       // } path.replace(chapter, `${positionNumber}?${query.toString()}`)
+           router.push(urlUpdate)
          }} /> }
           {b && b[0] && <NextChapter onClick={()=>{
            let query = new URLSearchParams(window.location.search)
            let positionNumber = Number(chapter) + 1
-           router.push(pathname.replace(chapter, `${positionNumber}?${query.toString()}`))
+           let path = pathname;
+           path = pathname.replaceAll("%20", " ");
+           let splitPath = path.split("/");
+           let splitChapNo = Number(splitPath[splitPath.length - 1]) + 1
+           splitPath[splitPath.length - 1] = `${splitChapNo}`
+           let urlUpdate = `${splitPath.join("/")}?${query.toString()}`
+        // } path.replace(chapter, `${positionNumber}?${query.toString()}`)
+            router.push(urlUpdate)
          }} /> }
         </div>
       </div>
