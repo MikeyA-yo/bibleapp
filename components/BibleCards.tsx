@@ -101,8 +101,8 @@ export function SearchBox({
             onChange={onChangeSelect}
             className="appearance-none hover:placeholder-shown:bg-emerald-500 relative text-pink-400 bg-transparent ring-0 outline-none border border-neutral-500 placeholder-violet-700 text-sm font-bold rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5"
           >
-            <option value={"kjv"}>King James Version</option>
             <option value={"nkjv"}>New King James Version</option>
+            <option value={"kjv"}>King James Version</option>
             <option value={"amp"}>Amplified Version</option>
             <option value={"nvi"}>NVI (portuegues)</option>
             <option value={"niv"}>New International Version</option>
