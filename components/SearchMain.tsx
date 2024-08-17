@@ -22,7 +22,7 @@ export let books3 = booksLoop.slice(36, 54);
 export let books4 = booksLoop.slice(54);
 export default function SearchMain() {
   const [text, setText] = useState("");
-  const [version, setVersion] = useState("kjv");
+  const [version, setVersion] = useState("nkjv");
   const [isClick, setIsClick] = useState(false);
   return (
     <>

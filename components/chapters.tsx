@@ -11,7 +11,7 @@ interface QueryParams {
 }
 const mont = Montserrat({weight:["700"], subsets:["latin"]})
 export default function Chapters({ chapters }: { chapters: number[] }) {
-  const [version, setVersion] = useState("kjv");
+  const [version, setVersion] = useState("nkjv");
   const { queryParams, setQueryParams } = useQueryParams<QueryParams>();
 
   useEffect(() => {
