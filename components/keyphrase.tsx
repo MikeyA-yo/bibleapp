@@ -30,6 +30,8 @@ export default async function KeyPhraseRes(phrase: string, version: string) {
           .replaceAll("</j>", "")
           .replaceAll("<br/>", "\n \n")
           .replaceAll("<br>", "\n")
+          .replaceAll(/<([^>]+)>(\d{1,4})<\/\1>/g, "")
+          .replaceAll(/<\/?[^>]+>/g, "")
       : "",
   }));
   // console.log(obResult)
