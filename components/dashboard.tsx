@@ -386,8 +386,8 @@ function FavoriteVerses({ email }: { email: string }) {
       body: jsonData,
     });
     if (res.ok) {
-      helper();
       revalidate();
+      helper();
       return;
     }
   }
