@@ -85,6 +85,8 @@ export default function Result() {
   //if there is a next chapter it is true else, false, second element 
   //for previous if there is a previous chapter in that book returns true , else false
   const [b, setB] = useState<any>();
+  //show the select on only my activation
+  const [showSelect, setShowSelect] = useState(false)
 
   let sp = useSearchParams();
   const params = useParams();
@@ -101,13 +103,20 @@ export default function Result() {
       setB(ChapterState)
     }
     fetchArray();
+    const show = (e:MouseEvent) => {
+      setShowSelect(!showSelect)
+    }
+    document.addEventListener("dblclick",show)
+    return () =>{
+      document.removeEventListener("dblclick", show)
+    }
   }, [book, chapter]);
   return (
     <>
       <h1 className={`${mont.className} pl-20 pb-8 text-2xl text-white`}>
         {pathname.split("/")[2].replace("%20", " ")} {chapter}
       </h1>
-      <SelectNav
+      {showSelect &&<SelectNav
         onChange={(e) => {
           if (e.target.checked) {
             setA(true);
@@ -115,7 +124,7 @@ export default function Result() {
             setA(false);
           }
         }}
-      />
+      />}
       <div className="mx-10 rounded-xl  pb-10 my-8 bg-slate-200 bg-opacity-40 ">
         {a && resArray && <VerseNav verseNo={resArray} />}
         <div className="flex pt-8 justify-around items-center">
