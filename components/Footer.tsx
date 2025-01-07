@@ -1,3 +1,4 @@
+"use client";
 import Cry from "./Brevo";
 
 export default function Footer() {
